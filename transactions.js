@@ -10,6 +10,13 @@ class Product {
     }
 }
 
+class SaleItem {
+    constructor(item, amount) {
+        this.item = item;
+        this.amount = amount;
+    }
+}
+
 class Sale {
     constructor() {
         this.productList = [new Product("Apple",3.00,5.00), new Product("Orange",3.00,5.00), new Product("Banana",3.00,5.00), 
@@ -19,6 +26,11 @@ class Sale {
                 new Product("Strawberry",3.00,5.00), new Product("Potato",3.00,5.00), new Product("Carrot",3.00,5.00),
                 new Product("Tomato",3.00,5.00), new Product("Cucumber",3.00,5.00), new Product("Radish",3.00,5.00),
                 new Product("Cherry Tomato",3.00,5.00), new Product("Jalapeno",3.00,5.00), new Product("Melon",3.00,5.00)];
+        this.saleList = []
+    }
+
+    addItem(item, amount) {
+        this.saleList.push(new SaleItem(item, amount));
     }
 }
 
@@ -27,8 +39,13 @@ function main() {
     let header = document.getElementById("feed");
     let stringy = "";
     testie.productList[0].decrement(4.0);
-    for (let i = 0; i < 21; i++){
-        stringy += testie.productList[i]["quantity"] + " ";
-    }
+
+    testie.addItem("Apple",3);
+    testie.addItem("Yam",3);
+
+    testie.saleList.forEach(element => {
+        stringy += element["item"];
+    });
+
     header.innerHTML = stringy;
 }
