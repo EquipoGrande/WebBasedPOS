@@ -16,39 +16,38 @@ function clearInputError(inputElement) {
     inputElement.parentElement.querySelector(".form__input-error-message").textContent = "";
 }
 
+function checkUserLogin() {
+    var user = document.getElementById('username').value;
+    var password = document.getElementById('password').value
+
+    if (user == "josi" && password == "ego") {
+        window.open("index.html");
+    } else {
+        setFormMessage(document, "error", "Invalid username/password combination");
+    }
+
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.querySelector("#login");
     const resetPasswordForm = document.querySelector("#resetPassword");
 
-    document.querySelector("#linkPassword").addEventListener("click", e => {
-        e.preventDefault();
-        loginForm.classList.add("form--hidden");
-        resetPasswordForm.classList.remove("form--hidden");
-    });
-
-    document.querySelector("#linkLogin").addEventListener("click", e => {
-        e.preventDefault();
-        loginForm.classList.remove("form--hidden");
-        resetPasswordForm.classList.add("form--hidden");
-    });
 
     loginForm.addEventListener("submit", e => {
         e.preventDefault();
 
-        // Perform your AJAX/Fetch login
-
-        setFormMessage(loginForm, "error", "Invalid username/password combination");
     });
 
-    document.querySelectorAll(".form__input").forEach(inputElement => {
-        inputElement.addEventListener("blur", e => {
-            if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 10) {
-                setInputError(inputElement, "Username must be at least 10 characters in length");
-            }
-        });
+    //Checks length for new username, not necessary for now but could help later
+    // document.querySelectorAll(".form__input").forEach(inputElement => {
+    //     inputElement.addEventListener("blur", e => {
+    //         if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 10) {
+    //             setInputError(inputElement, "Username must be at least 10 characters in length");
+    //         }
+    //     });
 
-        inputElement.addEventListener("input", e => {
-            clearInputError(inputElement);
-        });
-    });
+    //     inputElement.addEventListener("input", e => {
+    //         clearInputError(inputElement);
+    //     });
+    // });
 });
