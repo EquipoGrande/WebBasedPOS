@@ -20,6 +20,7 @@ class Sale {
         this.productInventory = inventory;
         this.saleList = new Array();
         this.table = document.getElementById("saleTable");
+        this.total = 0.0;
         this.maxID = 0;
     }
 
@@ -63,6 +64,7 @@ class Sale {
 
         this.table.append(saleRow)
         this.maxID++;
+        this.updateTotal();
     }
 
     // Removes an item from the sale
@@ -72,6 +74,7 @@ class Sale {
             if(this.saleList[i]["productID"] == productID) {
                 document.getElementById("row" + this.saleList[i]["lineID"]).remove();
                 this.saleList.splice(i, 1);
+                this.updateTotal();
                 break;
             }
         }
@@ -83,12 +86,20 @@ class Sale {
         saleItem["quantity"] = document.getElementById("quantityInput").value;
         document.getElementById("productQuantity" + saleItem["lineID"]).innerHTML = saleItem["quantity"];
         document.getElementById("priceElement" + saleItem["lineID"]).innerHTML = saleItem["sellPrice"];
+        this.updateTotal();
     }
 
     // Completes the sale and updates other systems as if the customer just paid for the goods
     finishSale(){
-        this.saleList = new Array();
-        document.getElementById("saleTable").innerHTML = "";
+        window.location.reload();
+    }
+
+    updateTotal(){
+        this.total = 0.0;
+        for(var i = 0; i < this.saleList.length; i++) {
+            this.total += this.saleList[i]["sellPrice"];
+        }
+        document.getElementById("totalPrice").value = "Total: €" + this.total;
     }
 
     // Updates other systems after a sale

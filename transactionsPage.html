@@ -52,13 +52,13 @@
                 </div>
                 <div class="row">
                     <div class="col-3">
-                        
+
                     </div>
                     <div class="col-3">
                         <input type="text" readonly class="form-control-plaintext" id="totalPrice" value="€ 0.00">
                     </div>
                     <div class="col-3">
-                        <button type="button" class="btn btn-primary">Make Sale</button>
+                        <button type="button" class="btn btn-primary" onclick="testSale.finishSale();">Make Sale</button>
                     </div>
                 </div>
             </form>
@@ -70,8 +70,8 @@
                     <div class="row" id="buttonGrid"></div>
                 </div>
             </div>
-            <button type="button" onclick="decrementPage();generateButtonGrid(pageNumber);">Option 1</button>
-            <button type="button" onclick="incrementPage();generateButtonGrid(pageNumber);">Option 2</button>
+            <button type="button" onclick="decrementPage();generateButtonGrid(pageNumber);">Page Left</button>
+            <button type="button" onclick="incrementPage();generateButtonGrid(pageNumber);">Page Right</button>
         </div>
     </div>
 </body>
