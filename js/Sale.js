@@ -3,6 +3,7 @@ function transactionOnload() {
     testSale = new Sale(testInventory);
     document.getElementById("sellLine").onclick = function() {testSale.addItemButton()};
     document.getElementById("removeLine").onclick = function() {testSale.removeItem()};
+    document.getElementById("quantityInput").onchange =  function() {testSale.updatePrice()};
 }
 
 class SaleItem {
@@ -100,6 +101,16 @@ class Sale {
             this.total += this.saleList[i]["sellPrice"];
         }
         document.getElementById("totalPrice").value = "Total: €" + this.total;
+    }
+
+    updatePrice(){
+        let productID = document.getElementById("idText").value;
+        for(var i = 0; i < this.productInventory.productList.length; i++) {
+            if(this.productInventory.productList[i]["productID"] == productID) {
+                document.getElementById("productTotal").value = "€ " + document.getElementById("quantityInput").value * this.productInventory.productList[i].sellPrice;
+                break;
+            }
+        }
     }
 
     // Updates other systems after a sale
