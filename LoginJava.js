@@ -21,7 +21,7 @@ function checkUserLogin() {
     var cashierPassword = document.getElementById('password').value;
 
     //Set the user and pass as this for now, we can change for authentication later
-    if (user == "josi" && password == "ego") {
+    if (cashierUser == "josi" && cashierPassword == "ego") {
         window.open("index.html");
     } else {
         setFormMessage(document, "error", "Invalid username/password combination");
