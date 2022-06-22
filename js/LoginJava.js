@@ -22,7 +22,7 @@ function checkUserLogin() {
 
     //Set the user and pass as this for now, we can change for authentication later
     if (cashierUser == "josi" && cashierPassword == "ego") {
-        window.open("index.html");
+        window.open("transactionsPage.html");
     } else {
         setFormMessage(document, "error", "Invalid username/password combination");
     }
