@@ -1,7 +1,9 @@
 class SaleItem {
-    constructor(name, quantity) {
+    constructor(productID, name, quantity, price) {
+        this.productID = productID;
         this.name = name;
         this.quantity = quantity;
+        this.price = quantity*price;
     }
 }
 
@@ -9,11 +11,32 @@ class Sale {
     constructor(inventory) {
         this.productList = inventory.productList;
         this.saleList = [];
+        this.table = document.getElementById("saleTable");
     }
 
     // Adds a new item to the sale
-    addItem(item, amount) {
-        this.saleList.push(new SaleItem(item, amount));
+    addItem(product) {
+        let currentSaleItem = product.toSaleItem();
+        this.saleList.push(currentSaleItem);
+
+        let saleRow = document.createElement("tr");
+
+        let idElement = document.createElement("td");
+        let nameElement = document.createElement("td");
+        let quantityElement = document.createElement("td");
+        let priceElement = document.createElement("td");
+
+        idElement.innerHTML = product["id"];
+        nameElement.innerHTML = product["name"];
+        quantityElement.innerHTML = getElementById("quantityInput").quantity;
+        priceElement.innerHTML = getElementById("quantityInput").quantity * product["price"];
+
+        saleRow.append(idElement);
+        saleRow.append(nameElement);
+        saleRow.append(quantityElement);
+        saleRow.append(priceElement);
+
+        this.table.append(saleRow)
     }
 
     // Removes an item from the sale

@@ -1,5 +1,6 @@
 class Product {
-    constructor(name, price, quantity) {
+    constructor(productID, name, price, quantity) {
+        this.productID = productID;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -8,20 +9,22 @@ class Product {
     decrement (amount) {
         this.quantity -= amount;
     }
+
+    toSaleItem () {
+        return new SaleItem(this.productID, this.name, this.quantity, this.price);
+    }
 }
 
 class CurrentInventory {
     constructor(){
-        this.numberOfElements = 31;
-        this.productList = [new Product("Apple",3.00,5.00), new Product("Orange",3.00,5.00), new Product("Banana",3.00,5.00), 
-            new Product("Pear",3.00,5.00), new Product("Grape Fruit",3.00,5.00), new Product("Fuji Apple",3.00,5.00),
-            new Product("Honey Crisp Apple",3.00,5.00), new Product("Yams",3.00,5.00), new Product("White Grapes",3.00,5.00),
-            new Product("Raspberry",3.00,5.00), new Product("Black Berry",3.00,5.00), new Product("Cherry",3.00,5.00),
-            new Product("Strawberry",3.00,5.00), new Product("Potato",3.00,5.00), new Product("Carrot",3.00,5.00),
-            new Product("Tomato",3.00,5.00), new Product("Cucumber",3.00,5.00), new Product("Radish",3.00,5.00),
-            new Product("Cherry Tomato",3.00,5.00), new Product("Jalapeno",3.00,5.00), new Product("Melon",3.00,5.00), 
-            new Product("Alligator",3.00,5.00), new Product("Pizza",3.00,5.00), new Product("Burger",3.00,5.00), 
-            new Product("Noodles",3.00,5.00), new Product("Pasta",3.00,5.00), new Product("Bread",3.00,5.00), 
-            new Product("Salsa",3.00,5.00), new Product("Chips",3.00,5.00), new Product("Avacado",3.00,5.00), new Product("Bell Pepper", 3.0, 5.0)];
+        this.numberOfElements = 23;
+        this.productList = [new Product(0, "Apple",3.00,5.00), new Product(1, "Orange",3.00,5.00), new Product(2, "Banana",3.00,5.00), 
+            new Product(3, "Pear",3.00,5.00), new Product(4, "Grape Fruit",3.00,5.00), new Product(5, "Fuji Apple",3.00,5.00),
+            new Product(6, "Honey Crisp Apple",3.00,5.00), new Product(7,"Yams",3.00,5.00), new Product(8, "White Grapes",3.00,5.00),
+            new Product(9, "Raspberry",3.00,5.00), new Product(10, "Black Berry",3.00,5.00), new Product(11, "Cherry",3.00,5.00),
+            new Product(12, "Strawberry",3.00,5.00), new Product(13, "Potato",3.00,5.00), new Product(14, "Carrot",3.00,5.00),
+            new Product(15, "Tomato",3.00,5.00), new Product(16, "Cucumber",3.00,5.00), new Product(17, "Radish",3.00,5.00),
+            new Product(18, "Cherry Tomato",3.00,5.00), new Product(19, "Jalapeno",3.00,5.00), new Product(20, "Melon",3.00,5.00), 
+            new Product(21, "Avacado",3.00,5.00), new Product(22, "Bell Pepper", 3.0, 5.0)];
     } 
 }

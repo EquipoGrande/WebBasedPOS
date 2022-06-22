@@ -1,25 +1,34 @@
 var pageNumber;
 var testInventory;
+var testSale;
 
 function onloadInitialize() {
     pageNumber = 0; 
     testInventory = new CurrentInventory();
     generateButtonGrid(0);
+    testSale = new Sale(testInventory);
 }
 
 
-function createButton(product, buttonGrid) {
+function createButton(product, buttonGrid, inputFunction) {
     var button = document.createElement("button");
+    
     button.setAttribute("type", "button");
     button.setAttribute("class", "col-md-4 col-6 btn btn-primary");
 
     button.innerHTML = product["name"];
 
-    button.onclick = function(){
-        document.getElementById("test").append(product["name"]);
+    button.onclick = new function() {
+        inputFunction(product);
     }
 
     buttonGrid.append(button);
+}
+
+function saleButtonFunction(currentProduct) {
+    document.getElementById("idText").value = currentProduct["productID"];
+    document.getElementById("quantityInput").focus();
+    document.getElementById("productName").value = currentProduct["name"];
 }
 
 function decrementPage() {
@@ -47,6 +56,6 @@ function generateButtonGrid() {
     }
 
     for (let i = (pageNumber*15); i < maximumIndex; i++) {
-        createButton(testInventory.productList[i], buttonGrid);
+        createButton(testInventory.productList[i], buttonGrid, saleButtonFunction);
     }
 }
