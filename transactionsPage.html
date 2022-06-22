@@ -10,7 +10,7 @@
     <title>Document</title>
 </head>
 
-<body onload="onloadInitialize();">
+<body onload="transactionOnload();">
     <script src="CurrentInventoryList.js"></script>
     <script src="ButtonGrid.js"></script>
     <script src="Sale.js"></script>
@@ -31,20 +31,26 @@
 
             <form>
                 <div class="row">
-                  <div class="col-2">
+                  <div class="col">
                     <input type="text" class="form-control" placeholder="id" id="idText">
                   </div>
                   <div class="col-3">
                     <input type="text" readonly class="form-control-plaintext" id="productName" value="Product Name">
                   </div>
-                  <div class="col-2">
+                  <div class="col">
                     <input type="text" class="form-control" placeholder="Amount" id="quantityInput" oninput="updatePrice();">
                   </div>
-                  <div class="col-2">
+                  <div class="col">
                     <input type="text" readonly class="form-control-plaintext" id="productTotal" value="€ 0.00">
                   </div>
-                  <div class="col-2">
-                    <button type="button" class="btn btn-primary" id="sellLine">Add Item</button>
+                  <div class="col">
+                    <button type="button" class="btn btn-primary" id="sellLine">Add</button>
+                  </div>
+                  <div class="col">
+                    <button type="button" class="btn btn-primary">Remove</button>
+                  </div>
+                  <div class="col">
+                    <button type="button" class="btn btn-primary">Edit</button>
                   </div>
                 </div>
             </form>

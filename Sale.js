@@ -1,9 +1,16 @@
+function transactionOnload() {
+    onloadInitialize();
+    testSale = new Sale(testInventory);
+    document.getElementById("sellLine").onclick = function() {testSale.addItemButton()};
+}
+
 class SaleItem {
-    constructor(productID, name, quantity, sellPrice) {
+    constructor(productID, name, quantity, sellPrice, lineID) {
         this.productID = productID;
         this.name = name;
         this.quantity = quantity;
         this.sellPrice = quantity*sellPrice;
+        this.lineID = this.lineID;
     }
 }
 
@@ -12,19 +19,29 @@ class Sale {
         this.productInventory = inventory;
         this.saleList = [];
         this.table = document.getElementById("saleTable");
+        this.maxID = 0;
     }
 
     // Adds a new item to the sale
     addItem(product, quantity) {
-        let currentSaleItem = product.toSaleItem(quantity);
+        let currentSaleItem = product.toSaleItem(quantity, this.maxID);
         this.saleList.push(currentSaleItem);
 
+
         let saleRow = document.createElement("tr");
+        saleRow.setAttribute("id", ("row" + this.maxID));
 
         let idElement = document.createElement("td");
+        idElement.setAttribute("id", ("productID" + this.maxID));
+
         let nameElement = document.createElement("td");
+        nameElement.setAttribute("id", ("productName" + this.maxID));
+
         let quantityElement = document.createElement("td");
+        quantityElement.setAttribute("id", ("productQuantity" + this.maxID));
+
         let priceElement = document.createElement("td");
+        priceElement.setAttribute("id", ("priceElement" + this.maxID));
 
         idElement.innerHTML = product["productID"];
         nameElement.innerHTML = product["name"];
@@ -37,6 +54,7 @@ class Sale {
         saleRow.append(priceElement);
 
         this.table.append(saleRow)
+        this.maxID++;
     }
 
     // Removes an item from the sale
@@ -56,11 +74,7 @@ class Sale {
 
     // Completes the sale and updates other systems as if the customer just paid for the goods
     finishSale(){
-        for(var i = 0; i < this.saleList.length; i++){
-
-            // Removes item from array
-            saleList.shift();
-        }
+        document.getElementById("saleTable").innerHTML = "";
     }
 
     // Updates other systems after a sale

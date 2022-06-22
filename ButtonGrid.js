@@ -6,8 +6,6 @@ function onloadInitialize() {
     pageNumber = 0; 
     testInventory = new CurrentInventory();
     generateButtonGrid(0);
-    testSale = new Sale(testInventory);
-    document.getElementById("sellLine").onclick = function() {testSale.addItemButton()};
 }
 
 

@@ -13,8 +13,8 @@ class Product {
         this.quantity -= amount;
     }
 
-    toSaleItem (quantitySold) {
-        return new SaleItem(this.productID, this.name, quantitySold, this.sellPrice);
+    toSaleItem (quantitySold, id) {
+        return new SaleItem(this.productID, this.name, quantitySold, this.sellPrice, this.id);
     }
 }
 
