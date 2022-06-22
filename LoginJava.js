@@ -17,10 +17,11 @@ function clearInputError(inputElement) {
 }
 
 function checkUserLogin() {
-    var user = document.getElementById('username').value;
-    var password = document.getElementById('password').value
+    var cashierUser = document.getElementById('username').value;
+    var cashierPassword = document.getElementById('password').value;
 
-    if (user == "josi" && password == "ego") {
+    //Set the user and pass as this for now, we can change for authentication later
+    if (cashierUser == "josi" && cashierPassword == "ego") {
         window.open("index.html");
     } else {
         setFormMessage(document, "error", "Invalid username/password combination");
@@ -32,10 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.querySelector("#login");
     const resetPasswordForm = document.querySelector("#resetPassword");
 
-
     loginForm.addEventListener("submit", e => {
         e.preventDefault();
-
     });
 
     //Checks length for new username, not necessary for now but could help later

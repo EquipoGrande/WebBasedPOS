@@ -1,9 +1,20 @@
 class Product {
+<<<<<<< HEAD
     constructor(productID, name, price, quantity) {
         this.productID = productID;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+=======
+    // Each product is stored using 1 string, 2 floats, 2 integers, and 1 boolean in the following parameters
+    constructor(name, id, sellPrice, purchasePrice, quantity, isKg) {
+        this.name = name; // String
+        this.sellPrice = sellPrice; // Float
+        this.purchasePrice = purchasePrice; // Float
+        this.quantity = quantity; // Integer
+        this.id = id; // Integer
+        this.isKg = isKg; // Boolean (True == kg, False == separately packaged)
+>>>>>>> 239d951dd423ad7d1a50bfdffcf7fbc00e03b8de
     }
 
     decrement (amount) {

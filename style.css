@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Contrail+One&family=Gothic+A1:wght@300&display=swap');
+
+h1 {
+    font-family: 'Contrail One', cursive;
+    color: #48563C;
+}
+
+body {
+    background-color: #CBE0CE;
+    margin: 20px;
+    font-family: 'Gothic A1', sans-serif;
+    color: #48563C;
+}
+
+.btn-color1 {
+    background-color: #5D8563;
+    color: white;
+}

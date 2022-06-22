@@ -1,9 +1,9 @@
 class SaleItem {
-    constructor(productID, name, quantity, price) {
+    constructor(productID, name, quantity, purchasePrice) {
         this.productID = productID;
         this.name = name;
         this.quantity = quantity;
-        this.price = quantity*price;
+        this.purchasePrice = quantity*purchasePrice;
     }
 }
 
@@ -29,7 +29,7 @@ class Sale {
         idElement.innerHTML = product["productID"];
         nameElement.innerHTML = product["name"];
         quantityElement.innerHTML = document.getElementById("quantityInput").value;
-        priceElement.innerHTML = document.getElementById("quantityInput").value * product["price"];
+        priceElement.innerHTML = document.getElementById("quantityInput").value * product["purchasePrice"];
 
         saleRow.append(idElement);
         saleRow.append(nameElement);
@@ -57,8 +57,6 @@ class Sale {
     // Completes the sale and updates other systems as if the customer just paid for the goods
     finishSale(){
         for(var i = 0; i < this.saleList.length; i++){
-            // Updates the database?
-            updateOtherSystems(saleList[i])
 
             // Removes item from array
             saleList.shift();
