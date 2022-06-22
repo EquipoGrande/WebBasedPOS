@@ -34,17 +34,10 @@ class Sale {
     // Completes the sale and updates other systems as if the customer just paid for the goods
     finishSale(){
         for(var i = 0; i < this.saleList.length; i++){
-            // Updates the database?
-            updateOtherSystems(saleList[i])
 
             // Removes item from array
             saleList.shift();
         }
-    }
-
-    // Updates other systems after a sale
-    updateOtherSystems(soldItem) { // ************* Needs to connect to other systems ****************
-        // soldItem is a saleItem object
     }
 }
 
