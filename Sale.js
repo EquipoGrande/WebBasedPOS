@@ -9,14 +9,14 @@ class SaleItem {
 
 class Sale {
     constructor(inventory) {
-        this.productList = inventory.productList;
+        this.productInventory = inventory;
         this.saleList = [];
         this.table = document.getElementById("saleTable");
     }
 
     // Adds a new item to the sale
-    addItem(product) {
-        let currentSaleItem = product.toSaleItem();
+    addItem(product, quantity) {
+        let currentSaleItem = product.toSaleItem(quantity);
         this.saleList.push(currentSaleItem);
 
         let saleRow = document.createElement("tr");
@@ -26,10 +26,10 @@ class Sale {
         let quantityElement = document.createElement("td");
         let priceElement = document.createElement("td");
 
-        idElement.innerHTML = product["id"];
+        idElement.innerHTML = product["productID"];
         nameElement.innerHTML = product["name"];
-        quantityElement.innerHTML = getElementById("quantityInput").quantity;
-        priceElement.innerHTML = getElementById("quantityInput").quantity * product["price"];
+        quantityElement.innerHTML = document.getElementById("quantityInput").value;
+        priceElement.innerHTML = document.getElementById("quantityInput").value * product["price"];
 
         saleRow.append(idElement);
         saleRow.append(nameElement);
@@ -69,6 +69,16 @@ class Sale {
     updateOtherSystems(soldItem) { // ************* Needs to connect to other systems ****************
         // soldItem is a saleItem object
     }
+
+    addItemButton() {
+        let targetID = document.getElementById("idText").value;;
+        for (let i = 0; i < this.productInventory.numberOfElements; i++) {
+            if (this.productInventory.productList[i]["productID"] == targetID) {
+                this.addItem(this.productInventory.productList[i]);
+                break;
+            }
+        }
+    }    
 }
 
 function main() {

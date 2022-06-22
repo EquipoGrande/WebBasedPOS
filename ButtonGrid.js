@@ -7,6 +7,7 @@ function onloadInitialize() {
     testInventory = new CurrentInventory();
     generateButtonGrid(0);
     testSale = new Sale(testInventory);
+    document.getElementById("sellLine").onclick = function() {testSale.addItemButton()};
 }
 
 
@@ -18,7 +19,7 @@ function createButton(product, buttonGrid, inputFunction) {
 
     button.innerHTML = product["name"];
 
-    button.onclick = new function() {
+    button.onclick = function() {
         inputFunction(product);
     }
 
