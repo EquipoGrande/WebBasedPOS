@@ -1,9 +1,9 @@
 class SaleItem {
-    constructor(productID, name, quantity, purchasePrice) {
+    constructor(productID, name, quantity, sellPrice) {
         this.productID = productID;
         this.name = name;
         this.quantity = quantity;
-        this.purchasePrice = quantity*purchasePrice;
+        this.sellPrice = quantity*sellPrice;
     }
 }
 
@@ -29,7 +29,7 @@ class Sale {
         idElement.innerHTML = product["productID"];
         nameElement.innerHTML = product["name"];
         quantityElement.innerHTML = document.getElementById("quantityInput").value;
-        priceElement.innerHTML = document.getElementById("quantityInput").value * product["purchasePrice"];
+        priceElement.innerHTML = document.getElementById("quantityInput").value * product["sellPrice"];
 
         saleRow.append(idElement);
         saleRow.append(nameElement);
