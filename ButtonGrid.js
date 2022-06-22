@@ -13,7 +13,7 @@ function createButton(product, buttonGrid, inputFunction) {
     var button = document.createElement("button");
     
     button.setAttribute("type", "button");
-    button.setAttribute("class", "col-md-4 col-6 btn btn-primary");
+    button.setAttribute("class", "col-md-4 col-6 btn btn-color1");
 
     button.innerHTML = product["name"];
 
