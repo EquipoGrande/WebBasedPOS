@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Shade&family=Gothic+A1:wght@300&display=swap');
+@import url(https://fonts.googleapis.com/css2?family=Contrail+One&family=Gothic+A1:wght@300&display=swap);
 
 body {
     --color-primary: #48563c;
@@ -13,7 +13,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Bungee Shade', sans-serif;
     font-size: 18px;
     background: url(https://img5.goodfon.com/original/1920x1080/a/d1/kivi-frukty-mnogo-eda-razrezannye.jpg);
     background-size: cover;
@@ -32,7 +31,7 @@ body {
 .container,
 .form__input,
 .form__button {
-    font: 500 1rem 'Gothic A1', sans-serif;
+    font: 500 1rem 'Contrail One', sans-serif;
 }
 
 .form--hidden {
@@ -49,7 +48,7 @@ body {
 
 .form__title {
     color: #ffffff;
-    font-family: 'Gothic A1', sans-serif;
+    font-family: 'Contrail One', sans-serif;
     margin-bottom: 2rem;
     text-align: center;
 }
