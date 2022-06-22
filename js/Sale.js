@@ -4,6 +4,7 @@ function transactionOnload() {
     document.getElementById("sellLine").onclick = function() {testSale.addItemButton()};
     document.getElementById("removeLine").onclick = function() {testSale.removeItem()};
     document.getElementById("quantityInput").onchange =  function() {testSale.updatePrice()};
+    document.getElementById("idText").onchange =  function() {testSale.updateItemName()};
 }
 
 class SaleItem {
@@ -108,6 +109,16 @@ class Sale {
         for(var i = 0; i < this.productInventory.productList.length; i++) {
             if(this.productInventory.productList[i]["productID"] == productID) {
                 document.getElementById("productTotal").value = "€ " + document.getElementById("quantityInput").value * this.productInventory.productList[i].sellPrice;
+                break;
+            }
+        }
+    }
+
+    updateItemName(){
+        let productID = document.getElementById("idText").value;
+        for(var i = 0; i < this.productInventory.productList.length; i++) {
+            if(this.productInventory.productList[i]["productID"] == productID) {
+                document.getElementById("productName").value = this.productInventory.productList[i].name;
                 break;
             }
         }
