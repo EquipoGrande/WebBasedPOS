@@ -14,7 +14,7 @@ class Product {
     }
 
     toSaleItem (quantitySold, id) {
-        return new SaleItem(this.productID, this.name, quantitySold, this.sellPrice, this.id);
+        return new SaleItem(this.productID, this.name, quantitySold, this.sellPrice, id);
     }
 }
 
