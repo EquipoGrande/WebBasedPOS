@@ -38,9 +38,12 @@
         </div>
       </div>
     </header>
+    
+    
     <div class="col-sm-6 col-padding">
       <h1>Transactions</h1>
-      <div class="border border-3 border-secondary bg-light">
+
+      <div class="border border-3 border-secondary bg-light transaction-box">
         <table class="table table-hover">
           <thead class="table-dark">
             <tr>
@@ -53,43 +56,39 @@
           <tbody id="saleTable">
           </tbody>
         </table>
-        <form>
-          <div class="row">
-            <div class="col">
-              <input type="number" class="form-control" placeholder="id" id="idText">
-            </div>
-            <div class="col-3">
-              <input type="text" readonly class="form-control-plaintext" id="productName" value="Product Name">
-            </div>
-            <div class="col">
-              <input type="number" class="form-control" placeholder="Amount" id="quantityInput">
-            </div>
-            <div class="col">
-              <input type="text" readonly class="form-control-plaintext" id="productTotal" value="€ 0.00">
-            </div>
-            <div class="col">
-              <button type="button" class="btn btn-color1" id="sellLine">Add/Edit</button>
-            </div>
-            <div class="col">
-              <button type="button" class="btn btn-color1" id="removeLine">Remove</button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-3">
+      </div>
 
-            </div>
-            <div class="col-3">
-              <input type="text" readonly class="form-control-plaintext" id="totalPrice" value="€ 0.00">
-            </div>
-            <div style="margin-top: 20px; margin-bottom: 10px;" class="col-3">
-              <button type="button" class="btn btn-color1" onclick="testSale.finishSale();">Make
-                Sale</button>
-            </div>
+      <div class="border border-3 border-secondary bg-light">
+
+        <form class="p-3 border border-3 bg-light">
+          <div class="row form-group row-margin">
+              <div class="col-5"> <input type="number" class="form-control" placeholder="ID" id="idText">    </div>
+              <div class="col-6"> <input type="text" readonly class="form-control-plaintext" id="productName" value="Product Name"> </div>
+          </div>
+          <div class="row form-group row-margin">
+              <div class="col-6"> <input type="number" class="form-control" placeholder="Amount" id="quantityInput"> </div>
+              <div class="col-4"> <input type="text" readonly class="form-control-plaintext" id="productTotal" value="€ 0.00"> </div>
+          </div>
+
+
+          <div class="row form-group row-total">
+            <input type="text" readonly class="form-control-plaintext" id="totalPrice" value="€ 0.00" placeholder="Total: € 0.00">
+          </div>
+
+
+          <div class="row form-group">
+              <button type="button" class="col-md my-1 btn btn-color1" id="sellLine">Add/Edit</button>
+              <button type="button" class="col-md my-1 btn btn-color1" id="removeLine">Remove</button>              
+              <button type="button" class="col-md my-1 btn btn-color1" onclick="testSale.finishSale();">Make Sale</button>
           </div>
         </form>
       </div>
     </div>
-    <div class="col-sm-6 d-flex flex-column">
+
+    
+    
+    
+    <div class="col-sm-6 d-flex flex-column col-padding">
       <h1>Select Product:</h1>
       <div class="flex-grow-1 productPanel">
         <div class="container h-100">
