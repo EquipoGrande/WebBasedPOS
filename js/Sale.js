@@ -74,7 +74,8 @@ class Sale {
         idElement.innerHTML = product["productID"];
         nameElement.innerHTML = product["name"];
         quantityElement.innerHTML = document.getElementById("quantityInput").value + " " + product["units"];
-        priceElement.innerHTML = "€ " + document.getElementById("quantityInput").value * product["sellPrice"];
+        var round = Math.round((100*product["sellPrice"] * document.getElementById("quantityInput").value));
+        priceElement.innerHTML = "€ " + round/100;
 
         saleRow.append(idElement);
         saleRow.append(nameElement);
@@ -123,7 +124,7 @@ class Sale {
     updateTotal(){
         this.total = 0.0;
         for(var i = 0; i < this.saleList.length; i++) {
-            this.total += this.saleList[i]["sellPrice"];
+            this.total += (Math.round(100*this.saleList[i]["sellPrice"])/100);
         }
         document.getElementById("totalPrice").value = "Total: €" + this.total;
     }
@@ -132,7 +133,8 @@ class Sale {
         let productID = document.getElementById("idText").value;
         for(var i = 0; i < this.productInventory.productList.length; i++) {
             if(this.productInventory.productList[i]["productID"] == productID) {
-                document.getElementById("productTotal").value = "€ " + document.getElementById("quantityInput").value * this.productInventory.productList[i].sellPrice;
+                var round = Math.round(100*this.productInventory.productList[i].sellPrice * document.getElementById("quantityInput").value);
+                document.getElementById("productTotal").value = "€ " + round/100;
                 break;
             }
         }
