@@ -15,6 +15,7 @@ body {
 .btn-color1 {
     background-color: #5D8563;
     color: white;
+    border: #CBE0CE solid 3px;
 }
 
 .row {
