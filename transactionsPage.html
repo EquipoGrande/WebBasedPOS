@@ -29,7 +29,10 @@
               <li class="col mx-2"><a href="transactionsPage.html">Transactions</a></li>
               <li class="col mx-2"><a href="EditProductInfo.html">Edit Product Info</a></li>
               <li class="col mx-2"><a href="UpdateInventory.html">Update Inventory</a></li>
-              <button class="col mx-2 btn btn-primary" onclick="toggleSize();">Toggle Size</button>
+            </ul>
+            <ul>
+              <button class="col mx-2 btn btn-light" onclick="toggleSize();">Toggle Size</button>
+              <button class="col mx-2 btn btn-dark" onclick="logoutButton();">Log Out</button>
             </ul>
           </nav>
         </div>
@@ -65,10 +68,10 @@
               <input type="text" readonly class="form-control-plaintext" id="productTotal" value="€ 0.00">
             </div>
             <div class="col">
-              <button type="button" class="btn btn-primary" id="sellLine">Add/Edit</button>
+              <button type="button" class="btn btn-color1" id="sellLine">Add/Edit</button>
             </div>
             <div class="col">
-              <button type="button" class="btn btn-primary" id="removeLine">Remove</button>
+              <button type="button" class="btn btn-color1" id="removeLine">Remove</button>
             </div>
           </div>
           <div class="row">
@@ -78,20 +81,20 @@
             <div class="col-3">
               <input type="text" readonly class="form-control-plaintext" id="totalPrice" value="€ 0.00">
             </div>
-            <div class="col-3">
-              <button type="button" class="btn btn-primary" onclick="testSale.finishSale();">Make Sale</button>
+            <div style="margin-top: 20px; margin-bottom: 10px;" class="col-3">
+              <button type="button" class="btn btn-color1" onclick="testSale.finishSale();">Make Sale</button>
             </div>
           </div>
         </form>
       </div>
     </div>
     <div class="col-sm-6 d-flex flex-column">
-      <div class="flex-grow-1 productPanel m-1">
+      <div class="flex-grow-1 productPanel">
         <div class="container h-100">
           <div class="row h-100" id="buttonGrid"></div>
         </div>
       </div>
-      <div class="btn-group p-1">
+      <div class="btn-group">
         <button class="btn btn-color1" type="button" onclick="decrementPage();generateButtonGrid(pageNumber);">&lt;&lt;
           Previous Page</button>
         <button class="btn btn-color1" type="button" onclick="incrementPage();generateButtonGrid(pageNumber);">Next Page

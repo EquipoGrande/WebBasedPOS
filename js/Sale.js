@@ -41,6 +41,10 @@ class Sale {
             return;
         }
 
+        if (document.getElementById("quantityInput").value > product.quantity) {
+            return;
+        }
+
         for (let i = 0; i < this.saleList.length; i++) {
             if (this.saleList[i]["productID"] == product["productID"]) {
                 this.modifyItem(this.saleList[i], product);
