@@ -16,3 +16,7 @@ body {
     background-color: #5D8563;
     color: white;
 }
+
+.row {
+    padding: 3%;
+}

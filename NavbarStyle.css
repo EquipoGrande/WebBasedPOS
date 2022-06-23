@@ -12,8 +12,6 @@
 
 #header {
     background-color: #5D8563;
-    margin: 0px;
-    padding-top: 10px;
 }
 
 
@@ -31,6 +29,7 @@
 #header .container {
     width: 80%;
     margin: 0 auto;
+
 }
 
 #header nav {
@@ -38,15 +37,12 @@
 }
 
 #header nav ul {
-    /* margin: 0; */
-    /* padding: 20px; */
     list-style: none;
 }
 
 #header nav li {
     display: inline-block;
-    /* margin-right: 100px; */
-    /* padding-top: 10px; */
+    padding-top: 10px;
     position: relative;
 }
 
@@ -55,7 +51,7 @@
     text-align: left;
     text-decoration: none;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 17px;
 }
 
 #header nav a:hover {
@@ -80,7 +76,6 @@
 }
 
 #logo {
-    /* max-width: 150px; */
     max-height: 150px;
     height: auto;
     width: auto;
