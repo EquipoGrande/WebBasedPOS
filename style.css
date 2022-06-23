@@ -5,12 +5,15 @@ h1 {
     color: #48563C;
 }
 
-html, body {
+html,
+body {
     background-color: #CBE0CE;
     /* margin: 20px; */
-    font-family: 'Gothic A1', sans-serif;
+    font-family: 'Contrail One', sans-serif;
     color: #48563C;
     height: 100%;
+    overflow: hidden;
+    padding-bottom: 20px;
 }
 
 .btn-color1 {
@@ -19,6 +22,11 @@ html, body {
     border: #CBE0CE solid 3px;
 }
 
-.row {
-    padding: 3%;
+.col-padding {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.row-margin {
+    margin-bottom: 5%;
 }
