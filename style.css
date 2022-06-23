@@ -11,8 +11,7 @@ body {
     /* margin: 20px; */
     font-family: 'Contrail One', sans-serif;
     color: #48563C;
-    height: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
     padding-bottom: 20px;
 }
 
@@ -23,10 +22,12 @@ body {
 }
 
 .col-padding {
-    padding-left: 5%;
+    padding-left: 4%;
     padding-right: 5%;
 }
 
 .row-margin {
     margin-bottom: 5%;
 }
+
+ 
