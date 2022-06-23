@@ -20,23 +20,23 @@
 <body onload="transactionOnload();">
   <header id="header">
     <div class="container-fluid">
-        <div class="row" id="headerDiv">
-            <img id="logo" class="img-fluid col-2 align-middle col-2" width="100"
-                src="assets/AssumtpaITomasLogoGreen.png">
-            <div class="col">
-                <h1 class="">Assumpta i Tomas</h1>
-                <nav class="navbar navbar-expand-lg navbar-light">
-                    <ul>
-                        <li class="col mx-2"><a href="transactionsPage.html">Transactions</a></li>
-                        <li class="col mx-2"><a href="EditProductInfo.html">Edit Product Info</a></li>
-                        <li class="col mx-2"><a href="UpdateInventory.html">Update Inventory</a></li>
-                        <button class="col mx-2 btn btn-primary" onclick="toggleSize();">Toggle Size</button>
-                    </ul>
-                </nav>
-            </div>
+      <div class="row" id="headerDiv">
+        <img id="logo" class="img-fluid col-2 align-middle col-2" width="100"
+          src="assets/AssumptaITomasLogoGreenV2.png">
+        <div class="col">
+          <h1 class="">Assumpta i Tomas</h1>
+          <nav class="navbar navbar-expand-lg navbar-light">
+            <ul>
+              <li class="col mx-2"><a href="transactionsPage.html">Transactions</a></li>
+              <li class="col mx-2"><a href="EditProductInfo.html">Edit Product Info</a></li>
+              <li class="col mx-2"><a href="UpdateInventory.html">Update Inventory</a></li>
+              <button class="col mx-2 btn btn-primary" onclick="toggleSize();">Toggle Size</button>
+            </ul>
+          </nav>
         </div>
+      </div>
     </div>
-</header>
+  </header>
   <div class="row">
     <div class="col-sm-6">
       <h1>Customer Sales</h1>
@@ -56,13 +56,13 @@
         <form>
           <div class="row">
             <div class="col">
-              <input  type="number" class="form-control" placeholder="id" id="idText">
+              <input type="number" class="form-control" placeholder="id" id="idText">
             </div>
             <div class="col-3">
               <input type="text" readonly class="form-control-plaintext" id="productName" value="Product Name">
             </div>
             <div class="col">
-              <input  type="number" class="form-control" placeholder="Amount" id="quantityInput">
+              <input type="number" class="form-control" placeholder="Amount" id="quantityInput">
             </div>
             <div class="col">
               <input type="text" readonly class="form-control-plaintext" id="productTotal" value="€ 0.00">
