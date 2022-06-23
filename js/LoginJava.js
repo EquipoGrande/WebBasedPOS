@@ -29,24 +29,11 @@ function checkUserLogin() {
 
 }
 
+
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.querySelector("#login");
-    const resetPasswordForm = document.querySelector("#resetPassword");
-
     loginForm.addEventListener("submit", e => {
         e.preventDefault();
     });
 
-    //Checks length for new username, not necessary for now but could help later
-    // document.querySelectorAll(".form__input").forEach(inputElement => {
-    //     inputElement.addEventListener("blur", e => {
-    //         if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 10) {
-    //             setInputError(inputElement, "Username must be at least 10 characters in length");
-    //         }
-    //     });
-
-    //     inputElement.addEventListener("input", e => {
-    //         clearInputError(inputElement);
-    //     });
-    // });
 });
