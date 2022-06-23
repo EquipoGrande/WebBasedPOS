@@ -14,12 +14,12 @@
     <script src="js/CurrentInventoryList.js"></script>
     <script src="js/ButtonGrid.js"></script>
     <script src="js/Sale.js"></script>
-    <title>Edit Product Info</title>
+    <title>Customer Transactions</title>
 </head>
 
 <body onload="transactionOnload();">
-    <div class="row h-100">
-        <header id="header">
+    <div class="container-fluid h-100 d-flex flex-column">
+        <header class="row" id="header">
             <div class="row" id="headerDiv">
                 <img id="logo" class="img-fluid col-2 align-middle col-2" src="assets/AssumptaITomasLogoGreenV2.png">
                 <div class="col">
@@ -38,10 +38,9 @@
                 </div>
             </div>
         </header>
-        
-        
-        <div class="col-sm-6 col-padding">
-            <h1>Edit Product Info</h1>
+        <div class="row flex-grow-1">
+            <div class="col-sm-6 col-padding d-flex flex-column h-100">
+                <h1>Edit Product Info</h1>
             <form class="p-3 border border-3 border-secondary bg-light">
                 <div class="row form-group row-margin">
                     <label class="col-6" for="productIDInput">Product ID:</label>
@@ -72,25 +71,25 @@
                     <button class="col-md my-1 btn btn-color1">Delete Product</button>
                 </div>
             </form>
-        </div>
-        
-        
-        <div class="col-sm-6 d-flex flex-column">
-            <h1>Select Product:</h1>
-            <div class="flex-grow-1 productPanel">
-                <div class="container h-100">
-                    <div class="row h-100" id="buttonGrid"></div>
+            </div>
+            <div class="col-sm-6 d-flex flex-column">
+                <h1>Select Product:</h1>
+                <div class="flex-grow-1 productPanel ">
+                    <div class="container h-100">
+                        <div class="row h-100" id="buttonGrid"></div>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-color1" type="button"
+                        onclick="decrementPage();generateButtonGrid(pageNumber);">&lt;&lt;
+                        Previous Page</button>
+                    <button class="btn btn-color1" type="button"
+                        onclick="incrementPage();generateButtonGrid(pageNumber);">Next Page
+                        &gt;&gt;</button>
                 </div>
             </div>
-            <div class="btn-group">
-                <button class="btn btn-color1" type="button"
-                    onclick="decrementPage();generateButtonGrid(pageNumber);">&lt;&lt;
-                    Previous Page</button>
-                <button class="btn btn-color1" type="button"
-                    onclick="incrementPage();generateButtonGrid(pageNumber);">Next Page
-                    &gt;&gt;</button>
-            </div>
         </div>
+
     </div>
 </body>
 
