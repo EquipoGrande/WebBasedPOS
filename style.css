@@ -8,10 +8,8 @@ h1 {
 html,
 body {
     background-color: #CBE0CE;
-    /* margin: 20px; */
     font-family: 'Contrail One', sans-serif;
     color: #48563C;
-    /* overflow: hidden; */
     padding-bottom: 20px;
     height: 100%;
 }
