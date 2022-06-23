@@ -5,6 +5,15 @@ function transactionOnload() {
     document.getElementById("removeLine").onclick = function() {testSale.removeItem()};
     document.getElementById("quantityInput").onchange =  function() {testSale.updatePrice()};
     document.getElementById("idText").onchange =  function() {testSale.updateItemName()};
+    resetForm();
+    document.getElementById("totalPrice").value = "";
+}
+
+function resetForm() {
+    document.getElementById("productTotal").value = "€ 0.00";
+    document.getElementById("quantityInput").value = "";
+    document.getElementById("idText").value = "";
+    document.getElementById("productName").value = "Product Name";
 }
 
 class SaleItem {
@@ -28,6 +37,10 @@ class Sale {
 
     // Adds a new item to the sale
     addItem(product) {
+        if (document.getElementById("quantityInput").value <= 0) {
+            return;
+        }
+
         for (let i = 0; i < this.saleList.length; i++) {
             if (this.saleList[i]["productID"] == product["productID"]) {
                 this.modifyItem(this.saleList[i], product);
@@ -56,17 +69,22 @@ class Sale {
 
         idElement.innerHTML = product["productID"];
         nameElement.innerHTML = product["name"];
-        quantityElement.innerHTML = document.getElementById("quantityInput").value;
-        priceElement.innerHTML = document.getElementById("quantityInput").value * product["sellPrice"];
+        quantityElement.innerHTML = document.getElementById("quantityInput").value + " " + product["units"];
+        priceElement.innerHTML = "€ " + document.getElementById("quantityInput").value * product["sellPrice"];
 
         saleRow.append(idElement);
         saleRow.append(nameElement);
         saleRow.append(quantityElement);
         saleRow.append(priceElement);
+        
+        saleRow.onclick = function() {
+            saleButtonFunction(product);
+        }
 
         this.table.append(saleRow)
         this.maxID++;
         this.updateTotal();
+        resetForm();
     }
 
     // Removes an item from the sale
@@ -77,6 +95,7 @@ class Sale {
                 document.getElementById("row" + this.saleList[i]["lineID"]).remove();
                 this.saleList.splice(i, 1);
                 this.updateTotal();
+                resetForm();
                 break;
             }
         }
@@ -86,9 +105,10 @@ class Sale {
     modifyItem(saleItem, product) {
         saleItem["sellPrice"] = product["sellPrice"] * document.getElementById("quantityInput").value;
         saleItem["quantity"] = document.getElementById("quantityInput").value;
-        document.getElementById("productQuantity" + saleItem["lineID"]).innerHTML = saleItem["quantity"];
-        document.getElementById("priceElement" + saleItem["lineID"]).innerHTML = saleItem["sellPrice"];
+        document.getElementById("productQuantity" + saleItem["lineID"]).innerHTML = saleItem["quantity"] + " " + product["units"];
+        document.getElementById("priceElement" + saleItem["lineID"]).innerHTML = "€ " +  saleItem["sellPrice"];
         this.updateTotal();
+        resetForm();
     }
 
     // Completes the sale and updates other systems as if the customer just paid for the goods
