@@ -5,11 +5,12 @@ h1 {
     color: #48563C;
 }
 
-body {
+html, body {
     background-color: #CBE0CE;
     /* margin: 20px; */
     font-family: 'Gothic A1', sans-serif;
     color: #48563C;
+    height: 100%;
 }
 
 .btn-color1 {
