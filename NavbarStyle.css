@@ -25,7 +25,7 @@
 
 #header h1 {
     color: rgb(255, 255, 255);
-    font-size: 60px;
+    font-size: 6vw;
 }
 
 #header .container {
@@ -38,15 +38,15 @@
 }
 
 #header nav ul {
-    margin: 0;
-    padding: 20px;
+    /* margin: 0; */
+    /* padding: 20px; */
     list-style: none;
 }
 
 #header nav li {
     display: inline-block;
-    margin-right: 100px;
-    padding-top: 10px;
+    /* margin-right: 100px; */
+    /* padding-top: 10px; */
     position: relative;
 }
 
@@ -80,7 +80,7 @@
 }
 
 #logo {
-    max-width: 150px;
+    /* max-width: 150px; */
     max-height: 150px;
     height: auto;
     width: auto;
