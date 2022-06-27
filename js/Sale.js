@@ -1,10 +1,10 @@
 function transactionOnload() {
     onloadInitialize();
     testSale = new Sale(testInventory);
-    document.getElementById("sellLine").onclick = function() {testSale.addItemButton()};
-    document.getElementById("removeLine").onclick = function() {testSale.removeItem()};
-    document.getElementById("quantityInput").onchange =  function() {testSale.updatePrice()};
-    document.getElementById("idText").onchange =  function() {testSale.updateItemName()};
+    document.getElementById("sellLine").onclick = function () { testSale.addItemButton() };
+    document.getElementById("removeLine").onclick = function () { testSale.removeItem() };
+    document.getElementById("quantityInput").onchange = function () { testSale.updatePrice() };
+    document.getElementById("idText").onchange = function () { testSale.updateItemName() };
     resetForm();
     document.getElementById("totalPrice").value = "";
 }
@@ -21,7 +21,7 @@ class SaleItem {
         this.productID = productID;
         this.name = name;
         this.quantity = quantity;
-        this.sellPrice = quantity*sellPrice;
+        this.sellPrice = quantity * sellPrice;
         this.lineID = lineID;
     }
 }
@@ -74,15 +74,15 @@ class Sale {
         idElement.innerHTML = product["productID"];
         nameElement.innerHTML = product["name"];
         quantityElement.innerHTML = document.getElementById("quantityInput").value + " " + product["units"];
-        var round = Math.round((100*product["sellPrice"] * document.getElementById("quantityInput").value));
-        priceElement.innerHTML = "€ " + round/100;
+        var round = Math.round((100 * product["sellPrice"] * document.getElementById("quantityInput").value));
+        priceElement.innerHTML = "€ " + round / 100;
 
         saleRow.append(idElement);
         saleRow.append(nameElement);
         saleRow.append(quantityElement);
         saleRow.append(priceElement);
-        
-        saleRow.onclick = function() {
+
+        saleRow.onclick = function () {
             saleButtonFunction(product);
         }
 
@@ -93,10 +93,10 @@ class Sale {
     }
 
     // Removes an item from the sale
-    removeItem(){
+    removeItem() {
         let productID = document.getElementById("idText").value;
-        for(var i = 0; i < this.saleList.length; i++) {
-            if(this.saleList[i]["productID"] == productID) {
+        for (var i = 0; i < this.saleList.length; i++) {
+            if (this.saleList[i]["productID"] == productID) {
                 document.getElementById("row" + this.saleList[i]["lineID"]).remove();
                 this.saleList.splice(i, 1);
                 this.updateTotal();
@@ -111,39 +111,39 @@ class Sale {
         saleItem["sellPrice"] = product["sellPrice"] * document.getElementById("quantityInput").value;
         saleItem["quantity"] = document.getElementById("quantityInput").value;
         document.getElementById("productQuantity" + saleItem["lineID"]).innerHTML = saleItem["quantity"] + " " + product["units"];
-        document.getElementById("priceElement" + saleItem["lineID"]).innerHTML = "€ " +  saleItem["sellPrice"];
+        document.getElementById("priceElement" + saleItem["lineID"]).innerHTML = "€ " + saleItem["sellPrice"];
         this.updateTotal();
         resetForm();
     }
 
     // Completes the sale and updates other systems as if the customer just paid for the goods
-    finishSale(){
+    finishSale() {
         window.location.reload();
     }
 
-    updateTotal(){
+    updateTotal() {
         this.total = 0.0;
-        for(var i = 0; i < this.saleList.length; i++) {
-            this.total += (Math.round(100*this.saleList[i]["sellPrice"])/100);
+        for (var i = 0; i < this.saleList.length; i++) {
+            this.total += (Math.round(100 * this.saleList[i]["sellPrice"]) / 100);
         }
         document.getElementById("totalPrice").value = "Total: €" + this.total;
     }
 
-    updatePrice(){
+    updatePrice() {
         let productID = document.getElementById("idText").value;
-        for(var i = 0; i < this.productInventory.productList.length; i++) {
-            if(this.productInventory.productList[i]["productID"] == productID) {
-                var round = Math.round(100*this.productInventory.productList[i].sellPrice * document.getElementById("quantityInput").value);
-                document.getElementById("productTotal").value = "€ " + round/100;
+        for (var i = 0; i < this.productInventory.productList.length; i++) {
+            if (this.productInventory.productList[i]["productID"] == productID) {
+                var round = Math.round(100 * this.productInventory.productList[i].sellPrice * document.getElementById("quantityInput").value);
+                document.getElementById("productTotal").value = "€ " + round / 100;
                 break;
             }
         }
     }
 
-    updateItemName(){
+    updateItemName() {
         let productID = document.getElementById("idText").value;
-        for(var i = 0; i < this.productInventory.productList.length; i++) {
-            if(this.productInventory.productList[i]["productID"] == productID) {
+        for (var i = 0; i < this.productInventory.productList.length; i++) {
+            if (this.productInventory.productList[i]["productID"] == productID) {
                 document.getElementById("productName").value = this.productInventory.productList[i].name;
                 break;
             }
@@ -163,7 +163,7 @@ class Sale {
                 break;
             }
         }
-    }    
+    }
 }
 
 function main() {
@@ -174,8 +174,8 @@ function main() {
 
     testSale.productList[0].decrement(4.0);
 
-    testSale.addItem("Apple",3);
-    testSale.addItem("Yam",3);
+    testSale.addItem("Apple", 3);
+    testSale.addItem("Yam", 3);
 
     testSale.saleList.forEach(element => {
         stringy += element["name"];
