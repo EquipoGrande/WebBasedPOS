@@ -30,17 +30,21 @@ body {
     padding-right: 2%;
 }
 
-/* .row-total {
-    margin: auto;
-    margin-bottom: 5%;
-    padding: 3px;
-    max-height: 40px;
-    max-width: 120px;
-    border-style: inset;
-} */
-
-
 .transaction-box {
-    margin-bottom: 5%;
     min-height: 200px;
+}
+
+.table-header {
+    background-color: black;
+    color: white;
+    padding: 3%;
+}
+
+.table-footer {
+    border-width: 2px !important;
+    background-color: white;
+    color: black;
+    margin-bottom: 5%;
+    padding: 3%;
+
 }
