@@ -34,6 +34,11 @@ body {
 .input-margin {
     margin-bottom: 1%;
 }
+
+.bottom-margin {
+    margin-bottom: 4%
+}
+
 /* .row-total {
     margin: auto;
     margin-bottom: 5%;
