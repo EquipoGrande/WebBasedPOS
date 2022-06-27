@@ -14,6 +14,13 @@
     <script src="js/CurrentInventoryList.js"></script>
     <script src="js/ButtonGrid.js"></script>
     <script src="js/Sale.js"></script>
+	<script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+    </script>
+    
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <title>Customer Transactions</title>
 </head>
 
@@ -34,45 +41,48 @@
                            <button class="col mx-2 btn btn-light" onclick="toggleSize();">Toggle Size</button>
                            <button class="col mx-2 btn btn-dark" onclick="logoutButton();">Log Out</button>
                        </ul>
+					   <ul>
+						<div id="google_translate_element"></div>
+					</ul>
                    </nav>
                </div>
            </div>
        </header>
 
-      <div class="row flex-grow-1">
-         <div class="col-sm-12 col-padding d-flex flex-column h-100">
-            <h1>Update Inventory</h1>
-            <div class="border border-3 border-secondary bg-light transaction-box">
-               
-
-               <div class="col-sm-12 col-padding d-flex flex-column">
-                  
-                  <form class="p-3">
-                      <div class="row form-group">
-                          <label class="col-7" for="productIDInput">Search Transactions ID:</label>
-                          <input class="col-5 row-margin" type="number" id="productIDInput">
-                          <label class="col-7" for="productName">Search Date:</label>
-                          <input class="col-5 row-margin" type="text" id="productName">
-                          <label class="col-7" for="currentInventory">Search Product ID:</label>
-                          <input class="col-5 row-margin" type="text" id="currentInventory">
-                      </div>
-                  </form>
-
-              </div>
-               
-               <table class="table table-hover">
-                  <thead class="table-dark">
-                     <tr>
-                     <th scope="col">PID</th>
-                     <th scope="col">Product</th>
-                     <th scope="col">Amount</th>
-                     <th scope="col">Price</th>
-                     </tr>
-                  </thead>
-                     <tbody id="saleTable"></tbody>
-               </table>
+	<div class="row flex-grow-1">
+		<div class="col-sm-12 col-padding d-flex flex-column h-100">
+            <h1>Vendor History</h1>
+            <div class="border border-3 border-secondary bg-light bottom-margin">
+				<div class="col-sm-12 col-padding d-flex flex-column">
+					<form class="p-3">
+						<div class="row form-group">
+							<label class="col-7 col-sm-5 col-md-2 col-lg-2" for="productIDInput">Search Transaction ID:</label>
+							<input class="col-5 col-sm-6 col-md-2 col-lg-2 input-margin" type="text" id="productIDInput">
+							<label class="col-7 col-sm-5 col-md-2 col-lg-2" for="productName">Search Date:</label>
+							<input class="col-5 col-sm-6 col-md-2 col-lg-2 input-margin" type="text" id="productName">
+							<label class="col-7 col-sm-5 col-md-2 col-lg-2" for="currentInventory">Search Product ID:</label>
+							<input class="col-5 col-sm-6 col-md-2 col-lg-2 input-margin" type="text" id="currentInventory">
+						</div>
+					</form>
+				</div>
             </div>
-         </div>
+
+			<div class="border border-3 border-secondary bg-light transaction-box">
+				<table class="table table-hover table-padding">
+				   <thead class="table-dark">
+					  <tr>
+					  <th scope="col">Date</th>
+					  <th scope="col">Transaction ID</th>
+					  <th scope="col">Product ID</th>
+					  <th scope="col">Quantity</th>
+					  <th scope="col">Total</th>
+					  </tr>
+				   </thead>
+					  <tbody id="saleTable"></tbody>
+				</table>
+			</div>
+
+		</div>
          
      </div>
    </div>
