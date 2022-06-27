@@ -58,3 +58,8 @@ function generateButtonGrid() {
         createButton(testInventory.productList[i], buttonGrid, saleButtonFunction);
     }
 }
+
+/**
+ * Add methods as event listeners for when the page loads
+ */
+window.addEventListener('load', onloadInitialize);

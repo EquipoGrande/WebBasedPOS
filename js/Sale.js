@@ -183,3 +183,5 @@ function main() {
 
     header.innerHTML = stringy;
 }
+
+window.addEventListener('load', transactionOnload);
