@@ -14,6 +14,13 @@
    <script src="js/CurrentInventoryList.js"></script>
    <script src="js/ButtonGrid.js"></script>
    <script src="js/Sale.js"></script>
+   <script type="text/javascript">
+       function googleTranslateElementInit() {
+         new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+       }
+   </script>
+   
+   <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
    <title>Customer Transactions</title>
 </head>
 
@@ -34,6 +41,9 @@
                      <button class="col mx-2 btn btn-light" onclick="toggleSize();">Toggle Size</button>
                      <button class="col mx-2 btn btn-dark" onclick="logoutButton();">Log Out</button>
                   </ul>
+                  <ul>
+                     <div id="google_translate_element"></div>
+                 </ul>
                </nav>
             </div>
          </div>
@@ -74,7 +84,14 @@
                            value="Product Name"> </div>
                   </div>
                   <div class="row form-group row-margin">
-                     <div class="col-6"> <input type="number" class="form-control" placeholder="Amount"
+                     <div class="col-5"> <input type="number" readonly class="form-control" placeholder="Amount"
+                           id="idText">
+                     </div>
+                     <div class="col-6"> <input type="text" readonly class="form-control-plaintext" id=""
+                           value="Amount Left in Stock"> </div>
+                  </div>
+                  <div class="row form-group row-margin">
+                     <div class="col-6"> <input type="number" class="form-control" placeholder="Quantity"
                            id="quantityInput"> </div>
                      <div class="col-4"> <input type="text" readonly class="form-control-plaintext" id="productTotal"
                            value="€ 0.00"> </div>
