@@ -41,32 +41,39 @@
 
       <div class="row flex-grow-1">
          <div class="col-sm-12 col-padding d-flex flex-column h-100">
-            <h1>Update Inventory</h1>
+            <h1>Vendor History</h1>
             <div class="border border-3 border-secondary bg-light transaction-box">
                
 
                <div class="col-sm-12 col-padding d-flex flex-column">
                   
-                  <form class="p-3">
-                      <div class="row form-group">
-                          <label class="col-7" for="productIDInput">Search Transactions ID:</label>
-                          <input class="col-5 row-margin" type="number" id="productIDInput">
-                          <label class="col-7" for="productName">Search Date:</label>
-                          <input class="col-5 row-margin" type="text" id="productName">
-                          <label class="col-7" for="currentInventory">Search Product ID:</label>
-                          <input class="col-5 row-margin" type="text" id="currentInventory">
-                      </div>
-                  </form>
+				<form class="p-3">
+					<div class="row form-group">
+						<!-- <div class="col-sm"> -->
+							<label class="col-7 col-sm-5 col-md-2 col-lg-2" for="productIDInput">Search Transaction ID:</label>
+						    <input class="col-5 col-sm-6 col-md-2 col-lg-2 row-margin" type="text" id="productIDInput">
+						<!-- </div> -->
+						<!-- <div class="col-sm"> -->
+							<label class="col-7 col-sm-5 col-md-2 col-lg-2" for="productName">Search Date:</label>
+							<input class="col-5 col-sm-6 col-md-2 col-lg-2 row-margin" type="text" id="productName">
+						<!-- </div> -->
+						<!-- <div class="col-sm"> -->
+							<label class="col-7 col-sm-5 col-md-2 col-lg-2" for="currentInventory">Search Product ID:</label>
+							<input class="col-5 col-sm-6 col-md-2 col-lg-2 row-margin" type="text" id="currentInventory">
+						<!-- </div> -->
+					</div>
+				</form>
 
               </div>
                
-               <table class="table table-hover">
+               <table class="table table-hover table-padding">
                   <thead class="table-dark">
                      <tr>
-                     <th scope="col">PID</th>
-                     <th scope="col">Product</th>
-                     <th scope="col">Amount</th>
-                     <th scope="col">Price</th>
+                     <th scope="col">Date</th>
+                     <th scope="col">Transaction ID</th>
+                     <th scope="col">Product ID</th>
+                     <th scope="col">Quantity</th>
+                     <th scope="col">Total</th>
                      </tr>
                   </thead>
                      <tbody id="saleTable"></tbody>

@@ -30,6 +30,10 @@ body {
     padding-right: 2%;
 }
 
+
+.input-margin {
+    margin-bottom: 1%;
+}
 /* .row-total {
     margin: auto;
     margin-bottom: 5%;
