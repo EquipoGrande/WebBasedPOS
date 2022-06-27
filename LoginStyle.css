@@ -7,7 +7,7 @@ body {
     --color-error: #bab9b9;
     --color-success: #4bb544;
     --border-radius: 4px;
-
+    
     margin: 0;
     height: 100vh;
     display: flex;
@@ -16,6 +16,7 @@ body {
     font-size: 18px;
     background: url(https://img5.goodfon.com/original/1920x1080/a/d1/kivi-frukty-mnogo-eda-razrezannye.jpg);
     background-size: cover;
+    backdrop-filter: blur(5px);
 }
 
 .container {
