@@ -21,7 +21,7 @@
       </script>
    
    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-   <title>Customer Transactions</title>
+   <title>Vendor Transactions</title>
 </head>
 
 <body onload="transactionOnload();">
@@ -51,40 +51,21 @@
 
       <div class="row flex-grow-1">
          <div class="col-sm-6 col-padding">
-            <h1>Transactions</h1>
+            <h1>Vendor Transactions</h1>
 
-            <div class="table-header">
-               <table style="width: 100%;">
-                  <thead>
-                     <tr>
-                        <th scope="col">PID</th>
-                        <th scope="col">Product</th>
+            <div class="border border-3 border-secondary bg-light transaction-box">
+               <table class="table table-hover">
+                  <thead class="table-dark">
+                     <tr> 
+                        <!-- FIXME -->
+                        <th width="25%" scope="col">TxID</th>
+                        <th width="25%" scope="col">Product</th>
                         <th width="25%" scope="col">Amount</th>
-                        <th scope="col">Price</th>
+                        <th width="25%" scope="col">Price</th>
                      </tr>
                   </thead>
-               </table>
-            </div>
+                  <!-- <tbody id="saleTable"></tbody> -->
 
-            <div class="border border-3 border-secondary bg-light transaction-box"
-               style="width:100%;overflow:auto; max-height:100px;">
-               <table class="table table-hover">
-
-                  <tbody id="saleTable"></tbody>
-
-               </table>
-            </div>
-
-            <div class="table-footer border border-dark">
-               <table style="width: 100%;">
-                  <tfoot id="table-footer">
-                     <tr>
-                        <th width="70%">Total :</th>
-                        <td><input type="text" readonly class="form-control-plaintext" id="totalPrice" value="€ 0.00"
-                              placeholder="€ 0.00">
-                        </td>
-                     </tr>
-                  </tfoot>
                </table>
             </div>
 
@@ -113,8 +94,8 @@
                   <div class="row form-group">
                      <button type="button" class="col-md my-1 btn btn-color1" id="sellLine">Add/Edit</button>
                      <button type="button" class="col-md my-1 btn btn-color1" id="removeLine">Remove</button>
-                     <button type="button" class="col-md my-1 btn btn-color1" onclick="testSale.finishSale();">Make
-                        Sale</button>
+                     <button type="button" class="col-md my-1 btn btn-color1" onclick="testSale.finishSale();">
+                        Make Vendor Sale</button>
                   </div>
                </form>
             </div>
