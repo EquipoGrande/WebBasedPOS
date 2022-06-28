@@ -1,8 +1,10 @@
 var pageNumber;
 var productList = new Array;
 var testSale;
+var numberOfButtons = 15;
 
 async function onloadInitialize(functionName) {
+    console.log("Initialized with function " + functionName);
     pageNumber = 0; 
     await generateInventory().then(function(value) {
         productList = value;
@@ -70,22 +72,31 @@ function decrementPage() {
 
 function incrementPage() {
     pageNumber++;
-    if (pageNumber > parseInt((productList.length-1)/15)) {
-        pageNumber = parseInt((productList.length-1)/15);
+    if (pageNumber > parseInt((productList.length-1)/numberOfButtons)) {
+        pageNumber = parseInt((productList.length-1)/numberOfButtons);
     }
 }
 
+function toggleSizeAndGenerateButtonGrid(){
+    toggleButtonSize();
+    pageNumber = 0;
+    generateButtonGrid();
+    toggleFontSize();
+}
+
 function generateButtonGrid(functionName) {
+    console.log("generating");
     var buttonGrid = document.getElementById("buttonGrid");
     buttonGrid.innerHTML = "";
+    numberOfButtons = g_sizeToggle ? 6 : 15;
 
-    var maximumIndex = (pageNumber + 1) * 15;
+    var maximumIndex = (pageNumber + 1) * numberOfButtons;
 
     if (maximumIndex > productList.length) {
         maximumIndex = productList.length;
     }
 
-    for (let i = (pageNumber*15); i < maximumIndex; i++) {
+    for (let i = (pageNumber*numberOfButtons); i < maximumIndex; i++) {
         createButton(productList[i], buttonGrid, functionName);
     }
 }

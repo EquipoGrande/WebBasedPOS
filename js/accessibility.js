@@ -6,6 +6,7 @@ function toggleFontSize() {
 }
 
 function toggleButtonSize() {
+    console.log("toggling");
     g_sizeToggle = !g_sizeToggle;
     if (g_sizeToggle) {
         document.querySelectorAll('.btn').forEach(element => {
@@ -16,7 +17,6 @@ function toggleButtonSize() {
             element.classList.remove('btn-lg');
         });
     }
-
 }
 
 function toggleSize() {

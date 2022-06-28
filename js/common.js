@@ -6,9 +6,7 @@ function loadNavbar() {
     fetch('/Navbar.html').then( response => response.text()).then( function (html) {
         var parser = new DOMParser();
         var navbar = parser.parseFromString(html, "text/html");
-        console.log(navbar);
         var div = navbar.getElementById('headerDiv');
-        console.log(div);
         document.getElementById('header').appendChild(div);
     });
 }
