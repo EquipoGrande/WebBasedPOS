@@ -3,7 +3,7 @@ async function performOnload() {
         modifyInventoryFunction(currentProduct);
     }).then();
     inventor = new ModifyInventory(productList);
-    document.getElementById("updateInventory").onclick = function () { inventor.modifyQuantityButton() };
+    document.getElementById("updateInventory").onclick = function () { inventor.modifyQuantity() };
     document.getElementById("idtext").value = "";
     document.getElementById("productName").value = "Name";
     document.getElementById("currentInventory").value = "";
@@ -12,22 +12,27 @@ async function performOnload() {
 class ModifyInventory {
     constructor(inventory) {
         this.productList = inventory;
-        console.log(this.productList)
     }
 
-    modifyQuantityButton(){
-        let targetId = document.getElementById("idText").value;
-        let newQuantity = document.getElementById("currentinventory").value;
-        this.modifyQuantity(targetId,newQuantity);
-    }
-
-    modifyQuantity(itemId, newQuantity) {
-        for(let i = 0; i < this.productList.length; i++) {
-            if(itemId == productList[i].id) {
-                productList[i].quantity = newQuantity;
-                break;
+    async modifyQuantity() {
+        var promise = new Promise(function(resolve, reject){
+            var getRequest = new XMLHttpRequest();
+            getRequest.responseType = "json";
+            getRequest.open("PUT", "http://localhost:3000/api/inventory/setinventorybyid?productid=" + document.getElementById("idtext").value + "&newquantity=" + document.getElementById("currentInventory").value);
+            getRequest.onload = function () {
+                if (getRequest.status == 200) {
+                    resolve(getRequest.response);
+                } else {
+                    reject(Error(getRequest.statusText));
+                };
+                getRequest.onerror = function() {
+                    reject(Error('Cannot find JSON data'));
+                }
             }
-        }
+            getRequest.send();
+        });
+        var inventoryNum = await promise;
+        return inventoryNum;
     }
 
     static async getInventoryOf(currentId){
@@ -50,7 +55,6 @@ class ModifyInventory {
     []
         var inventoryNum = await promise;
         var endPoint = inventoryNum[0]["stockquantity"];
-        console.log(endPoint);
         return endPoint;
     }
 }
