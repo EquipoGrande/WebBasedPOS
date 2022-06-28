@@ -4,6 +4,10 @@ h1 {
     font-family: 'Contrail One', cursive;
     color: #48563C;
 }
+    
+.goog-te-banner-frame{
+    display:none !important
+}
 
 html,
 body {
@@ -12,6 +16,8 @@ body {
     color: #48563C;
     padding-bottom: 20px;
     height: 100%;
+    top: 0px !important; 
+    position: static !important; 
 }
 
 .btn-color1 {
