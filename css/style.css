@@ -80,14 +80,30 @@ body {
     color: black;
 }
 
+.sidebarTitle {
+    font-size: 30px;
+    color: black;
+    margin-bottom: 20%;
+
+}
+
 .main-content {
     margin-top: 2%;
 }
 
 .date {
     margin-bottom: 10%;
+    color: black;
 }
 
 .button {
+    margin-bottom: 20%;
+}
+
+#startDate {
+    margin-bottom: 15%;
+}
+
+#endDate {
     margin-bottom: 20%;
 }
