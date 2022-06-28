@@ -14,6 +14,7 @@
     <script src="js/accessibility.js"></script>
     <script src="js/CurrentInventoryList.js"></script>
     <script src="js/ButtonGrid.js"></script>
+    <script src="js/ModifyInventory.js"></script>
     <title>Customer Transactions</title>
 </head>
 
@@ -26,8 +27,8 @@
                 <h1>Update Inventory</h1>
                 <form class="p-3 border border-3 border-secondary bg-light">
                     <div class="row form-group row-margin">
-                        <label class="col-6" for="productIDInput">Product ID:</label>
-                        <input class="col-6" type="number" id="productIDInput" readonly>
+                        <label class="col-6" for="idtext">Product ID:</label>
+                        <input class="col-6" type="number" id="idtext" readonly>
                     </div>
                     <div class="row form-group row-margin">
                         <label class="col-6" for="productName">Product Name:</label>
@@ -38,7 +39,7 @@
                         <input class="col-6" type="text" id="currentInventory">
                     </div>
                     <div class="row form-group">
-                        <button class="col-md my-1 btn btn-color1">Update Inventory</button>
+                        <button class="col-md my-1 btn btn-color1" id="updateInventory">Update Inventory</button>
                     </div>
                 </form>
             </div>
