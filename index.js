@@ -25,4 +25,4 @@ app.use('/css', express.static(path.join(__dirname, 'css')));           // serve
 app.use('/js', express.static(path.join(__dirname, 'js')));             // serve js files on /js path
 app.use('/assets', express.static(path.join(__dirname, 'assets')));     // serve asset files on /assets path
 
-app.listen(port, () => console.log(`Hello world app listening on port ${port}!`))
+app.listen(port, () => console.log(`Assumpta i Tomas POS app listening on port ${port}!`))
