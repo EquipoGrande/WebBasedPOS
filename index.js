@@ -2,6 +2,7 @@
 // Boilerplate code to set up Express
 const express = require('express');
 const app = require('express')();
+app.use(express.json());
 const router = express.Router();
 const port = 3000;
 const { application_name } = require('pg/lib/defaults');
