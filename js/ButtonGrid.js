@@ -25,17 +25,40 @@ function createButton(product, buttonGrid, inputFunction) {
     buttonGrid.append(button);
 }
 
+async function getInventoryOf(currentId){
+    var promise = new Promise(function(resolve, reject){
+        var getRequest = new XMLHttpRequest();
+        getRequest.responseType = "json";
+        getRequest.open('GET', 'http://localhost:3000/api/inventory/getinventorybyid?productid=' + currentId);
+        getRequest.onload = function () {
+            if (getRequest.status == 200) {
+                resolve(getRequest.response);
+            } else {
+                reject(Error(getRequest.statusText));
+            };
+            getRequest.onerror = function() {
+                reject(Error('Cannot find JSON data'));
+            }
+        }
+        getRequest.send();
+    });
+[]
+    var inventoryNum = await promise;
+    var endPoint = inventoryNum[0]["stockquantity"];
+    return endPoint;
+}
+
 async function modifyInventoryFunction(currentProduct) {
     document.getElementById("idtext").value = currentProduct["productid"];
     document.getElementById("productName").value = currentProduct["productname"];
-    document.getElementById("currentInventory").value = await ModifyInventory.getInventoryOf(currentProduct["productid"]).then();
+    document.getElementById("currentInventory").value = await getInventoryOf(currentProduct["productid"]).then();
 }
 
-function saleButtonFunction(currentProduct) {
+async function saleButtonFunction(currentProduct) {
     document.getElementById("idText").value = currentProduct["productid"];
     document.getElementById("quantityInput").focus();
     document.getElementById("productName").value = currentProduct["productname"];
-    //document.getElementById("productAmount").value = currentProduct["quantity"] + " " + currentProduct["units"];
+    document.getElementById("productAmount").value = await getInventoryOf(currentProduct["productid"]).then() + " kg left";
 }
 
 function decrementPage() {

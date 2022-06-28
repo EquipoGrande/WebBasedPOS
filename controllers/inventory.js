@@ -26,6 +26,16 @@ module.exports = function (express) {
         });
     });
 
+    router.get('/getunitsbyid', (req, res) => {
+        db.query('SELECT * FROM product WHERE productID = ' + req.query.productid, (err, queryResult) => {
+            if(!err) {
+                res.send(queryResult.rows);
+            } else {
+                console.log(err.message);
+            }
+        })
+    })
+
     router.get('/getinventorybyid', (req, res) => {
         db.query('SELECT stockQuantity FROM currentinventory WHERE productID = ' + req.query.productid, (err, queryResult) => {
             if(!err) {
