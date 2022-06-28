@@ -24,28 +24,30 @@ module.exports = function (express) {
      * Returns a list of all products in JSON format
      */
     router.get('/getproductslist', (req, res) => {
-        db.query(query_getproductslist, (err, queryResult)=>{
-            if (!err) {
-            res.send(queryResult.rows)
-            } else {
+        db.query(query_getproductslist)
+        .then(queryResult => {
+            res.status(200);
+            res.send(queryResult.rows);
+        })
+        .catch(err => {
+            res.status(500);
             console.log(err.message);
-            }
-        });
+            res.send(err.message);
+        })
     });
 
     /**
      * Returns the product specified by the product id in JSON format
      */
      router.get('/getproductbyid', (req, res) => {
-        db.query(query_getproductbyid, [req.query.productid], (err, queryResult) => {
-            if(!err) {
-                res.status(200);
-                res.send(queryResult.rows);
-            } else {
-                res.status(500);
-                console.log(err.message);
-                res.send(err.message);
-            }
+        db.query(query_getproductbyid, [req.query.productid]).then(queryResult => {
+            res.status(200);
+            res.send(queryResult.rows);
+        })
+        .catch(err => {
+            res.status(500);
+            console.log(err.message);
+            res.send(err.message);
         });
     });
 
@@ -57,15 +59,15 @@ module.exports = function (express) {
     router.post('/addproduct', async (req, res) => {
         var nextID = await getNextProductID(db);
         var params = [nextID, req.body.productname, req.body.sellprice, req.body.purchaseprice, req.body.unit];
-        db.query(query_insertproduct, params, (err, queryResult) => {
-            if(!err) {
-                res.status(201);
-                res.send(req.body.productname + ' added successfully!');
-            } else {
-                res.status(500);
-                console.log(err.message);
-                res.send(err.message);
-            }
+        
+        db.query(query_insertproduct, params).then(queryResult => {
+            res.status(201);
+            res.send(req.body.productname + ' added successfully!');
+        })
+        .catch(err => {
+            res.status(500);
+            console.log(err.message);
+            res.send(err.message);
         });
     });
 
@@ -73,7 +75,7 @@ module.exports = function (express) {
      * Remove product specified by the product id.
      */
     router.delete('/removeproduct', (req, res) => {
-        db.query(query_deleteproduct, [req.query.productid]).then(() => {
+        db.query(query_deleteproduct, [req.query.productid]).then(queryResult => {
             res.status(200);
             res.send(req.query.productid + 'deleted');
         })
