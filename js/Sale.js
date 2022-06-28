@@ -133,8 +133,15 @@ class Sale {
     }
 
     // Completes the sale and updates other systems as if the customer just paid for the goods
-    finishSale() {
-        console.log(JSON.stringify(this.saleList));
+    async finishSale() {
+        const response = await fetch('http://localhost:3000/api/sales/makesale', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.saleList)
+        });
     }
 
     sendSaleLine() {

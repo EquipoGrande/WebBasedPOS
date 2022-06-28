@@ -1,4 +1,6 @@
 const sqlGetNextID = 'SELECT MAX(saleid) as max FROM salehistory;';
+const sqlLineItem = "INSERT INTO salelineitem VALUES($1, $2, $3);";
+const sqlHistoryEntry = "INSERT INTO salehistory VALUES($1, $2, $3);";
 
 var max_id;
 
@@ -16,37 +18,21 @@ module.exports = function (express) {
     router.post('/makesale', async (req, res) => {
         await getSaleID(db);
 
+        console.log(req.body);
         console.log(max_id);
 
         var saleList = req.body;
-        var sqlStatement;
 
         var total = 0.0;
-        var date = Date.now();
+        var date = new Date();
 
         for (let i = 0; i < saleList.length; i++) {
-            var sqlStatement = "INSERT INTO salelineitem VALUES('" + max_id + "', '" + saleList[i].productID + "', '" + saleList[i].quantity + "');";
-            await db.query(sqlStatement);
+            await db.query(sqlLineItem, [max_id, saleList[i].productID, saleList[i].quantity]);
             total = total + parseFloat(saleList[i].sellprice);
         }
 
-        sqlStatement = "INSERT INTO salehistory VALUES('" + max_id + "', '" + date + "', '" + total + "');";
-        await db.query(sqlStatement);
-
-        /*
-        var salelist = req.body;
-        for (let i = 0; i < salelist.length; i++) {
-            console.log(salelist[i].name);
-        }
-        */
-        /*db.query('SELECT * FROM product',(err, queryResult)=>{
-            if (!err) {
-            res.send(queryResult.rows)
-            } else {
-            console.log(err.message);
-            }
-        });*/
+        await db.query(sqlHistoryEntry, [max_id, date, total]);
+        res.send();
     });
-
     return router;
 };
