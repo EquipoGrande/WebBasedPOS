@@ -13,6 +13,7 @@
     <script src="js/common.js"></script>
     <script src="js/accessibility.js"></script>
     <script src="js/CurrentInventoryList.js"></script>
+    <script src="js/Trends.js"></script>
 
     <title>Trends</title>
 </head>
@@ -21,76 +22,34 @@
     <header class="row" id="header">
     </header>
 
-    <!-- <div>
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <a href="/"
-                        class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-black text-decoration-none">
-                        <span class="fs-5 d-none d-sm-inline">Menu</span>
-                    </a>
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-                        id="menu">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline text-white">Home</span>
-                            </a>
-                        </li>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 col-sm-4 col-xs-4 sidebar">
+                <div class="left-navigation">
+                    <h5 class="sidebarTitle"><strong>Menu</strong></h5>
 
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline text-white">Orders</span></a>
-                        </li>
+                    <div class="date">
+                        <label for="startDate">Start</label>
+                        <input id="startDate" class="form-control" type="date" />
+                        <label for="endDate">End</label>
+                        <input id="endDate" class="form-control" type="date" />
+                    </div>
 
+                    <div class="btn-group-vertical">
+                        <button class="btn-light button">End-of-Day Report</button>
+                        <button class="btn-light button">Excess Report</button>
+                        <button class="btn-light button">Restock Report</button>
+                        <button class="btn-light button">Sales Report</button>
+                    </div>
 
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span>
-                            </a>
-                        </li>
-                    </ul>
                 </div>
-            </div> -->
+            </div>
 
-    </header>
-    <div class="wrapper">
-        <div class="container">
-            <div class="row">
-                <div
-                    class="col-md-2 left d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <a href="/"
-                        class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-black text-decoration-none">
-                        <span class="fs-5 d-none d-sm-inline">Menu</span>
-                    </a>
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-                        id="menu">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline text-white">Sales
-                                    Report</span>
-                            </a>
-                        </li>
+            <div class="col-md-10 col-sm-8 main-content">
+                <h1>Trends & Analytics</h1>
 
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline text-white">Excess
-                                    Report</span></a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline text-white">Restock
-                                    Report</span></a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-table"></i> <span
-                                    class="ms-1 d-none d-sm-inline text-white">End-of-Day Report</span></a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-md-8 right">
-                    <div class="bg"></div>Right Content
+                <div style="width:75%;">
+                    <canvas id="barChart" width="1" height="1"></canvas>
                 </div>
             </div>
         </div>
