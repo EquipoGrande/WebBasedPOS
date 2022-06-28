@@ -4,7 +4,8 @@ module.exports = function (express) {
     var db = require('../Database');
     //const router = require('../')();
 
-    router.get('', (req, res) => {
+    router.get('/getproductslist', (req, res) => {
+        console.log("test")
         db.query('SELECT * FROM product',(err, queryResult)=>{
             if (!err) {
             res.send(queryResult.rows)

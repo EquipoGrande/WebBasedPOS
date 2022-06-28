@@ -12,10 +12,8 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/Login.html');
 });
 
-//server.js
-
 var productListController = require('./controllers/products')(express);
-app.use('/productlist', productListController);
+app.use('/api/products', productListController);
 
 // serve all the static files. They will match the folder structure of this project
 app.use(express.static('./'));
