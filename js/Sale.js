@@ -14,6 +14,7 @@ function resetForm() {
     document.getElementById("quantityInput").value = "";
     document.getElementById("idText").value = "";
     document.getElementById("productName").value = "Product Name";
+    document.getElementById("productAmount").value = "Amount left in Stock";
 }
 
 class SaleItem {
@@ -145,6 +146,7 @@ class Sale {
         for (var i = 0; i < this.productInventory.productList.length; i++) {
             if (this.productInventory.productList[i]["productID"] == productID) {
                 document.getElementById("productName").value = this.productInventory.productList[i].name;
+                document.getElementById("productAmount").value = this.productInventory.productList[i].quantity + " " + this.productInventory.productList[i].units;
                 break;
             }
         }
