@@ -1,7 +1,7 @@
 
 const query_getproductslist = `SELECT * FROM product;`;
 const query_getproductbyid = `SELECT * FROM product WHERE productid=$1`;
-const query_insertproduct = `INSERT INTO product(productid, productname, sellprice, sellunit, purchaseprice, purchaseunit) VALUES($1, $2, $3, $5, $4, $5);`;
+const query_insertproduct = `INSERT INTO product(productid, productname, sellprice, sellunit, purchaseprice, purchaseunit) VALUES($1, $2, $3, $4, $5, $6);`;
 const query_getmaxproductid = `SELECT MAX(productid) AS max FROM product;`;
 const query_deleteproduct = `DELETE FROM product WHERE productid=$1`;
 
@@ -58,7 +58,7 @@ module.exports = function (express) {
      */
     router.post('/addproduct', async (req, res) => {
         var nextID = await getNextProductID(db);
-        var params = [nextID, req.body.productname, req.body.sellprice, req.body.purchaseprice, req.body.unit];
+        var params = [nextID, req.body.productname, req.body.sellprice, req.body.sellunit, req.body.purchaseprice, req.body.purchaseunit];
         
         db.query(query_insertproduct, params).then(queryResult => {
             res.status(201);
@@ -72,12 +72,39 @@ module.exports = function (express) {
     });
 
     /**
+     * 
+     */
+    router.put('/editproduct', (req, res) => {
+        var productid;
+        var sqlstring = 'UPDATE product SET ';
+        for(key in req.body) {
+            if(key == 'productid') {
+                productid = req.body[key];
+                continue;
+            }
+            sqlstring += `${key}=${req.body[key]}, `
+        }
+        sqlstring = sqlstring.slice(0, -2);
+        sqlstring += ' WHERE productid=$1';
+
+        db.query(sqlstring, [productid]).then(queryResult => {
+            res.status(200);
+            res.send(productid + ' updated');
+        })
+        .catch(err => {
+            res.status(500);
+            console.log(err.message);
+            res.send(err.message);
+        });
+    })
+
+    /**
      * Remove product specified by the product id.
      */
     router.delete('/removeproduct', (req, res) => {
         db.query(query_deleteproduct, [req.query.productid]).then(queryResult => {
             res.status(200);
-            res.send(req.query.productid + 'deleted');
+            res.send(req.query.productid + ' deleted');
         })
         .catch(err => {
             res.status(500);
