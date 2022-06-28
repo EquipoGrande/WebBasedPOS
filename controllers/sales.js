@@ -26,12 +26,12 @@ module.exports = function (express) {
 
         for (let i = 0; i < saleList.length; i++) {
             var sqlStatement = "INSERT INTO salelineitem VALUES('" + max_id + "', '" + saleList[i].productID + "', '" + saleList[i].quantity + "');";
-            console.log(sqlStatement);
-            total += saleList[i].saleprice;
+            await db.query(sqlStatement);
+            total = total + parseFloat(saleList[i].sellprice);
         }
 
         sqlStatement = "INSERT INTO salehistory VALUES('" + max_id + "', '" + date + "', '" + total + "');";
-        console.log(sqlStatement);
+        await db.query(sqlStatement);
 
         /*
         var salelist = req.body;
