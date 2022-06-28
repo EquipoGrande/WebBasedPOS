@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 
 //server.js
 
-var productListController = require('./controllers/productlist')(express);
+var productListController = require('./controllers/products')(express);
 app.use('/productlist', productListController);
 
 // serve all the static files. They will match the folder structure of this project
