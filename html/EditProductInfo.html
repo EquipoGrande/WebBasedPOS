@@ -14,6 +14,7 @@
     <script src="js/accessibility.js"></script>
     <script src="js/CurrentInventoryList.js"></script>
     <script src="js/ButtonGrid.js"></script>
+    <script src="js/EditProductInfoJava.js"></script>
     <title>Customer Transactions</title>
 </head>
 
@@ -21,7 +22,7 @@
     <div class="container-fluid h-100 d-flex flex-column">
         <header class="row" id="header">
         </header>
-        <div class="row flex-grow-1">
+        <div class="row flex-grow-1 main-content">
             <div class="col-sm-6 col-padding d-flex flex-column h-100">
                 <h1>Edit Product Info</h1>
             <form class="p-3 border border-3 border-secondary bg-light">
@@ -49,9 +50,9 @@
                     <label for="radioKgs">Individual</label>
                 </div>
                 <div class="row form-group">
-                    <button class="col-md my-1 btn btn-color1">Edit Product Info</button>
-                    <button class="col-md my-1 btn btn-color1">Insert New Product</button>
-                    <button class="col-md my-1 btn btn-color1">Delete Product</button>
+                    <button type="button" id="editProductBtn" class="col-md my-1 btn btn-color1">Edit Product Info</button>
+                    <button type="button" id="insertProductBtn" class="col-md my-1 btn btn-color1">Insert New Product</button>
+                    <button type="button" id="deleteProductBtn" class="col-md my-1 btn btn-color1">Delete Product</button>
                 </div>
             </form>
             </div>

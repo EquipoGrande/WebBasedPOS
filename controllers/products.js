@@ -59,7 +59,7 @@ module.exports = function (express) {
     router.post('/addproduct', async (req, res) => {
         var nextID = await getNextProductID(db);
         var params = [nextID, req.body.productname, req.body.sellprice, req.body.sellunit, req.body.purchaseprice, req.body.purchaseunit];
-        
+        console.log(params);
         db.query(query_insertproduct, params).then(queryResult => {
             res.status(201);
             res.send(req.body.productname + ' added successfully!');
@@ -82,10 +82,13 @@ module.exports = function (express) {
                 productid = req.body[key];
                 continue;
             }
-            sqlstring += `${key}=${req.body[key]}, `
+            console.log(`${key}: ${req.body[key]}`);
+            sqlstring += `${key}='${req.body[key]}', `
         }
         sqlstring = sqlstring.slice(0, -2);
         sqlstring += ' WHERE productid=$1';
+
+        console.log(sqlstring);
 
         db.query(sqlstring, [productid]).then(queryResult => {
             res.status(200);

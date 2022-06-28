@@ -4,7 +4,7 @@ async function performOnload() {
     }).then();
     inventor = new ModifyInventory(productList);
     document.getElementById("updateInventory").onclick = function () { inventor.modifyQuantity() };
-    document.getElementById("idtext").value = "";
+    document.getElementById("idtext").value = "0";
     document.getElementById("productName").value = "Name";
     document.getElementById("currentInventory").value = "";
 }
@@ -24,11 +24,11 @@ class ModifyInventory {
                     resolve(getRequest.response);
                 } else {
                     reject(Error(getRequest.statusText));
-                };
+                }
                 getRequest.onerror = function() {
                     reject(Error('Cannot find JSON data'));
                 }
-            }
+            };
             getRequest.send();
         });
         var inventoryNum = await promise;

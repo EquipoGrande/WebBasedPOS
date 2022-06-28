@@ -63,6 +63,18 @@ async function saleButtonFunction(currentProduct) {
     document.getElementById("productAmount").value = await getInventoryOf(currentProduct["productid"]).then() + " kg left";
 }
 
+async function editInventoryFunction(currentProduct) {
+    document.getElementById("productIDInput").value = currentProduct["productid"];
+    document.getElementById("productName").value = currentProduct["productname"];
+    document.getElementById("sellPrice").value = currentProduct["sellprice"];
+    document.getElementById("purchasePrice").value = currentProduct["purchaseprice"];
+    if(currentProduct["sellunit"] == 1) {
+        document.getElementById("radioKgs").checked = true;
+    } else {
+        docuent.getElementById("radioIndividual").checked = true;
+    }
+}
+
 function decrementPage() {
     pageNumber--;
     if (pageNumber < 0) {
