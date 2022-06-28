@@ -3,6 +3,7 @@ const query_getproductslist = `SELECT * FROM product;`;
 const query_getproductbyid = `SELECT * FROM product WHERE productid=$1`;
 const query_insertproduct = `INSERT INTO product(productid, productname, sellprice, sellunit, purchaseprice, purchaseunit) VALUES($1, $2, $3, $5, $4, $5);`;
 const query_getmaxproductid = `SELECT MAX(productid) AS max FROM product;`;
+const query_deleteproduct = `DELETE FROM product WHERE productid=$1`;
 
 async function getNextProductID(db) {
     var nextID;
@@ -49,7 +50,9 @@ module.exports = function (express) {
     });
 
     /**
-     * Adds a new product to the database. Does not take in a product id. Will be generated automatically
+     * Adds a new product to the database. 
+     * Does not take in a product id as it will be generated automatically.
+     * Product should be supplied as json in the request body
      */
     router.post('/addproduct', async (req, res) => {
         var nextID = await getNextProductID(db);
@@ -63,6 +66,21 @@ module.exports = function (express) {
                 console.log(err.message);
                 res.send(err.message);
             }
+        });
+    });
+
+    /**
+     * Remove product specified by the product id.
+     */
+    router.delete('/removeproduct', (req, res) => {
+        db.query(query_deleteproduct, [req.query.productid]).then(() => {
+            res.status(200);
+            res.send(req.query.productid + 'deleted');
+        })
+        .catch(err => {
+            res.status(500);
+            console.log(err.message);
+            res.send(err.message);
         });
     });
 
