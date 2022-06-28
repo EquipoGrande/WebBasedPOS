@@ -12,26 +12,27 @@
 
 </head>
 
-<header id="header">
-
-    <div class="container">
-        <div class="row justify-content-center" id="headerDiv">
-            <h1 class="col-4 align-middle"><img class="img-fluid col-2 align-middle" width="100"
-                    src="assets/AssumptaITomasLogoGreenV2.png"> Assumpta i Tomas</h1>
+<body>
+    <div class="row" id="headerDiv">
+        <img id="logo" class="img-fluid col-2 align-middle col-2" src="assets/AssumptaITomasLogoGreenV2.png">
+        <div class="col">
+            <h1 class="">Assumpta i Tomas</h1>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <ul>
+                    <li class="col mx-2"><a href="transactionsPage.html">Transactions</a></li>
+                    <li class="col mx-2"><a href="EditProductInfo.html">Edit Product Info</a></li>
+                    <li class="col mx-2"><a href="UpdateInventory.html">Update Inventory</a></li>
+                </ul>
+                <ul>
+                    <button class="col mx-2 btn btn-light" onclick="toggleSize();">Toggle Size</button>
+                    <button class="col mx-2 btn btn-dark" onclick="logoutButton();">Log Out</button>
+                </ul>
+                <ul>
+                    <div id="google_translate_element"></div>
+                </ul>
+            </nav>
         </div>
-
-
-        <nav class="navbar navbar-expand-lg fixed-top bg-light navbar-light">
-            <ul>
-                <li><a href="transactionsPage.html">Transactions</a></li>
-                <li><a href="EditProductInfo.html">Edit Product Info</a></li>
-                <li><a href="UpdateInventory.html">Update Inventory</a></li>
-            </ul>
-        </nav>
     </div>
-
-</header>
-
-
+</body>
 
 </html>
