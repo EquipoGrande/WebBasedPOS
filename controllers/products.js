@@ -36,6 +36,16 @@ module.exports = function (express) {
         })
     });
 
+    router.get('/sellline', (req, res) => {
+        db.query('SELECT * FROM product',(err, queryResult)=>{
+            if (!err) {
+            res.send(queryResult.rows)
+            req.para
+            } else {
+            console.log(err.message);
+            }
+        });
+    });
     /**
      * Returns the product specified by the product id in JSON format
      */

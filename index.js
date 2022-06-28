@@ -8,6 +8,7 @@ const port = 3000;
 const { application_name } = require('pg/lib/defaults');
 const path = require('path');
 
+app.use(express.json());
 
 // Landing page is login page
 app.get('/', (req, res) => {
@@ -19,6 +20,9 @@ app.use('/api/products', productListController);
 
 var inventoryListController = require('./controllers/inventory')(express);
 app.use('/api/inventory', inventoryListController);
+
+var saleController = require('./controllers/sales')(express);
+app.use('/api/sales', saleController);
 
 // serve all the static files. They will match the folder structure of this project
 app.use('/', express.static(path.join(__dirname, 'html')));             // serve html files on root path

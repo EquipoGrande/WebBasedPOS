@@ -49,14 +49,14 @@ class Sale {
         //}
 
         for (let i = 0; i < this.saleList.length; i++) {
-            if (this.saleList[i]["productid"] == product["productid"]) {
+            if (this.saleList[i]["productID"] == product["productid"]) {
                 this.modifyItem(this.saleList[i], product);
                 return;
             }
         }
 
         let currentSaleItem = new SaleItem(product.productid, product.productname, document.getElementById("quantityInput").value,
-        product.sellprice, this.maxID);
+        product.sellprice*document.getElementById("quantityInput").value, this.maxID);
 
         this.saleList.push(currentSaleItem);
 
@@ -81,7 +81,7 @@ class Sale {
 
         var unitType = " kg";
         if (product.sellunit == 0) {
-            unitType = " bags"
+            unitType = " bags";
         }
 
         quantityElement.innerHTML = document.getElementById("quantityInput").value + " " + unitType;
@@ -121,15 +121,32 @@ class Sale {
     modifyItem(saleItem, product) {
         saleItem["sellprice"] = product["sellprice"] * document.getElementById("quantityInput").value;
         saleItem["quantity"] = document.getElementById("quantityInput").value;
-        document.getElementById("productQuantity" + saleItem["lineID"]).innerHTML = saleItem["quantity"] + " " + product["units"];
+        
+        var unitType = " kg";
+        if (product.sellunit == 0) {
+            unitType = " bags";
+        }
+
+        document.getElementById("productQuantity" + saleItem["lineID"]).innerHTML = saleItem["quantity"] + " " + unitType;
         document.getElementById("priceElement" + saleItem["lineID"]).innerHTML = "€ " + saleItem["sellprice"];
         this.updateTotal();
         resetForm();
     }
 
     // Completes the sale and updates other systems as if the customer just paid for the goods
-    finishSale() {
-        window.location.reload();
+    async finishSale() {
+        const response = await fetch('http://localhost:3000/api/sales/makesale', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.saleList)
+        });
+    }
+
+    sendSaleLine() {
+
     }
 
     updateTotal() {
@@ -137,7 +154,7 @@ class Sale {
         for (var i = 0; i < this.saleList.length; i++) {
             this.total += (Math.round(100 * this.saleList[i]["sellprice"]) / 100);
         }
-        document.getElementById("totalPrice").value = "€" + this.total;
+        document.getElementById("totalPrice").value = "Total: €" + this.total;
     }
 
     updatePrice() {
