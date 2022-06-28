@@ -14,13 +14,6 @@
    <script src="js/CurrentInventoryList.js"></script>
    <script src="js/ButtonGrid.js"></script>
    <script src="js/Sale.js"></script>
-   <script type="text/javascript">
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-      }
-      </script>
-   
-   <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
    <title>Customer Transactions</title>
 </head>
 
@@ -41,9 +34,6 @@
                      <button class="col mx-2 btn btn-light" onclick="toggleSize();">Toggle Size</button>
                      <button class="col mx-2 btn btn-dark" onclick="logoutButton();">Log Out</button>
                   </ul>
-                  <ul>
-                     <div id="google_translate_element"></div>
-                 </ul>
                </nav>
             </div>
          </div>
@@ -59,7 +49,7 @@
                      <tr>
                         <th scope="col">PID</th>
                         <th scope="col">Product</th>
-                        <th width="25%" scope="col">Amount</th>
+                        <th scope="col">Amount</th>
                         <th scope="col">Price</th>
                      </tr>
                   </thead>
@@ -67,7 +57,7 @@
             </div>
 
             <div class="border border-3 border-secondary bg-light transaction-box"
-               style="width:100%;overflow:auto; max-height:100px;">
+               style="overflow:auto; max-height:100px;">
                <table class="table table-hover">
 
                   <tbody id="saleTable"></tbody>
@@ -92,7 +82,7 @@
 
                <form class="p-3 border border-3 bg-light">
                   <div class="row form-group row-margin">
-                     <div class="col-5"> <input type="number" class="form-control" placeholder="ID" id="idText" min="0"> </div>
+                     <div class="col-5"> <input type="number" class="form-control" placeholder="ID" id="idText"> </div>
                      <div class="col-6"> <input type="text" readonly class="form-control-plaintext" id="productName"
                            value="Product Name"> </div>
                   </div>
@@ -105,7 +95,7 @@
                   </div>
                   <div class="row form-group row-margin">
                      <div class="col-6"> <input type="number" class="form-control" placeholder="Quantity"
-                           id="quantityInput" min="0"> </div>
+                           id="quantityInput"> </div>
                      <div class="col-4"> <input type="text" readonly class="form-control-plaintext" id="productTotal"
                            value="€ 0.00"> </div>
                   </div>
