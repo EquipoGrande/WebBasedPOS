@@ -4,9 +4,9 @@ h1 {
     font-family: 'Contrail One', cursive;
     color: #48563C;
 }
-    
-.goog-te-banner-frame{
-    display:none !important
+
+.goog-te-banner-frame {
+    display: none !important
 }
 
 html,
@@ -16,8 +16,9 @@ body {
     color: #48563C;
     padding-bottom: 20px;
     height: 100%;
-    top: 0px !important; /* The top: and position: cmds are used along with .goog-te-banner-frame to take away the Google Translate TopBar */
-    position: static !important; 
+    top: 0px !important;
+    /* The top: and position: cmds are used along with .goog-te-banner-frame to take away the Google Translate TopBar */
+    position: static !important;
 }
 
 .btn-color1 {
@@ -66,4 +67,27 @@ body {
 
 .input-margin {
     margin-bottom: 2%;
+}
+
+.sidebar {
+    background: white;
+    padding-top: 2%;
+    /* hard coded for now, need to play around with the height */
+    height: 70vh;
+}
+
+.list {
+    color: black;
+}
+
+.main-content {
+    margin-top: 2%;
+}
+
+.date {
+    margin-bottom: 10%;
+}
+
+.button {
+    margin-bottom: 20%;
 }
