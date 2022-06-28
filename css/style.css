@@ -40,6 +40,11 @@ body {
     min-height: 200px;
 }
 
+.vendor-box {
+    min-height: 200px;
+    margin-bottom: 5%;
+}
+
 .table-header {
     background-color: black;
     color: white;
@@ -53,4 +58,12 @@ body {
     margin-bottom: 5%;
     padding: 3%;
 
+}
+
+.bottom-margin {
+    margin-bottom: 4%;
+}
+
+.input-margin {
+    margin-bottom: 2%;
 }
