@@ -1,10 +1,11 @@
-function transactionOnload() {
+async function transactionOnload() {
     onloadInitialize();
-    testSale = new Sale(testInventory);
-    document.getElementById("sellLine").onclick = function () { testSale.addItemButton() };
-    document.getElementById("removeLine").onclick = function () { testSale.removeItem() };
-    document.getElementById("quantityInput").onchange = function () { testSale.updatePrice() };
-    document.getElementById("idText").onchange = function () { testSale.updateItemName() };
+    await onloadInitialize().then();
+    newSale = new Sale(productList);
+    document.getElementById("sellLine").onclick = function () { newSale.addItemButton() };
+    document.getElementById("removeLine").onclick = function () { newSale.removeItem() };
+    document.getElementById("quantityInput").onchange = function () { newSale.updatePrice() };
+    document.getElementById("idText").onchange = function () { newSale.updateItemName() };
     resetForm();
     document.getElementById("totalPrice").value = "";
 }
@@ -18,18 +19,18 @@ function resetForm() {
 }
 
 class SaleItem {
-    constructor(productID, name, quantity, sellPrice, lineID) {
+    constructor(productID, name, quantity, sellprice, lineID) {
         this.productID = productID;
         this.name = name;
         this.quantity = quantity;
-        this.sellPrice = quantity * sellPrice;
+        this.sellprice = quantity * sellprice;
         this.lineID = lineID;
     }
 }
 
 class Sale {
     constructor(inventory) {
-        this.productInventory = inventory;
+        this.productList = inventory;
         this.saleList = new Array();
         this.table = document.getElementById("saleTable");
         this.total = 0.0;
@@ -42,18 +43,20 @@ class Sale {
             return;
         }
 
-        if (document.getElementById("quantityInput").value > product.quantity) {
-            return;
-        }
+        //if (document.getElementById("quantityInput").value > product.quantity) {
+        //    return;
+        //}
 
         for (let i = 0; i < this.saleList.length; i++) {
-            if (this.saleList[i]["productID"] == product["productID"]) {
+            if (this.saleList[i]["productid"] == product["productid"]) {
                 this.modifyItem(this.saleList[i], product);
                 return;
             }
         }
 
-        let currentSaleItem = product.toSaleItem(document.getElementById("quantityInput").value, this.maxID);
+        let currentSaleItem = new SaleItem(product.productid, product.productname, document.getElementById("quantityInput").value,
+        product.sellprice, this.maxID);
+
         this.saleList.push(currentSaleItem);
 
 
@@ -72,10 +75,16 @@ class Sale {
         let priceElement = document.createElement("td");
         priceElement.setAttribute("id", ("priceElement" + this.maxID));
 
-        idElement.innerHTML = product["productID"];
-        nameElement.innerHTML = product["name"];
-        quantityElement.innerHTML = document.getElementById("quantityInput").value + " " + product["units"];
-        var round = Math.round((100 * product["sellPrice"] * document.getElementById("quantityInput").value));
+        idElement.innerHTML = product["productid"];
+        nameElement.innerHTML = product["productname"];
+
+        var unitType = " kg";
+        if (product.sellunit == 0) {
+            unitType = " bags"
+        }
+
+        quantityElement.innerHTML = document.getElementById("quantityInput").value + " " + unitType;
+        var round = Math.round((100 * product["sellprice"] * document.getElementById("quantityInput").value));
         priceElement.innerHTML = "€ " + round / 100;
 
         saleRow.append(idElement);
@@ -109,10 +118,10 @@ class Sale {
 
     // Changes the amount of the given item to the new amount
     modifyItem(saleItem, product) {
-        saleItem["sellPrice"] = product["sellPrice"] * document.getElementById("quantityInput").value;
+        saleItem["sellprice"] = product["sellprice"] * document.getElementById("quantityInput").value;
         saleItem["quantity"] = document.getElementById("quantityInput").value;
         document.getElementById("productQuantity" + saleItem["lineID"]).innerHTML = saleItem["quantity"] + " " + product["units"];
-        document.getElementById("priceElement" + saleItem["lineID"]).innerHTML = "€ " + saleItem["sellPrice"];
+        document.getElementById("priceElement" + saleItem["lineID"]).innerHTML = "€ " + saleItem["sellprice"];
         this.updateTotal();
         resetForm();
     }
@@ -125,16 +134,17 @@ class Sale {
     updateTotal() {
         this.total = 0.0;
         for (var i = 0; i < this.saleList.length; i++) {
-            this.total += (Math.round(100 * this.saleList[i]["sellPrice"]) / 100);
+            this.total += (Math.round(100 * this.saleList[i]["sellprice"]) / 100);
         }
         document.getElementById("totalPrice").value = "€" + this.total;
     }
 
     updatePrice() {
         let productID = document.getElementById("idText").value;
-        for (var i = 0; i < this.productInventory.productList.length; i++) {
-            if (this.productInventory.productList[i]["productID"] == productID) {
-                var round = Math.round(100 * this.productInventory.productList[i].sellPrice * document.getElementById("quantityInput").value);
+        console.log(this.productList);
+        for (var i = 0; i < this.productList.length; i++) {
+            if (this.productList[i]["productid"] == productID) {
+                var round = Math.round(100 * this.productList[i].sellprice * document.getElementById("quantityInput").value);
                 document.getElementById("productTotal").value = "€ " + round / 100;
                 break;
             }
@@ -143,10 +153,10 @@ class Sale {
 
     updateItemName() {
         let productID = document.getElementById("idText").value;
-        for (var i = 0; i < this.productInventory.productList.length; i++) {
-            if (this.productInventory.productList[i]["productID"] == productID) {
-                document.getElementById("productName").value = this.productInventory.productList[i].name;
-                document.getElementById("productAmount").value = this.productInventory.productList[i].quantity + " " + this.productInventory.productList[i].units;
+        for (var i = 0; i < this.productList.length; i++) {
+            if (this.productList[i]["productid"] == productID) {
+                document.getElementById("productName").value = this.productList[i].productname;
+                //document.getElementById("productAmount").value = this.productList[i].quantity + " " + this.productList[i].units;
                 break;
             }
         }
@@ -159,31 +169,14 @@ class Sale {
 
     addItemButton() {
         let targetID = document.getElementById("idText").value;
-        for (let i = 0; i < this.productInventory.numberOfElements; i++) {
-            if (this.productInventory.productList[i]["productID"] == targetID) {
-                this.addItem(this.productInventory.productList[i]);
+        for (let i = 0; i < this.productList.length; i++) {
+            if (this.productList[i]["productid"] == targetID) {
+                console.log("here");
+                this.addItem(this.productList[i]);
                 break;
             }
         }
     }
-}
-
-function main() {
-    var testInventory = new CurrentInventory();
-    let testSale = new Sale(testInventory);
-    let header = document.getElementById("feed");
-    let stringy = "";
-
-    testSale.productList[0].decrement(4.0);
-
-    testSale.addItem("Apple", 3);
-    testSale.addItem("Yam", 3);
-
-    testSale.saleList.forEach(element => {
-        stringy += element["name"];
-    });
-
-    header.innerHTML = stringy;
 }
 
 window.addEventListener('load', transactionOnload);

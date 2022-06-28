@@ -16,7 +16,7 @@ body {
     color: #48563C;
     padding-bottom: 20px;
     height: 100%;
-    top: 0px !important; 
+    top: 0px !important; /* The top: and position: cmds are used along with .goog-te-banner-frame to take away the Google Translate TopBar */
     position: static !important; 
 }
 
@@ -40,6 +40,11 @@ body {
     min-height: 200px;
 }
 
+.vendor-box {
+    min-height: 200px;
+    margin-bottom: 5%;
+}
+
 .table-header {
     background-color: black;
     color: white;
@@ -53,4 +58,12 @@ body {
     margin-bottom: 5%;
     padding: 3%;
 
+}
+
+.bottom-margin {
+    margin-bottom: 4%;
+}
+
+.input-margin {
+    margin-bottom: 2%;
 }

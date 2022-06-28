@@ -1,10 +1,12 @@
 var pageNumber;
-var testInventory;
+var productList = new Array;
 var testSale;
 
-function onloadInitialize() {
+async function onloadInitialize() {
     pageNumber = 0; 
-    testInventory = new CurrentInventory();
+    await generateInventory().then(function(value) {
+        productList = value;
+    });
     generateButtonGrid(0);
 }
 
@@ -15,7 +17,7 @@ function createButton(product, buttonGrid, inputFunction) {
     button.setAttribute("type", "button");
     button.setAttribute("class", "col-md-4 col-6 btn btn-color1");
 
-    button.innerHTML = product["name"];
+    button.innerHTML = product["productname"];
 
     button.onclick = function() {
         inputFunction(product);
@@ -25,10 +27,10 @@ function createButton(product, buttonGrid, inputFunction) {
 }
 
 function saleButtonFunction(currentProduct) {
-    document.getElementById("idText").value = currentProduct["productID"];
+    document.getElementById("idText").value = currentProduct["productid"];
     document.getElementById("quantityInput").focus();
-    document.getElementById("productName").value = currentProduct["name"];
-    document.getElementById("productAmount").value = currentProduct["quantity"] + " " + currentProduct["units"];
+    document.getElementById("productName").value = currentProduct["productname"];
+    //document.getElementById("productAmount").value = currentProduct["quantity"] + " " + currentProduct["units"];
 }
 
 function decrementPage() {
@@ -40,8 +42,8 @@ function decrementPage() {
 
 function incrementPage() {
     pageNumber++;
-    if (pageNumber > parseInt((testInventory.numberOfElements-1)/15)) {
-        pageNumber = parseInt((testInventory.numberOfElements-1)/15);
+    if (pageNumber > parseInt((productList.length-1)/15)) {
+        pageNumber = parseInt((productList.length-1)/15);
     }
 }
 
@@ -51,12 +53,12 @@ function generateButtonGrid() {
 
     var maximumIndex = (pageNumber + 1) * 15;
 
-    if (maximumIndex > testInventory.numberOfElements) {
-        maximumIndex = testInventory.numberOfElements;
+    if (maximumIndex > productList.length) {
+        maximumIndex = productList.length;
     }
 
     for (let i = (pageNumber*15); i < maximumIndex; i++) {
-        createButton(testInventory.productList[i], buttonGrid, saleButtonFunction);
+        createButton(productList[i], buttonGrid, saleButtonFunction);
     }
 }
 
