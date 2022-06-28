@@ -1,4 +1,6 @@
 
+const query_getproductslist = `SELECT * FROM product;`;
+const query_getproductbyid = `SELECT * FROM product WHERE productid=$1`;
 const query_insertproduct = `INSERT INTO product(productid, productname, sellprice, sellunit, purchaseprice, purchaseunit) VALUES($1, $2, $3, $5, $4, $5);`;
 const query_getmaxproductid = `SELECT MAX(productid) AS max FROM product;`;
 
@@ -21,7 +23,7 @@ module.exports = function (express) {
      * Returns a list of all products in JSON format
      */
     router.get('/getproductslist', (req, res) => {
-        db.query('SELECT * FROM product',(err, queryResult)=>{
+        db.query(query_getproductslist, (err, queryResult)=>{
             if (!err) {
             res.send(queryResult.rows)
             } else {
@@ -34,7 +36,7 @@ module.exports = function (express) {
      * Returns the product specified by the product id in JSON format
      */
      router.get('/getproductbyid', (req, res) => {
-        db.query('SELECT * FROM product WHERE productid=' + req.query.productid, (err, queryResult) => {
+        db.query(query_getproductbyid, [req.query.productid], (err, queryResult) => {
             if(!err) {
                 res.status(200);
                 res.send(queryResult.rows);
