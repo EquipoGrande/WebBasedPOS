@@ -29,6 +29,10 @@ module.exports = function (express) {
             console.log(sqlStatement);
             total += saleList[i].saleprice;
         }
+
+        sqlStatement = "INSERT INTO salehistory VALUES('" + max_id + "', '" + date + "', '" + total + "');";
+        console.log(sqlStatement);
+
         /*
         var salelist = req.body;
         for (let i = 0; i < salelist.length; i++) {
