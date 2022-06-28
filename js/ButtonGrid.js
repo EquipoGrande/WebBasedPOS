@@ -28,6 +28,7 @@ function saleButtonFunction(currentProduct) {
     document.getElementById("idText").value = currentProduct["productID"];
     document.getElementById("quantityInput").focus();
     document.getElementById("productName").value = currentProduct["name"];
+    document.getElementById("productAmount").value = currentProduct["quantity"] + " " + currentProduct["units"];
 }
 
 function decrementPage() {
