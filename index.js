@@ -16,6 +16,9 @@ app.get('/', (req, res) => {
 var productListController = require('./controllers/products')(express);
 app.use('/api/products', productListController);
 
+var inventoryListController = require('./controllers/inventory')(express);
+app.use('/api/inventory', inventoryListController);
+
 // serve all the static files. They will match the folder structure of this project
 app.use('/', express.static(path.join(__dirname, 'html')));             // serve html files on root path
 app.use('/', express.static(path.join(__dirname, 'css')));              // serve css files on root path
