@@ -18,7 +18,7 @@ app.use('/api/products', productListController);
 
 // serve all the static files. They will match the folder structure of this project
 app.use('/', express.static(path.join(__dirname, 'html')));             // serve html files on root path
-app.use('/', express.static(path.join(__dirname, 'css')));              // serve css files on root path
+app.use('/css', express.static(path.join(__dirname, 'css')));           // serve css files on css path
 app.use('/js', express.static(path.join(__dirname, 'js')));             // serve js files on /js path
 app.use('/assets', express.static(path.join(__dirname, 'assets')));     // serve asset files on /assets path
 
