@@ -72,12 +72,39 @@ module.exports = function (express) {
     });
 
     /**
+     * 
+     */
+    router.put('/editproduct', (req, res) => {
+        var productid;
+        var sqlstring = 'UPDATE product SET ';
+        for(key in req.body) {
+            if(key == 'productid') {
+                productid = req.body[key];
+                continue;
+            }
+            sqlstring += `${key}=${req.body[key]}, `
+        }
+        sqlstring = sqlstring.slice(0, -2);
+        sqlstring += ' WHERE productid=$1';
+
+        db.query(sqlstring, [productid]).then(queryResult => {
+            res.status(200);
+            res.send(productid + ' updated');
+        })
+        .catch(err => {
+            res.status(500);
+            console.log(err.message);
+            res.send(err.message);
+        });
+    })
+
+    /**
      * Remove product specified by the product id.
      */
     router.delete('/removeproduct', (req, res) => {
         db.query(query_deleteproduct, [req.query.productid]).then(queryResult => {
             res.status(200);
-            res.send(req.query.productid + 'deleted');
+            res.send(req.query.productid + ' deleted');
         })
         .catch(err => {
             res.status(500);
