@@ -10,47 +10,19 @@
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/NavbarStyle.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/common.js"></script>
     <script src="js/accessibility.js"></script>
     <script src="js/CurrentInventoryList.js"></script>
-    <script src="js/ButtonGrid.js"></script>
-    <script src="js/Sale.js"></script>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
-        }
-    </script>
 
-    <script type="text/javascript"
-        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <title>Trends</title>
 </head>
 
-<body onload="transactionOnload();">
-    <div class="container-fluid h-100 d-flex flex-column">
-        <header class="row" id="header">
-            <div class="row" id="headerDiv">
-                <img id="logo" class="img-fluid col-2 align-middle col-2" src="assets/AssumptaITomasLogoGreenV2.png">
-                <div class="col">
-                    <h1 class="">Assumpta i Tomas</h1>
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                        <ul>
-                            <li class="col mx-2"><a href="transactionsPage.html">Transactions</a></li>
-                            <li class="col mx-2"><a href="EditProductInfo.html">Edit Product Info</a></li>
-                            <li class="col mx-2"><a href="UpdateInventory.html">Update Inventory</a></li>
-                        </ul>
-                        <ul>
-                            <button class="col mx-2 btn btn-light" onclick="toggleSize();">Toggle Size</button>
-                            <button class="col mx-2 btn btn-dark" onclick="logoutButton();">Log Out</button>
-                        </ul>
-                        <ul>
-                            <div id="google_translate_element"></div>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+<body>
+    <header class="row" id="header">
+    </header>
 
 
-            <!-- <div>
+    <!-- <div>
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <a href="/"
                         class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-black text-decoration-none">
@@ -79,49 +51,49 @@
                 </div>
             </div> -->
 
-        </header>
-        <div class="wrapper">
-            <div class="container">
-                <div class="row">
-                    <div
-                        class="col-md-2 left d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                        <a href="/"
-                            class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-black text-decoration-none">
-                            <span class="fs-5 d-none d-sm-inline">Menu</span>
-                        </a>
-                        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-                            id="menu">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link align-middle px-0">
-                                    <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline text-white">Sales
-                                        Report</span>
-                                </a>
-                            </li>
+    </header>
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                <div
+                    class="col-md-2 left d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <a href="/"
+                        class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-black text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline">Menu</span>
+                    </a>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                        id="menu">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link align-middle px-0">
+                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline text-white">Sales
+                                    Report</span>
+                            </a>
+                        </li>
 
-                            <li>
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span
-                                        class="ms-1 d-none d-sm-inline text-white">Excess Report</span></a>
-                            </li>
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline text-white">Excess
+                                    Report</span></a>
+                        </li>
 
-                            <li>
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span
-                                        class="ms-1 d-none d-sm-inline text-white">Restock Report</span></a>
-                            </li>
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline text-white">Restock
+                                    Report</span></a>
+                        </li>
 
-                            <li>
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span
-                                        class="ms-1 d-none d-sm-inline text-white">End-of-Day Report</span></a>
-                            </li>
-                        </ul>
-                    </div>
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-table"></i> <span
+                                    class="ms-1 d-none d-sm-inline text-white">End-of-Day Report</span></a>
+                        </li>
+                    </ul>
+                </div>
 
-                    <div class="col-md-8 right">
-                        <div class="bg"></div>Right Content
-                    </div>
+                <div class="col-md-8 right">
+                    <div class="bg"></div>Right Content
                 </div>
             </div>
         </div>
+    </div>
 </body>
