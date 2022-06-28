@@ -2,12 +2,12 @@ var pageNumber;
 var productList = new Array;
 var testSale;
 
-async function onloadInitialize() {
+async function onloadInitialize(functionName) {
     pageNumber = 0; 
     await generateInventory().then(function(value) {
         productList = value;
     });
-    generateButtonGrid(0);
+    generateButtonGrid(functionName);
 }
 
 
@@ -16,7 +16,6 @@ function createButton(product, buttonGrid, inputFunction) {
     
     button.setAttribute("type", "button");
     button.setAttribute("class", "col-md-4 col-6 btn btn-color1");
-
     button.innerHTML = product["productname"];
 
     button.onclick = function() {
@@ -24,6 +23,12 @@ function createButton(product, buttonGrid, inputFunction) {
     }
 
     buttonGrid.append(button);
+}
+
+async function modifyInventoryFunction(currentProduct) {
+    document.getElementById("idtext").value = currentProduct["productid"];
+    document.getElementById("productName").value = currentProduct["productname"];
+    document.getElementById("currentInventory").value = await ModifyInventory.getInventoryOf(currentProduct["productid"]).then();
 }
 
 function saleButtonFunction(currentProduct) {
@@ -47,7 +52,7 @@ function incrementPage() {
     }
 }
 
-function generateButtonGrid() {
+function generateButtonGrid(functionName) {
     var buttonGrid = document.getElementById("buttonGrid");
     buttonGrid.innerHTML = "";
 
@@ -58,7 +63,7 @@ function generateButtonGrid() {
     }
 
     for (let i = (pageNumber*15); i < maximumIndex; i++) {
-        createButton(productList[i], buttonGrid, saleButtonFunction);
+        createButton(productList[i], buttonGrid, functionName);
     }
 }
 

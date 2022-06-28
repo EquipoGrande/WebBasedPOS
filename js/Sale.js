@@ -1,6 +1,7 @@
 async function transactionOnload() {
-    onloadInitialize();
-    await onloadInitialize().then();
+    await onloadInitialize(function(currentProduct){
+        saleButtonFunction(currentProduct);
+    }).then();
     newSale = new Sale(productList);
     document.getElementById("sellLine").onclick = function () { newSale.addItemButton() };
     document.getElementById("removeLine").onclick = function () { newSale.removeItem() };
