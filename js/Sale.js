@@ -48,14 +48,14 @@ class Sale {
         //}
 
         for (let i = 0; i < this.saleList.length; i++) {
-            if (this.saleList[i]["productid"] == product["productid"]) {
+            if (this.saleList[i]["productID"] == product["productid"]) {
                 this.modifyItem(this.saleList[i], product);
                 return;
             }
         }
 
         let currentSaleItem = new SaleItem(product.productid, product.productname, document.getElementById("quantityInput").value,
-        product.sellprice, this.maxID);
+        product.sellprice*document.getElementById("quantityInput").value, this.maxID);
 
         this.saleList.push(currentSaleItem);
 
@@ -80,7 +80,7 @@ class Sale {
 
         var unitType = " kg";
         if (product.sellunit == 0) {
-            unitType = " bags"
+            unitType = " bags";
         }
 
         quantityElement.innerHTML = document.getElementById("quantityInput").value + " " + unitType;
@@ -120,7 +120,13 @@ class Sale {
     modifyItem(saleItem, product) {
         saleItem["sellprice"] = product["sellprice"] * document.getElementById("quantityInput").value;
         saleItem["quantity"] = document.getElementById("quantityInput").value;
-        document.getElementById("productQuantity" + saleItem["lineID"]).innerHTML = saleItem["quantity"] + " " + product["units"];
+        
+        var unitType = " kg";
+        if (product.sellunit == 0) {
+            unitType = " bags";
+        }
+
+        document.getElementById("productQuantity" + saleItem["lineID"]).innerHTML = saleItem["quantity"] + " " + unitType;
         document.getElementById("priceElement" + saleItem["lineID"]).innerHTML = "€ " + saleItem["sellprice"];
         this.updateTotal();
         resetForm();
