@@ -2,14 +2,18 @@ var pageNumber;
 var productList = new Array;
 var testSale;
 var numberOfButtons = 15;
+var now = new Date().getTime();
 
 async function onloadInitialize(functionName) {
-    console.log("Initialized with function " + functionName);
     pageNumber = 0; 
     await generateInventory().then(function(value) {
         productList = value;
     });
     generateButtonGrid(functionName);
+    if(window.name == "Accessibility Mode"){
+        g_sizeToggle = true;
+        correctSizes();
+    }
 }
 
 
@@ -90,6 +94,16 @@ function incrementPage() {
 }
 
 function toggleSizeAndGenerateButtonGrid(){
+    g_sizeToggle = !g_sizeToggle;
+    if(g_sizeToggle){
+        window.name = "Accessibility Mode";
+    }else{
+        window.name = "Standard Mode";
+    }
+    correctSizes();
+}
+
+function correctSizes(){
     toggleButtonSize();
     pageNumber = 0;
     generateButtonGrid();
@@ -97,7 +111,6 @@ function toggleSizeAndGenerateButtonGrid(){
 }
 
 function generateButtonGrid(functionName) {
-    console.log("generating");
     var buttonGrid = document.getElementById("buttonGrid");
     buttonGrid.innerHTML = "";
     numberOfButtons = g_sizeToggle ? 6 : 15;

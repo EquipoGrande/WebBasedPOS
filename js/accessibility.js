@@ -6,8 +6,6 @@ function toggleFontSize() {
 }
 
 function toggleButtonSize() {
-    console.log("toggling");
-    g_sizeToggle = !g_sizeToggle;
     if (g_sizeToggle) {
         document.querySelectorAll('.btn').forEach(element => {
             element.classList.add('btn-lg');
@@ -20,6 +18,12 @@ function toggleButtonSize() {
 }
 
 function toggleSize() {
+    g_sizeToggle = !g_sizeToggle;
+    if(g_sizeToggle){
+        window.name = "Accessibility Mode";
+    }else{
+        window.name = "Standard Mode";
+    }
     toggleButtonSize();
     toggleFontSize();
 }
