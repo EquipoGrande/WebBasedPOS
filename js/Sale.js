@@ -74,7 +74,12 @@ class Sale {
 
         let removeElement = document.createElement("td");
         let removeButton = document.createElement("button");
-        removeButton.innerHTML = "   X   ";
+        removeButton.innerHTML = "X";
+        removeButton.style.backgroundColor = '#8F423D'; 
+        removeButton.style.color='white'
+        removeButton.style.width='35px'
+        removeButton.style.border='#8F423D';
+
         removeButton.onclick = function() {
             newSale.removeItemByID(product["productid"]);
         }
