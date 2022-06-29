@@ -67,7 +67,7 @@ class ProductInfo {
 
         var product = {};
         product["productname"] = productName;
-        product["sellpric1e"] = sellPrice;
+        product["sellprice"] = sellPrice;
         product["sellunit"] = unit;
         product["purchaseprice"] = purchasePrice;
         product["purchaseunit"] = unit;

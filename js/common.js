@@ -30,12 +30,12 @@ function loadGoogleTranslate() {
 }
 
 /**
- * 
+ * Show a bootstrap alert inside the alertContainer. The alert will expire after 5 seconds
  * @param {string} alertType The bootstrap alert type (alert-sucess, alert-danger, etc.)
  * @param {string} text The text for the alert
  */
 function showAlert(alertType, text) {
-    alertDiv = document.createElement('div');
+    let alertDiv = document.createElement('div');
     alertDiv.classList.add('alert', alertType);
 
     innerElement = document.createElement('p');
