@@ -191,7 +191,7 @@ class Sale {
         for (var i = 0; i < this.productList.length; i++) {
             if (this.productList[i]["productid"] == productID) {
                 document.getElementById("productName").value = this.productList[i].productname;
-                document.getElementById("productAmount").value = await getInventoryOf(productID).then() + " kg left";
+                document.getElementById("productAmount").value = (round(100*(await getInventoryOf(productID).then()))/100) + " kg left";
                 break;
             }
         }
