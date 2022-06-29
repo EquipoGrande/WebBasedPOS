@@ -99,6 +99,10 @@ class ProductInfo {
 
     async DeleteProduct() {
 
+        if(!confirm('Are you sure you want to delete this product?')) {
+            return;
+        }
+
         showAlert('alert-info', 'Attempting to delete product...');
 
         var productID = document.getElementById('productIDInput').value;
