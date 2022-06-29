@@ -1,9 +1,13 @@
 var table;
 var htmlTable;
+var startDate;
+var endDate;
 
 async function performOnload() {
     document.getElementById("productIDInput").onchange = function () { performOnload(); };
     document.getElementById("currentInventory").onchange = function () { performOnload(); };
+    document.getElementById("vendorStartDate").onchange = function () { dateCheck(); };
+    document.getElementById("vendorEndDate").onchange = function () { dateCheck(); };
     htmlTable = document.getElementById("vendorTable");
     document.getElementById("vendorTable").innerHTML = "";
     table = await generateTable();
@@ -22,6 +26,14 @@ async function performOnload() {
         cell4.innerHTML = table[i][4];
     }
     limitTable();
+}
+
+function dateCheck() {
+    startDate = new Date(document.getElementById("vendorStartDate").value);
+    endDate = new Date(document.getElementById("vendorEndDate").value);
+    if(startDate != null && endDate != null) {
+        performOnload();
+    }
 }
 
 async function generateTable() {
@@ -51,8 +63,11 @@ async function generateTable() {
 }
 
 function limitTable() {
+    console.log(htmlTable.rows[0].cells[0].innerHTML);
     for(let i = 0; i < htmlTable.rows.length; i++) {
-        if(document.getElementById("productIDInput").value.length > 0 && (htmlTable.rows[i].cells[1].innerHTML != document.getElementById("productIDInput").value) || (document.getElementById("currentInventory").value.length > 0 && htmlTable.rows[i].cells[2].innerHTML != document.getElementById("currentInventory").value)) {
+        if((document.getElementById("productIDInput").value.length > 0 && htmlTable.rows[i].cells[1].innerHTML != document.getElementById("productIDInput").value) ||
+        (document.getElementById("currentInventory").value.length > 0 && htmlTable.rows[i].cells[2].innerHTML != document.getElementById("currentInventory").value) ||
+        (startDate-86400000 > new Date(htmlTable.rows[i].cells[0].innerHTML) || endDate < new Date(htmlTable.rows[i].cells[0].innerHTML))) {
             htmlTable.rows[i].remove();
             i--;
         }
