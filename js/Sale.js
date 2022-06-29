@@ -144,10 +144,10 @@ class Sale {
             },
             body: JSON.stringify(this.saleList)
         });
-    }
 
-    sendSaleLine() {
-
+        document.getElementById("saleTable").innerHTML = "";
+        resetForm();
+        this.saleList = [];
     }
 
     updateTotal() {
