@@ -1,9 +1,23 @@
 
 
 async function performOnload() {
-    htmlTable = document.getElementById("saleTable");
+    htmlTable = document.getElementById("vendorTable");
     var table = await generateTable();
-    htmlTable.append(table);
+    console.log(table);
+    for(let i = 0; i < table.length; i++) {
+        var row = htmlTable.insertRow(i);
+        var cell0 = row.insertCell(0);
+        var cell1 = row.insertCell(1);
+        var cell2 = row.insertCell(2);
+        var cell3 = row.insertCell(3);
+        var cell4 = row.insertCell(4);
+        date = new Date(table[i][0]);
+        cell0.innerHTML = date.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'});
+        cell1.innerHTML = table[i][1];
+        cell2.innerHTML = table[i][2];
+        cell3.innerHTML = table[i][3];
+        cell4.innerHTML = table[i][4];
+    }
 }
 
 async function generateTable() {
