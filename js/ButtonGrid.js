@@ -1,13 +1,13 @@
 var productList = new Array;
 var testSale;
 var numberOfButtons = 15;
-var ButtonGridObject;
+var buttonGridObject;
 
 async function onloadInitialize(functionName) {
     await generateInventory().then(function(value) {
         productList = value;
     });
-    ButtonGridObject = new ButtonGrid(function(currentProduct) {functionName(currentProduct)});
+    buttonGridObject = new ButtonGrid(function(currentProduct) {functionName(currentProduct)});
     if(window.name == "Accessibility Mode"){
         g_sizeToggle = true;
         correctSizes();
@@ -98,7 +98,7 @@ class ButtonGrid {
     constructor(functionName) {
         this.buttonFunction = functionName;
         this.pageNumber = 0;
-        generate
+        this.generateButtonGrid();
     }
 
     decrementPage() {
