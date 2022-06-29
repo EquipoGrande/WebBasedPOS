@@ -30,6 +30,24 @@ function loadGoogleTranslate() {
 }
 
 /**
+ * Show a bootstrap alert inside the alertContainer. The alert will expire after 5 seconds
+ * @param {string} alertType The bootstrap alert type (alert-sucess, alert-danger, etc.)
+ * @param {string} text The text for the alert
+ */
+function showAlert(alertType, text) {
+    let alertDiv = document.createElement('div');
+    alertDiv.classList.add('alert', alertType);
+
+    innerElement = document.createElement('p');
+    innerElement.innerHTML = text;
+    alertDiv.appendChild(innerElement);
+
+    document.getElementById("alertContainer").appendChild(alertDiv);
+
+    window.setTimeout(() => alertDiv.remove(), 5000);
+}
+
+/**
  * Add methods as event listeners for when the page loads
  */
 window.addEventListener('load', loadNavbar);
