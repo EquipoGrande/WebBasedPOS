@@ -16,6 +16,7 @@
     <script src="js/Trends.js"></script>
 
     <title>Trends</title>
+    <link rel="icon" type="image/x-icon" href="/assets/EquipoGrandeLogo.png">
 </head>
 
 <body>
@@ -48,9 +49,24 @@
             <div class="col-md-10 col-sm-8 main-content">
                 <h1>Trends & Analytics</h1>
 
-                <div style="width:75%;">
+                <div class="border border-3 border-secondary bg-light transaction-box">
+					<table class="table table-hover table-padding">
+						<thead class="table-dark">
+							<tr>
+								<th scope="col">Date</th>
+								<th scope="col">Transaction ID</th>
+								<th scope="col">Product ID</th>
+								<th scope="col">Quantity</th>
+								<th scope="col">Total</th>
+							</tr>
+						</thead>
+						<tbody id="trendsTable"></tbody>
+					</table>
+				</div>
+                
+                <!-- <div style="width:75%;">
                     <canvas id="barChart" width="1" height="1"></canvas>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

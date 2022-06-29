@@ -17,6 +17,8 @@ class ProductInfo {
 
     async EditProduct() {
 
+        showAlert('alert-info', 'Attempting to edit product...');
+
         // Get info from page
         var productID = document.getElementById('productIDInput').value;
         var productName = document.getElementById('productName').value;
@@ -55,6 +57,9 @@ class ProductInfo {
     }
 
     async InsertProduct() {
+
+        showAlert('alert-info', 'Attempting to add product...');
+
         var productName = document.getElementById('productName').value;
         var sellPrice = document.getElementById('sellPrice').value;
         var purchasePrice = document.getElementById('purchasePrice').value;
@@ -78,12 +83,20 @@ class ProductInfo {
             },
             body: JSON.stringify(product)
         });
-        const content = await response;
 
-        console.log(content);
+        console.log(response.status);
+
+        if(response.status == 201) {
+            showAlert('alert-success', 'Successfully Added Product');
+        } else {
+            showAlert('alert-danger', 'Error Adding Product');
+        }
     }
 
     async DeleteProduct() {
+
+        showAlert('alert-info', 'Attempting to delete product...');
+
         var productID = document.getElementById('productIDInput').value;
 
         // TODO: add alert to make sure they want to
@@ -97,9 +110,14 @@ class ProductInfo {
                 'Content-Type': 'application/json'
             }
         });
-        const content = await response;
 
-        console.log(content);
+        console.log(response.status);
+
+        if(response.status == 200) {
+            showAlert('alert-success', 'Successfully Removed Product');
+        } else {
+            showAlert('alert-danger', 'Error Removing Product');
+        }
 
     }
 }

@@ -1,7 +1,7 @@
 async function transactionOnload() {
-    await onloadInitialize(function(currentProduct){
-        saleButtonFunction(currentProduct);
-    }).then();
+    await onloadInitialize(function (currentProduct) {
+            saleButtonFunction(currentProduct)
+        }).then();
     newSale = new Sale(productList);
     document.getElementById("sellLine").onclick = function () { newSale.addItemButton() };
     document.getElementById("removeLine").onclick = function () { newSale.removeItem() };
@@ -44,10 +44,6 @@ class Sale {
             return;
         }
 
-        //if (document.getElementById("quantityInput").value > product.quantity) {
-        //    return;
-        //}
-
         for (let i = 0; i < this.saleList.length; i++) {
             if (this.saleList[i]["productID"] == product["productid"]) {
                 this.modifyItem(this.saleList[i], product);
@@ -56,7 +52,7 @@ class Sale {
         }
 
         let currentSaleItem = new SaleItem(product.productid, product.productname, document.getElementById("quantityInput").value,
-        product.sellprice*document.getElementById("quantityInput").value, this.maxID);
+        product.sellprice, this.maxID);
 
         this.saleList.push(currentSaleItem);
 
@@ -85,6 +81,7 @@ class Sale {
         }
 
         quantityElement.innerHTML = document.getElementById("quantityInput").value + " " + unitType;
+
         var round = Math.round((100 * product["sellprice"] * document.getElementById("quantityInput").value));
         priceElement.innerHTML = "€ " + round / 100;
 
@@ -135,7 +132,7 @@ class Sale {
 
     // Completes the sale and updates other systems as if the customer just paid for the goods
     async finishSale() {
-        const response = await fetch('http://localhost:3000/api/sales/makesale', {
+        fetch('http://localhost:3000/api/sales/makesale', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -143,10 +140,11 @@ class Sale {
             },
             body: JSON.stringify(this.saleList)
         });
-    }
 
-    sendSaleLine() {
-
+        document.getElementById("saleTable").innerHTML = "";
+        document.getElementById("totalPrice").value = "";
+        resetForm();
+        this.saleList = [];
     }
 
     updateTotal() {
@@ -178,11 +176,6 @@ class Sale {
                 break;
             }
         }
-    }
-
-    // Updates other systems after a sale
-    updateOtherSystems(soldItem) { // ************* Needs to connect to other systems ****************
-        // soldItem is a saleItem object
     }
 
     addItemButton() {

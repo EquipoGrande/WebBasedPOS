@@ -1,27 +1,18 @@
-var pageNumber;
 var productList = new Array;
 var testSale;
 var numberOfButtons = 15;
-var now = new Date().getTime();
+var buttonGridObject;
 
 async function onloadInitialize(functionName) {
-    pageNumber = 0; 
-    updatePageNumber();
     await generateInventory().then(function(value) {
         productList = value;
     });
-    generateButtonGrid(functionName);
+    buttonGridObject = new ButtonGrid(function(currentProduct) {functionName(currentProduct)});
     if(window.name == "Accessibility Mode"){
         g_sizeToggle = true;
         correctSizes();
     }
 }
-
-async function updatePageNumber() {
-    if(pageNumber != null)
-        document.getElementById("pageNumber").innerHTML = (pageNumber+1);
-}
-
 
 function createButton(product, buttonGrid, inputFunction) {
     var button = document.createElement("button");
@@ -54,7 +45,6 @@ async function getInventoryOf(currentId){
         }
         getRequest.send();
     });
-[]
     var inventoryNum = await promise;
     var endPoint = inventoryNum[0]["stockquantity"];
     return endPoint;
@@ -85,22 +75,6 @@ async function editInventoryFunction(currentProduct) {
     }
 }
 
-function decrementPage() {
-    pageNumber--;
-    if (pageNumber < 0) {
-        pageNumber = 0;
-    }
-    updatePageNumber();
-}
-
-function incrementPage() {
-    pageNumber++;
-    if (pageNumber > parseInt((productList.length-1)/numberOfButtons)) {
-        pageNumber = parseInt((productList.length-1)/numberOfButtons);
-    }
-    updatePageNumber();
-}
-
 function toggleSizeAndGenerateButtonGrid(){
     g_sizeToggle = !g_sizeToggle;
     if(g_sizeToggle){
@@ -113,25 +87,54 @@ function toggleSizeAndGenerateButtonGrid(){
 
 function correctSizes(){
     toggleButtonSize();
-    pageNumber = 0;
-    updatePageNumber();
     generateButtonGrid();
     toggleFontSize();
 }
 
-function generateButtonGrid(functionName) {
-    var buttonGrid = document.getElementById("buttonGrid");
-    buttonGrid.innerHTML = "";
-    numberOfButtons = g_sizeToggle ? 6 : 15;
-
-    var maximumIndex = (pageNumber + 1) * numberOfButtons;
-
-    if (maximumIndex > productList.length) {
-        maximumIndex = productList.length;
+class ButtonGrid {
+    constructor(functionName) {
+        this.buttonFunction = functionName;
+        this.pageNumber = 0;
+        this.generateButtonGrid();
     }
 
-    for (let i = (pageNumber*numberOfButtons); i < maximumIndex; i++) {
-        createButton(productList[i], buttonGrid, functionName);
+    decrementPage() {
+        this.pageNumber--;
+        if (this.pageNumber < 0) {
+            this.pageNumber = 0;
+        }
+        this.generateButtonGrid();
+        this.updatePageNumber();
+    }
+
+    incrementPage() {
+        this.pageNumber++;
+        if (this.pageNumber > parseInt((productList.length-1)/numberOfButtons)) {
+            this.pageNumber = parseInt((productList.length-1)/numberOfButtons);
+        }
+        this.generateButtonGrid();
+        this.updatePageNumber();
+    }
+
+    updatePageNumber() {
+        document.getElementById("pageNumber").innerHTML = (this.pageNumber + 1);
+    }
+
+    generateButtonGrid() {
+        var buttonGrid = document.getElementById("buttonGrid");
+        buttonGrid.innerHTML = "";
+        numberOfButtons = g_sizeToggle ? 6 : 15;
+    
+        var maximumIndex = (this.pageNumber + 1) * numberOfButtons;
+    
+        if (maximumIndex > productList.length) {
+            maximumIndex = productList.length;
+        }
+    
+        for (let i = (this.pageNumber*numberOfButtons); i < maximumIndex; i++) {
+            createButton(productList[i], buttonGrid, this.buttonFunction);
+        }
+        this.updatePageNumber();
     }
 }
 

@@ -16,6 +16,7 @@
     <script src="js/ButtonGrid.js"></script>
     <script src="js/ModifyInventory.js"></script>
     <title>Customer Transactions</title>
+    <link rel="icon" type="image/x-icon" href="/assets/EquipoGrandeLogo.png">
 </head>
 
 <body>
@@ -39,7 +40,7 @@
                         <input class="col-6" type="text" id="currentInventory">
                     </div>
                     <div class="row form-group">
-                        <button class="col-md my-1 btn btn-color1" id="updateInventory">Update Inventory</button>
+                        <button type="button" class="col-md my-1 btn btn-color1" id="updateInventory">Update Inventory</button>
                     </div>
                 </form>
             </div>
@@ -52,16 +53,16 @@
                 </div>
                 <div class="btn-group">
                     <button class="btn btn-color1" type="button"
-                        onclick="decrementPage();generateButtonGrid(pageNumber);">&lt;&lt;
-                        Previous Page</button>
+                       onclick="buttonGridObject.decrementPage();">&lt;&lt;
+                       Previous Page</button>
                     <button class="btn btn-color1" type="button"
-                        onclick="incrementPage();generateButtonGrid(pageNumber);">Next Page
-                        &gt;&gt;</button>
-                </div>
-                <div class="pageButton">
+                       onclick="buttonGridObject.incrementPage();">Next Page
+                       &gt;&gt;</button>
+                 </div>
+                 <div class="pageButton">
                     Page <span id="pageNumber"></span>
                 </div>
-            </div>
+                </div>
         </div>
     </div>
 </body>

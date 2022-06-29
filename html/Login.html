@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="/assets/EquipoGrandeLogo.png">
     <link rel="stylesheet" href="/css/LoginStyle.css">
     <script type="text/javascript">
         function googleTranslateElementInit() {
@@ -28,11 +29,10 @@
                 <input type="password" class="form__input" id="password" autofocus placeholder="Password">
                 <div class="form__input-error-message"></div>
             </div>
-            <button onclick="checkUserLogin()" class="form__button" type="submit">Submit</button>
-            <div id="google_translate_element"></div>
-
-
+            <button onclick="checkUserLogin()" class="form__button" type="submit">Submit</button>    
         </form>
+        
+        <div id="google_translate_element" style="margin-top:3%;" class="center_img"></div>
         <!-- Form to create a new  -->
         <!-- <form class="form form--hidden" id="resetPassword">
             <h1 class="form__title">Reset Password</h1>
@@ -52,6 +52,11 @@
                 <a class="form__link" href="./" id="linkLogin">Return to Login</a>
             </p>
         </form> -->
+        <br><br>
+        <div class="row d-flex justify-content-center">
+            <img id="logo" class="center_img" 
+                style="width: 80px; height: 80px;" src="assets/EquipoGrandeLogo.png">
+        </div>
     </div>
     <script src="js/LoginJava.js"></script>
 </body>

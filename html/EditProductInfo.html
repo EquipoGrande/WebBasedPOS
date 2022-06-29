@@ -16,6 +16,7 @@
     <script src="js/ButtonGrid.js"></script>
     <script src="js/EditProductInfoJava.js"></script>
     <title>Customer Transactions</title>
+    <link rel="icon" type="image/x-icon" href="/assets/EquipoGrandeLogo.png">
 </head>
 
 <body>
@@ -65,19 +66,23 @@
                 </div>
                 <div class="btn-group">
                     <button class="btn btn-color1" type="button"
-                        onclick="decrementPage();generateButtonGrid(pageNumber);">&lt;&lt;
-                        Previous Page</button>
+                       onclick="buttonGridObject.decrementPage();">&lt;&lt;
+                       Previous Page</button>
                     <button class="btn btn-color1" type="button"
-                        onclick="incrementPage();generateButtonGrid(pageNumber);">Next Page
-                        &gt;&gt;</button>
-                </div>
-                <div class="pageButton">
+                       onclick="buttonGridObject.incrementPage();">Next Page
+                       &gt;&gt;</button>
+                 </div>
+                 <div class="pageButton">
                     Page <span id="pageNumber"></span>
+                </div>
                 </div>
             </div>
         </div>
 
     </div>
+    <div id="alertContainer" class="position-fixed top-0 start-50">
+    </div>
+    
 </body>
 
 </html>
