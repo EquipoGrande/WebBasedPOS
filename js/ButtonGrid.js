@@ -87,6 +87,7 @@ function toggleSizeAndGenerateButtonGrid(){
 }
 
 function correctSizes(){
+    buttonGridObject.pageNumber = 0;
     toggleButtonSize();
     buttonGridObject.generateButtonGrid();
     toggleFontSize();
