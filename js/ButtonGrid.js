@@ -14,7 +14,6 @@ async function onloadInitialize(functionName) {
     }
 }
 
-
 function createButton(product, buttonGrid, inputFunction) {
     var button = document.createElement("button");
     
@@ -46,7 +45,6 @@ async function getInventoryOf(currentId){
         }
         getRequest.send();
     });
-[]
     var inventoryNum = await promise;
     var endPoint = inventoryNum[0]["stockquantity"];
     return endPoint;
@@ -77,7 +75,6 @@ async function editInventoryFunction(currentProduct) {
     }
 }
 
-
 function toggleSizeAndGenerateButtonGrid(){
     g_sizeToggle = !g_sizeToggle;
     if(g_sizeToggle){
@@ -107,6 +104,7 @@ class ButtonGrid {
             this.pageNumber = 0;
         }
         this.generateButtonGrid();
+        updatePageNumber();
     }
 
     incrementPage() {
@@ -115,6 +113,11 @@ class ButtonGrid {
             this.pageNumber = parseInt((productList.length-1)/numberOfButtons);
         }
         this.generateButtonGrid();
+        updatePageNumber();
+    }
+
+    function updatePageNumber() {
+        document.getElementById("pageNumber").innerHTML = (this.pageNumber + 1);
     }
 
     generateButtonGrid() {
@@ -131,6 +134,7 @@ class ButtonGrid {
         for (let i = (this.pageNumber*numberOfButtons); i < maximumIndex; i++) {
             createButton(productList[i], buttonGrid, this.buttonFunction);
         }
+        updatePageNumber();
     }
 }
 
