@@ -79,19 +79,6 @@ async function editInventoryFunction(currentProduct) {
     }
 }
 
-function decrementPage() {
-    pageNumber--;
-    if (pageNumber < 0) {
-        pageNumber = 0;
-    }
-}
-
-function incrementPage() {
-    pageNumber++;
-    if (pageNumber > parseInt((productList.length-1)/numberOfButtons)) {
-        pageNumber = parseInt((productList.length-1)/numberOfButtons);
-    }
-}
 
 function toggleSizeAndGenerateButtonGrid(){
     g_sizeToggle = !g_sizeToggle;
@@ -110,19 +97,40 @@ function correctSizes(){
     toggleFontSize();
 }
 
-function generateButtonGrid(functionName) {
-    var buttonGrid = document.getElementById("buttonGrid");
-    buttonGrid.innerHTML = "";
-    numberOfButtons = g_sizeToggle ? 6 : 15;
-
-    var maximumIndex = (pageNumber + 1) * numberOfButtons;
-
-    if (maximumIndex > productList.length) {
-        maximumIndex = productList.length;
+class ButtonGrid {
+    constructor(functionName) {
+        this.buttonFunction = functionName;
+        this.pageNumber = 0;
     }
 
-    for (let i = (pageNumber*numberOfButtons); i < maximumIndex; i++) {
-        createButton(productList[i], buttonGrid, functionName);
+    decrementPage() {
+        this.pageNumber--;
+        if (this.pageNumber < 0) {
+            this.pageNumber = 0;
+        }
+    }
+
+    incrementPage() {
+        this.pageNumber++;
+        if (this.pageNumber > parseInt((productList.length-1)/numberOfButtons)) {
+            this.pageNumber = parseInt((productList.length-1)/numberOfButtons);
+        }
+    }
+
+    generateButtonGrid() {
+        var buttonGrid = document.getElementById("buttonGrid");
+        buttonGrid.innerHTML = "";
+        numberOfButtons = g_sizeToggle ? 6 : 15;
+    
+        var maximumIndex = (pageNumber + 1) * numberOfButtons;
+    
+        if (maximumIndex > productList.length) {
+            maximumIndex = productList.length;
+        }
+    
+        for (let i = (pageNumber*numberOfButtons); i < maximumIndex; i++) {
+            createButton(productList[i], buttonGrid, this.buttonFunction);
+        }
     }
 }
 

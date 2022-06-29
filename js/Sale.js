@@ -1,7 +1,7 @@
 async function transactionOnload() {
-    await onloadInitialize(function(currentProduct){
-        saleButtonFunction(currentProduct);
-    }).then();
+    await onloadInitialize(function (currentProduct) {
+            saleButtonFunction(currentProduct)
+        }).then();
     newSale = new Sale(productList);
     document.getElementById("sellLine").onclick = function () { newSale.addItemButton() };
     document.getElementById("removeLine").onclick = function () { newSale.removeItem() };
@@ -43,10 +43,6 @@ class Sale {
         if (document.getElementById("quantityInput").value <= 0) {
             return;
         }
-
-        //if (document.getElementById("quantityInput").value > product.quantity) {
-        //    return;
-        //}
 
         for (let i = 0; i < this.saleList.length; i++) {
             if (this.saleList[i]["productID"] == product["productid"]) {
