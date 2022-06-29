@@ -51,9 +51,13 @@ class ProductInfo {
             },
             body: JSON.stringify(product)
         });
-        const content = await response;
 
-        console.log(content);
+        if(response.status == 200) {
+            showAlert('alert-success', 'Successfully Added Product');
+            updateButtonGrid();
+        } else {
+            showAlert('alert-danger', 'Error Adding Product');
+        }
     }
 
     async InsertProduct() {
@@ -92,6 +96,7 @@ class ProductInfo {
         if(response.status == 201) {
             showAlert('alert-success', 'Successfully Added Product');
             document.getElementById('productIDInput').value = responseBody.productid;
+            updateButtonGrid();
         } else {
             showAlert('alert-danger', 'Error Adding Product');
         }
@@ -124,6 +129,7 @@ class ProductInfo {
         if(response.status == 200) {
             showAlert('alert-success', 'Successfully Removed Product');
             document.getElementById('editProductForm').reset();
+            updateButtonGrid();
         } else {
             showAlert('alert-danger', 'Error Removing Product');
         }

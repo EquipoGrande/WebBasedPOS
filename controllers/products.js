@@ -1,5 +1,5 @@
 
-const query_getproductslist = `SELECT * FROM product;`;
+const query_getproductslist = `SELECT * FROM product ORDER BY productname ASC;`;
 const query_getproductbyid = `SELECT * FROM product WHERE productid=$1`;
 const query_insertproduct = `INSERT INTO product(productid, productname, sellprice, sellunit, purchaseprice, purchaseunit) VALUES($1, $2, $3, $4, $5, $6);`;
 const query_getmaxproductid = `SELECT MAX(productid) AS max FROM product;`;

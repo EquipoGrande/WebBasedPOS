@@ -73,7 +73,7 @@ async function editInventoryFunction(currentProduct) {
     if(currentProduct["sellunit"] == 1) {
         document.getElementById("radioKgs").checked = true;
     } else {
-        docuent.getElementById("radioIndividual").checked = true;
+        document.getElementById("radioIndividual").checked = true;
     }
 }
 
@@ -92,6 +92,13 @@ function correctSizes(){
     toggleButtonSize();
     buttonGridObject.generateButtonGrid();
     toggleFontSize();
+}
+
+async function updateButtonGrid() {
+    await generateInventory().then(function(value) {
+        productList = value;
+    });
+    buttonGridObject.generateButtonGrid();
 }
 
 class ButtonGrid {
