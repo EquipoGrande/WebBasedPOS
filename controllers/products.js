@@ -60,7 +60,6 @@ module.exports = function (express) {
         var nextID = await getNextProductID(db);
         var params = [nextID, req.body.productname, req.body.sellprice, req.body.sellunit, req.body.purchaseprice, req.body.purchaseunit];
         for(const item of params) {
-            console.log(item);
             if(typeof item === 'undefined') {
                 res.status(400);
                 res.send('Invalid input');
