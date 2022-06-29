@@ -15,6 +15,7 @@ class ModifyInventory {
     }
 
     async modifyQuantity() {
+        showAlert('alert-info',"Modifying product...");
         var promise = new Promise(function(resolve, reject){
             var getRequest = new XMLHttpRequest();
             getRequest.responseType = "json";
@@ -22,8 +23,10 @@ class ModifyInventory {
             getRequest.onload = function () {
                 if (getRequest.status == 200) {
                     resolve(getRequest.response);
+                    showAlert('alert-success',"Product successfully modified!");
                 } else {
                     reject(Error(getRequest.statusText));
+                    showAlert('alert-danger',"Product could not be modified.");
                 }
                 getRequest.onerror = function() {
                     reject(Error('Cannot find JSON data'));

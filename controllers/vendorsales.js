@@ -1,4 +1,4 @@
-const sqlGetNextID = 'SELECT MAX(saleid) as max FROM salehistory;';
+const sqlGetNextID = 'SELECT MAX(saleid) as max FROM vendorHistory;';
 const sqlLineItem = "INSERT INTO vendorlineitem VALUES($1, $2, $3);";
 const sqlHistoryEntry = "INSERT INTO vendorhistory VALUES($1, $2, $3);";
 const sqlUpdateInventory = "UPDATE currentinventory SET stockQuantity = $1 WHERE productID = $2";
