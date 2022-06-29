@@ -14,6 +14,7 @@
     <script src="js/accessibility.js"></script>
     <script src="js/CurrentInventoryList.js"></script>
     <script src="js/Trends.js"></script>
+    <script src="js/trendLogic.js"></script>
 
     <title>Trends</title>
     <link rel="icon" type="image/x-icon" href="/assets/EquipoGrandeLogo.png">
@@ -39,8 +40,8 @@
                     <div class="btn-group-vertical">
                         <button class="btn-light button">End-of-Day Report</button>
                         <button class="btn-light button">Excess Report</button>
-                        <button class="btn-light button">Restock Report</button>
-                        <button class="btn-light button">Sales Report</button>
+                        <button class="btn-light button" onclick="generateRestockReport()">Restock Report</button>
+                        <button class="btn-light button" onclick="generateSalesReport()">Sales Report</button>
                     </div>
 
                 </div>
@@ -51,16 +52,9 @@
 
                 <div class="border border-3 border-secondary bg-light transaction-box">
 					<table class="table table-hover table-padding">
-						<thead class="table-dark">
-							<tr>
-								<th scope="col">Date</th>
-								<th scope="col">Transaction ID</th>
-								<th scope="col">Product ID</th>
-								<th scope="col">Quantity</th>
-								<th scope="col">Total</th>
-							</tr>
+						<thead class="table-dark" id="tableHeader">
 						</thead>
-						<tbody id="trendsTable"></tbody>
+						<tbody id="trendTable"></tbody>
 					</table>
 				</div>
                 
