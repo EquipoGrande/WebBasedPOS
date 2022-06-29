@@ -37,7 +37,7 @@ module.exports = function (express) {
             let currentInventory = await db.query(sqlCheckInventory, [saleList[i].productID]).then(result => result.rows[0].stockquantity);
             var updateInventory =  parseFloat(currentInventory) - parseFloat(saleList[i].quantity);
 
-            if (updateInventory < 0) {
+            if (updateInventory < 0.0) {
                 updateInventory = 0.0;
             }
 
