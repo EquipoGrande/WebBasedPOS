@@ -1,7 +1,7 @@
 async function transactionOnload() {
     await onloadInitialize(function (currentProduct) {
-            saleButtonFunction(currentProduct)
-        }).then();
+        saleButtonFunction(currentProduct)
+    }).then();
     newSale = new Sale(productList);
     document.getElementById("sellLine").onclick = function () { newSale.addItemButton() };
     document.getElementById("removeLine").onclick = function () { newSale.removeItem() };
@@ -52,7 +52,7 @@ class Sale {
         }
 
         let currentSaleItem = new SaleItem(product.productid, product.productname, document.getElementById("quantityInput").value,
-        product.sellprice, this.maxID);
+            product.sellprice, this.maxID);
 
         this.saleList.push(currentSaleItem);
 
@@ -74,7 +74,12 @@ class Sale {
 
         let removeElement = document.createElement("td");
         let removeButton = document.createElement("button");
-        removeButton.innerHTML = "Remove";
+        removeButton.innerHTML = "X";
+        removeButton.style.backgroundColor = '#8F423D'; 
+        removeButton.style.color='white'
+        removeButton.style.width='35px'
+        removeButton.style.border='#8F423D';
+
         removeButton.onclick = function() {
             newSale.removeItemByID(product["productid"]);
         }
@@ -131,7 +136,7 @@ class Sale {
     modifyItem(saleItem, product) {
         saleItem["sellprice"] = product["sellprice"] * document.getElementById("quantityInput").value;
         saleItem["quantity"] = document.getElementById("quantityInput").value;
-        
+
         var unitType = " kg";
         if (product.sellunit == 0) {
             unitType = " bags";
@@ -165,7 +170,7 @@ class Sale {
         for (var i = 0; i < this.saleList.length; i++) {
             this.total += (Math.round(100 * this.saleList[i]["sellprice"]) / 100);
         }
-        document.getElementById("totalPrice").value = "Total: €" + this.total;
+        document.getElementById("totalPrice").value = " € " + this.total;
     }
 
     updatePrice() {
