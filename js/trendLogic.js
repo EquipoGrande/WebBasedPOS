@@ -4,7 +4,6 @@ function onloadTrends() {
 
 async function generateSalesReport() {
     salesReport = await fetchReport('http://localhost:3000/api/trends/salesReport').then(response => response.json());
-    console.log(salesReport);
 
     if (salesReport.length == 0) {
         // implement error here
@@ -16,7 +15,6 @@ async function generateSalesReport() {
 
 async function generateRestockReport() {
     restockReport = await fetchReport('http://localhost:3000/api/trends/restockReport').then(response => response.json());
-    console.log(salesReport);
 
     if (restockReport.length == 0) {
         // implement error here
@@ -52,6 +50,7 @@ function generateTable(report, columnNames) {
     header = document.getElementById("tableHeader");
     
     trendsTable.innerHTML = "";
+    header.innerHTML = "";
 
     let headerRow = document.createElement("tr");
 
