@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 function onloadTrends() {
     
 }
@@ -21,6 +23,16 @@ async function generateRestockReport() {
     }
 
     generateTable(restockReport, ["Product", "Quantity in Stock", "Quantity Sold", "Revenue"]);
+}
+
+async function generateExcessReport() {
+    excessReport = await fetchReport('http://localhost/api/trends/excessReport').then(response => response.json());
+
+    if (excessReport.length == 0) {
+        showAlert('alert-danger', 'Error: No Results in Excess Report');
+    }
+
+    generateTable(excessReport, ["Product ID", "Name", "Starting Stock", "Quantity Sold", "Percent Sold"]);
 }
 
 async function fetchReport(urlQuery) {
