@@ -24,5 +24,30 @@ module.exports = function (express) {
             })
     });
 
+    router.get('/getManager', (req, res) => {
+        db.query(query_getManager)
+            .then(queryResult => {
+                res.status(200);
+                res.send(queryResult.rows);
+            })
+            .catch(err => {
+                res.status(500);
+                console.log(err.message);
+                res.send(err.message);
+            })
+    });
+
+    router.get('/getCashier', (req, res) => {
+        db.query(query_getCashier)
+            .then(queryResult => {
+                res.status(200);
+                res.send(queryResult.rows);
+            })
+            .catch(err => {
+                res.status(500);
+                console.log(err.message);
+                res.send(err.message);
+            })
+    });
     return router;
 };
