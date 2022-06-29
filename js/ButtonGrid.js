@@ -1,15 +1,13 @@
-var pageNumber;
 var productList = new Array;
 var testSale;
 var numberOfButtons = 15;
-var now = new Date().getTime();
+var ButtonGridObject;
 
 async function onloadInitialize(functionName) {
-    pageNumber = 0; 
     await generateInventory().then(function(value) {
         productList = value;
     });
-    generateButtonGrid(functionName);
+    ButtonGridObject = new ButtonGrid(function(currentProduct) {functionName(currentProduct)});
     if(window.name == "Accessibility Mode"){
         g_sizeToggle = true;
         correctSizes();
@@ -92,7 +90,6 @@ function toggleSizeAndGenerateButtonGrid(){
 
 function correctSizes(){
     toggleButtonSize();
-    pageNumber = 0;
     generateButtonGrid();
     toggleFontSize();
 }
@@ -101,6 +98,7 @@ class ButtonGrid {
     constructor(functionName) {
         this.buttonFunction = functionName;
         this.pageNumber = 0;
+        generate
     }
 
     decrementPage() {
@@ -108,6 +106,7 @@ class ButtonGrid {
         if (this.pageNumber < 0) {
             this.pageNumber = 0;
         }
+        this.generateButtonGrid();
     }
 
     incrementPage() {
@@ -115,6 +114,7 @@ class ButtonGrid {
         if (this.pageNumber > parseInt((productList.length-1)/numberOfButtons)) {
             this.pageNumber = parseInt((productList.length-1)/numberOfButtons);
         }
+        this.generateButtonGrid();
     }
 
     generateButtonGrid() {
@@ -122,13 +122,13 @@ class ButtonGrid {
         buttonGrid.innerHTML = "";
         numberOfButtons = g_sizeToggle ? 6 : 15;
     
-        var maximumIndex = (pageNumber + 1) * numberOfButtons;
+        var maximumIndex = (this.pageNumber + 1) * numberOfButtons;
     
         if (maximumIndex > productList.length) {
             maximumIndex = productList.length;
         }
     
-        for (let i = (pageNumber*numberOfButtons); i < maximumIndex; i++) {
+        for (let i = (this.pageNumber*numberOfButtons); i < maximumIndex; i++) {
             createButton(productList[i], buttonGrid, this.buttonFunction);
         }
     }
