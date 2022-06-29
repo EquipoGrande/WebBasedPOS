@@ -19,6 +19,7 @@ function createButton(product, buttonGrid, inputFunction) {
     
     button.setAttribute("type", "button");
     button.setAttribute("class", "col-md-4 col-6 btn btn-color1");
+    button.style.fontSize = g_sizeToggle ? '150%' : '100%';
     button.innerHTML = product["productname"];
 
     button.onclick = function() {
@@ -87,7 +88,7 @@ function toggleSizeAndGenerateButtonGrid(){
 
 function correctSizes(){
     toggleButtonSize();
-    generateButtonGrid();
+    buttonGridObject.generateButtonGrid();
     toggleFontSize();
 }
 
