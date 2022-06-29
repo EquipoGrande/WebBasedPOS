@@ -63,7 +63,6 @@ async function generateTable() {
 }
 
 function limitTable() {
-    console.log(htmlTable.rows[0].cells[0].innerHTML);
     for(let i = 0; i < htmlTable.rows.length; i++) {
         if((document.getElementById("productIDInput").value.length > 0 && htmlTable.rows[i].cells[1].innerHTML != document.getElementById("productIDInput").value) ||
         (document.getElementById("currentInventory").value.length > 0 && htmlTable.rows[i].cells[2].innerHTML != document.getElementById("currentInventory").value) ||
@@ -71,6 +70,9 @@ function limitTable() {
             htmlTable.rows[i].remove();
             i--;
         }
+    }
+    if(htmlTable.rows.length == 0) {
+        htmlTable.innerHTML = "No matching data could be found";
     }
 }
 

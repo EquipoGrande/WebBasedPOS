@@ -72,6 +72,14 @@ class Sale {
         let priceElement = document.createElement("td");
         priceElement.setAttribute("id", ("priceElement" + this.maxID));
 
+        let removeElement = document.createElement("td");
+        let removeButton = document.createElement("button");
+        removeButton.innerHTML = "Remove";
+        removeButton.onclick = function() {
+            newSale.removeItemByID(product["productid"]);
+        }
+        removeElement.append(removeButton);
+
         idElement.innerHTML = product["productid"];
         nameElement.innerHTML = product["productname"];
 
@@ -89,6 +97,7 @@ class Sale {
         saleRow.append(nameElement);
         saleRow.append(quantityElement);
         saleRow.append(priceElement);
+        saleRow.append(removeElement);
 
         saleRow.onclick = function () {
             saleButtonFunction(product);
@@ -103,6 +112,10 @@ class Sale {
     // Removes an item from the sale
     removeItem() {
         let productID = document.getElementById("idText").value;
+        this.removeItemByID(productID);	
+    }	
+    
+    removeItemByID(productID) {
         for (var i = 0; i < this.saleList.length; i++) {
             if (this.saleList[i]["productID"] == productID) {
                 document.getElementById("row" + this.saleList[i]["lineID"]).remove();
