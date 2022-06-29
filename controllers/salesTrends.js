@@ -21,7 +21,7 @@ async function getIDs(start, end, db) {
     idRange = await db.query(dateRangeQuery, [start, end])
         .then(result => result.rows[0])
         .catch(err => {
-            console.log(err.message);
+            throw TypeError(err.message);
         });
 }
 
@@ -31,7 +31,11 @@ module.exports = function (express) {
     var db = require('../Database');
 
     router.get('/salesReport', async (req, res) => {
-        await getIDs(req.query.start, req.query.end, db).then();
+        await getIDs(req.query.start, req.query.end, db).then().catch(err => {
+            res.status(500);
+            console.log(err.message);
+            res.send(err.message);
+        });
 
         db.query(salesReportQuery, [idRange.min, idRange.max])
         .then(queryResult => {
