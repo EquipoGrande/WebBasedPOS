@@ -28,7 +28,6 @@ module.exports = function (express) {
         var total = 0.0;
         var date = new Date();
 
-        
 
         for (let i = 0; i < saleList.length; i++) {
             await db.query(sqlLineItem, [max_id, saleList[i].productID, saleList[i].quantity]);
@@ -37,7 +36,7 @@ module.exports = function (express) {
             let currentInventory = await db.query(sqlCheckInventory, [saleList[i].productID]).then(result => result.rows[0].stockquantity);
             var updateInventory =  parseFloat(currentInventory) - parseFloat(saleList[i].quantity);
 
-            if (updateInventory < 0.0) {
+            if (updateInventory < 0) {
                 updateInventory = 0.0;
             }
 

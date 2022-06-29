@@ -56,7 +56,7 @@ class Sale {
         }
 
         let currentSaleItem = new SaleItem(product.productid, product.productname, document.getElementById("quantityInput").value,
-        product.sellprice*document.getElementById("quantityInput").value, this.maxID);
+        product.sellprice, this.maxID);
 
         this.saleList.push(currentSaleItem);
 
@@ -85,6 +85,7 @@ class Sale {
         }
 
         quantityElement.innerHTML = document.getElementById("quantityInput").value + " " + unitType;
+
         var round = Math.round((100 * product["sellprice"] * document.getElementById("quantityInput").value));
         priceElement.innerHTML = "€ " + round / 100;
 
