@@ -46,6 +46,8 @@ module.exports = function (express) {
         }
 
         await db.query(sqlHistoryEntry, [max_id, date, total]);
+        
+        res.status(500);
         res.send();
     });
     return router;

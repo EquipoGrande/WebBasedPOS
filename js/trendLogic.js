@@ -6,7 +6,8 @@ async function generateSalesReport() {
     salesReport = await fetchReport('http://localhost:3000/api/trends/salesReport').then(response => response.json());
 
     if (salesReport.length == 0) {
-        // implement error here
+        showAlert("alert-danger", "Error: No data for requested period");
+        return;
     }
 
     generateTable(salesReport, ["Product","Quantity Sold","Revenue", "Cost", "Profit"]);
@@ -14,10 +15,14 @@ async function generateSalesReport() {
 }
 
 async function generateRestockReport() {
-    restockReport = await fetchReport('http://localhost:3000/api/trends/restockReport').then(response => response.json());
+    restockReport = await fetchReport('http://localhost:3000/api/trends/restockReport').then(response => response.json())
+    .catch(error => {
+        console.error('Error:', error);
+      });
 
     if (restockReport.length == 0) {
-        // implement error here
+        showAlert("alert-danger", "Error: No data for requested period");
+        return;
     }
 
     generateTable(restockReport, ["Product", "Quantity in Stock", "Quantity Sold", "Revenue"]);
@@ -27,12 +32,11 @@ async function fetchReport(urlQuery) {
     startDate = document.getElementById("startDate").value;
     endDate = document.getElementById("endDate").value;
 
-    if (startDate == null || endDate == null) {
-        // implement error here
-        return
+    if (startDate == "" || endDate == "") {
+        showAlert("alert-danger", "Error: Please insert a valid date in each entry!");
+    } else {
+        return fetch(urlQuery + "?start=" + startDate + "&end=" + endDate, {method: 'GET'});
     }
-
-    return fetch(urlQuery + "?start=" + startDate + "&end=" + endDate, {method: 'GET'});
 }
 
 function generateTotal(report, propertyName) {
