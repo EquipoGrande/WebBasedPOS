@@ -14,6 +14,7 @@ async function generateSalesReport() {
     }
 
     generateTable(salesReport, ["Product","Quantity Sold","Revenue", "Cost", "Profit"]);
+    console.log(generateTotal(salesReport, "profit"));
 }
 
 async function generateRestockReport() {
@@ -39,12 +40,14 @@ async function fetchReport(urlQuery) {
     return fetch(urlQuery + "?start=" + startDate + "&end=" + endDate, {method: 'GET'});
 }
 
-function generateTotal(report) {
+function generateTotal(report, propertyName) {
     let total = 0.0;
 
     for (let i = 0; i < report.length; i++) {
-        total += report[i]["revenue"];
+        total += report[i][propertyName];
     }
+    
+    return total;
 }
 
 function generateTable(report, columnNames) {
