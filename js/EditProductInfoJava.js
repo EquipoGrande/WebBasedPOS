@@ -50,6 +50,13 @@ class ProductInfo {
             body: JSON.stringify(product)
         });
         const content = await response;
+
+        if(response.status == 201) {
+            showAlert('alert-success', 'Successfully Edited Product');
+            document.getElementById('productIDInput').value = responseBody.productid;
+        } else {
+            showAlert('alert-danger', 'Error Editing Product');
+        }
     }
 
     async InsertProduct() {

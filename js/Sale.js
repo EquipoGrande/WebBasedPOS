@@ -40,7 +40,9 @@ class Sale {
 
     // Adds a new item to the sale
     addItem(product) {
-        if (document.getElementById("quantityInput").value <= 0) {
+        if ((document.getElementById("quantityInput").value <= 0) || 
+        (document.getElementById("quantityInput").value > document.getElementById("productAmount").value)) {
+            showAlert('alert-danger',"Error: Invalid quantity");
             return;
         }
 
@@ -174,7 +176,11 @@ class Sale {
         for (var i = 0; i < this.productList.length; i++) {
             if (this.productList[i]["productid"] == productID) {
                 var round = Math.round(100 * this.productList[i].sellprice * document.getElementById("quantityInput").value);
-                document.getElementById("productTotal").value = "€ " + round / 100;
+                if(round > 0) {
+                    document.getElementById("productTotal").value = "€ " + round / 100;
+                } else {
+                    document.getElementById("productTotal").value = "€ " + 0;
+                }
                 break;
             }
         }
