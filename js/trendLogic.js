@@ -1,6 +1,3 @@
-const { response } = require("express");
-const sales = require("../controllers/sales");
-
 function onloadTrends() {
     
 }
@@ -53,6 +50,8 @@ function generateTotal(report, propertyName) {
 function generateTable(report, columnNames) {
     trendsTable = document.getElementById("trendTable");
     header = document.getElementById("tableHeader");
+    
+    trendsTable.innerHTML = "";
 
     let headerRow = document.createElement("tr");
 
