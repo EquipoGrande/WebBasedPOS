@@ -104,14 +104,10 @@
             </div>
             <div class="btn-group">
                <button class="btn btn-color1" type="button"
-                  onclick="decrementPage();generateButtonGrid(pageNumber, function(currentProduct){
-                     saleButtonFunction(currentProduct);
-                 });">&lt;&lt;
+                  onclick="buttonGridObject.decrementPage();">&lt;&lt;
                   Previous Page</button>
                <button class="btn btn-color1" type="button"
-                  onclick="incrementPage();generateButtonGrid(pageNumber,function(currentProduct){
-                     saleButtonFunction(currentProduct);
-                 });">Next Page
+                  onclick="buttonGridObject.incrementPage();">Next Page
                   &gt;&gt;</button>
             </div>
             <div class="pageButton">

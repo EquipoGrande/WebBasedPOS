@@ -52,15 +52,17 @@
                 </div>
                 <div class="btn-group">
                     <button class="btn btn-color1" type="button"
-                        onclick="decrementPage();generateButtonGrid(pageNumber);">&lt;&lt;
-                        Previous Page</button>
+                       onclick="buttonGridObject.decrementPage();">&lt;&lt;
+                       Previous Page</button>
                     <button class="btn btn-color1" type="button"
+                       onclick="buttonGridObject.incrementPage();">Next Page
+                       &gt;&gt;</button>
+                 </div>
                         onclick="incrementPage();generateButtonGrid(pageNumber);">Next Page
                         &gt;&gt;</button>
                 </div>
                 <div class="pageButton">
                     Page <span id="pageNumber"></span>
-                </div>
             </div>
         </div>
     </div>
