@@ -115,6 +115,7 @@ class ProductInfo {
 
         if(response.status == 200) {
             showAlert('alert-success', 'Successfully Removed Product');
+            document.getElementById('editProductForm').reset();
         } else {
             showAlert('alert-danger', 'Error Removing Product');
         }
