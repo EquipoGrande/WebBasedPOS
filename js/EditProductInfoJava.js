@@ -62,7 +62,7 @@ class ProductInfo {
 
         var product = {};
         product["productname"] = productName;
-        product["sellprice"] = sellPrice;
+        product["sellpric1e"] = sellPrice;
         product["sellunit"] = unit;
         product["purchaseprice"] = purchasePrice;
         product["purchaseunit"] = unit;
@@ -78,9 +78,14 @@ class ProductInfo {
             },
             body: JSON.stringify(product)
         });
-        const content = await response;
 
-        console.log(content);
+        console.log(response.status);
+
+        if(response.status == 201) {
+            showAlert('alert-success', 'Successfully Added Product');
+        } else {
+            showAlert('alert-danger', 'Error Adding Product');
+        }
     }
 
     async DeleteProduct() {
