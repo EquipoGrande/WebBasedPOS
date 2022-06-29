@@ -1,6 +1,4 @@
-const query_getUserInfo = `SELECT * FROM userinformation;`;
-const query_getManager = `SELECT * FROM userinformation WHERE role='Manager';`;
-const query_getCashier = `SELECT * FROM userinformation WHERE role='Cashier';`;
+const query_getUsernames = `SELECT * FROM userinformation;`;
 
 
 module.exports = function (express) {
@@ -9,10 +7,10 @@ module.exports = function (express) {
     var db = require('../Database');
 
     /**
-     * Returns a list of the user information in JSON format
+     * Returns a list of the usernames in JSON format
      */
     router.get('/getUsers', (req, res) => {
-        db.query(query_getUserInfo)
+        db.query(query_getUsernames)
             .then(queryResult => {
                 res.status(200);
                 res.send(queryResult.rows);
@@ -24,30 +22,5 @@ module.exports = function (express) {
             })
     });
 
-    router.get('/getManager', (req, res) => {
-        db.query(query_getManager)
-            .then(queryResult => {
-                res.status(200);
-                res.send(queryResult.rows);
-            })
-            .catch(err => {
-                res.status(500);
-                console.log(err.message);
-                res.send(err.message);
-            })
-    });
-
-    router.get('/getCashier', (req, res) => {
-        db.query(query_getCashier)
-            .then(queryResult => {
-                res.status(200);
-                res.send(queryResult.rows);
-            })
-            .catch(err => {
-                res.status(500);
-                console.log(err.message);
-                res.send(err.message);
-            })
-    });
     return router;
 };

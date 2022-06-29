@@ -1,3 +1,9 @@
+var userList = new Array;
+
+async function roles() {
+    userList = await findUsers();
+}
+
 function setFormMessage(formElement, type, message) {
     const messageElement = formElement.querySelector(".form__message");
 
@@ -16,16 +22,25 @@ function clearInputError(inputElement) {
     inputElement.parentElement.querySelector(".form__input-error-message").textContent = "";
 }
 
-function checkUserLogin() {
-    var cashierUser = document.getElementById('username').value;
-    var cashierPassword = document.getElementById('password').value;
+async function checkUserLogin() {
+    await roles();
+    var user = document.getElementById('username').value;
+    var pass = document.getElementById('password').value;
+    var accessGranted = false;
 
-    //Set the user and pass as this for now, we can change for authentication later
-    if (cashierUser == "josi" && cashierPassword == "ego") {
+    for (let i = 0; i < userList.length; i++) {
+        if ((user == userList[i]["username"]) && (pass == userList[i]["password"])) {
+            accessGranted = true;
+        }
+    }
+
+    // Set the user and pass as this for now, we can change for authentication later
+    if (accessGranted == true) {
         window.open("transactionsPage.html");
+        //close is still a work in progress
         close();
     } else {
-        setFormMessage(document, "error", "Invalid username/password combination");
+        setFormMessage(document, "error", "Invalid username / password combination");
     }
 
 }
