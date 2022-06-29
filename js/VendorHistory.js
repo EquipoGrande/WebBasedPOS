@@ -1,9 +1,16 @@
-
+var table;
+var htmlTable;
+var startDate;
+var endDate;
 
 async function performOnload() {
+    document.getElementById("productIDInput").onchange = function () { performOnload(); };
+    document.getElementById("currentInventory").onchange = function () { performOnload(); };
+    document.getElementById("vendorStartDate").onchange = function () { dateCheck(); };
+    document.getElementById("vendorEndDate").onchange = function () { dateCheck(); };
     htmlTable = document.getElementById("vendorTable");
-    var table = await generateTable();
-    console.log(table);
+    document.getElementById("vendorTable").innerHTML = "";
+    table = await generateTable();
     for(let i = 0; i < table.length; i++) {
         var row = htmlTable.insertRow(i);
         var cell0 = row.insertCell(0);
@@ -17,6 +24,15 @@ async function performOnload() {
         cell2.innerHTML = table[i][2];
         cell3.innerHTML = table[i][3];
         cell4.innerHTML = table[i][4];
+    }
+    limitTable();
+}
+
+function dateCheck() {
+    startDate = new Date(document.getElementById("vendorStartDate").value);
+    endDate = new Date(document.getElementById("vendorEndDate").value);
+    if(startDate != null && endDate != null) {
+        performOnload();
     }
 }
 
@@ -42,7 +58,34 @@ async function generateTable() {
     for(let i = 0; i < apiResult.length; i++) {
         tableArray[i] = [apiResult[i]["saledate"],apiResult[i]["saleid"],apiResult[i]["productid"],apiResult[i]["quantity"],(Math.round(apiResult[i]["saleprice"]*100))/100];
     }
+    sortTable(tableArray);
     return tableArray;
+}
+
+function limitTable() {
+    for(let i = 0; i < htmlTable.rows.length; i++) {
+        if((document.getElementById("productIDInput").value.length > 0 && htmlTable.rows[i].cells[1].innerHTML != document.getElementById("productIDInput").value) ||
+        (document.getElementById("currentInventory").value.length > 0 && htmlTable.rows[i].cells[2].innerHTML != document.getElementById("currentInventory").value) ||
+        (startDate-86400000 > new Date(htmlTable.rows[i].cells[0].innerHTML) || endDate < new Date(htmlTable.rows[i].cells[0].innerHTML))) {
+            htmlTable.rows[i].remove();
+            i--;
+        }
+    }
+    if(htmlTable.rows.length == 0) {
+        htmlTable.innerHTML = "No matching data could be found";
+    }
+}
+
+function sortTable(table) {
+    for(let i = 0; i < table.length-1; i++) {
+        for(let j = i+1; j < table.length; j++) {
+            if(table[i][0] > table[j][0] || table[i][0] == table[j][0] && table[i][2] > table[j][2]) {
+                let hold = table[i];
+                table[i] = table[j];
+                table[j] = hold;
+            }
+        }
+    }
 }
 
 window.addEventListener('load', performOnload);

@@ -24,11 +24,17 @@ app.use('/api/inventory', inventoryListController);
 var saleController = require('./controllers/sales')(express);
 app.use('/api/sales', saleController);
 
+var vendorSaleController = require('./controllers/vendorsales')(express);
+app.use('/api/vendorsales', vendorSaleController);
+
 var vendorController = require('./controllers/vendor')(express);
 app.use('/api/vendor', vendorController);
 
 var userController = require('./controllers/users')(express);
 app.use('/api/users', userController);
+
+var excessReportController = require('./controllers/excessInventoryTrends')(express);
+app.use('/api/trends', excessReportController);
 
 // serve all the static files. They will match the folder structure of this project
 app.use('/', express.static(path.join(__dirname, 'html')));             // serve html files on root path

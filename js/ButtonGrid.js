@@ -58,6 +58,7 @@ async function modifyInventoryFunction(currentProduct) {
 }
 
 async function saleButtonFunction(currentProduct) {
+    console.log("Sale function");
     document.getElementById("idText").value = currentProduct["productid"];
     document.getElementById("quantityInput").focus();
     document.getElementById("productName").value = currentProduct["productname"];
@@ -72,7 +73,7 @@ async function editInventoryFunction(currentProduct) {
     if(currentProduct["sellunit"] == 1) {
         document.getElementById("radioKgs").checked = true;
     } else {
-        docuent.getElementById("radioIndividual").checked = true;
+        document.getElementById("radioIndividual").checked = true;
     }
 }
 
@@ -87,9 +88,17 @@ function toggleSizeAndGenerateButtonGrid(){
 }
 
 function correctSizes(){
+    buttonGridObject.pageNumber = 0;
     toggleButtonSize();
     buttonGridObject.generateButtonGrid();
     toggleFontSize();
+}
+
+async function updateButtonGrid() {
+    await generateInventory().then(function(value) {
+        productList = value;
+    });
+    buttonGridObject.generateButtonGrid();
 }
 
 class ButtonGrid {

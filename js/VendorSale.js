@@ -1,7 +1,7 @@
 async function transactionOnload() {
     await onloadInitialize(function (currentProduct) {
-        saleButtonFunction(currentProduct)
-    }).then();
+            saleButtonFunction(currentProduct)
+        }).then();
     newSale = new Sale(productList);
     document.getElementById("sellLine").onclick = function () { newSale.addItemButton() };
     document.getElementById("removeLine").onclick = function () { newSale.removeItem() };
@@ -20,11 +20,11 @@ function resetForm() {
 }
 
 class SaleItem {
-    constructor(productID, name, quantity, sellprice, lineID) {
+    constructor(productID, name, quantity, purchaseprice, lineID) {
         this.productID = productID;
         this.name = name;
         this.quantity = quantity;
-        this.sellprice = quantity * sellprice;
+        this.purchaseprice = quantity * purchaseprice;
         this.lineID = lineID;
     }
 }
@@ -52,7 +52,7 @@ class Sale {
         }
 
         let currentSaleItem = new SaleItem(product.productid, product.productname, document.getElementById("quantityInput").value,
-            product.sellprice, this.maxID);
+        product.purchaseprice, this.maxID);
 
         this.saleList.push(currentSaleItem);
 
@@ -90,7 +90,7 @@ class Sale {
 
         quantityElement.innerHTML = document.getElementById("quantityInput").value + " " + unitType;
 
-        var round = Math.round((100 * product["sellprice"] * document.getElementById("quantityInput").value));
+        var round = Math.round((100 * product["purchaseprice"] * document.getElementById("quantityInput").value));
         priceElement.innerHTML = "€ " + round / 100;
 
         saleRow.append(idElement);
@@ -112,9 +112,9 @@ class Sale {
     // Removes an item from the sale
     removeItem() {
         let productID = document.getElementById("idText").value;
-        this.removeItemByID(productID);
-    }
-
+        this.removeItemByID(productID);	
+    }	
+    
     removeItemByID(productID) {
         for (var i = 0; i < this.saleList.length; i++) {
             if (this.saleList[i]["productID"] == productID) {
@@ -129,23 +129,23 @@ class Sale {
 
     // Changes the amount of the given item to the new amount
     modifyItem(saleItem, product) {
-        saleItem["sellprice"] = product["sellprice"] * document.getElementById("quantityInput").value;
+        saleItem["purchaseprice"] = product["purchaseprice"] * document.getElementById("quantityInput").value;
         saleItem["quantity"] = document.getElementById("quantityInput").value;
-
+        
         var unitType = " kg";
         if (product.sellunit == 0) {
             unitType = " bags";
         }
 
         document.getElementById("productQuantity" + saleItem["lineID"]).innerHTML = saleItem["quantity"] + " " + unitType;
-        document.getElementById("priceElement" + saleItem["lineID"]).innerHTML = "€ " + saleItem["sellprice"];
+        document.getElementById("priceElement" + saleItem["lineID"]).innerHTML = "€ " + saleItem["purchaseprice"];
         this.updateTotal();
         resetForm();
     }
 
     // Completes the sale and updates other systems as if the customer just paid for the goods
     async finishSale() {
-        fetch('http://localhost:3000/api/sales/makesale', {
+        fetch('http://localhost:3000/api/vendorsales/makesale', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -163,9 +163,9 @@ class Sale {
     updateTotal() {
         this.total = 0.0;
         for (var i = 0; i < this.saleList.length; i++) {
-            this.total += (Math.round(100 * this.saleList[i]["sellprice"]) / 100);
+            this.total += (Math.round(100 * this.saleList[i]["purchaseprice"]) / 100);
         }
-        document.getElementById("totalPrice").value = " € " + this.total;
+        document.getElementById("totalPrice").value = "Total: €" + this.total;
     }
 
     updatePrice() {
@@ -173,7 +173,7 @@ class Sale {
         console.log(this.productList);
         for (var i = 0; i < this.productList.length; i++) {
             if (this.productList[i]["productid"] == productID) {
-                var round = Math.round(100 * this.productList[i].sellprice * document.getElementById("quantityInput").value);
+                var round = Math.round(100 * this.productList[i].purchaseprice * document.getElementById("quantityInput").value);
                 document.getElementById("productTotal").value = "€ " + round / 100;
                 break;
             }
