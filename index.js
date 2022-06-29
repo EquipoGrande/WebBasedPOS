@@ -24,6 +24,9 @@ app.use('/api/inventory', inventoryListController);
 var saleController = require('./controllers/sales')(express);
 app.use('/api/sales', saleController);
 
+var vendorController = require('./controllers/vendor')(express);
+app.use('/api/vendor', vendorController);
+
 var userController = require('./controllers/users')(express);
 app.use('/api/users', userController);
 
