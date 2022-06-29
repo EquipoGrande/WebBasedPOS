@@ -104,7 +104,7 @@ class ButtonGrid {
             this.pageNumber = 0;
         }
         this.generateButtonGrid();
-        updatePageNumber();
+        this.updatePageNumber();
     }
 
     incrementPage() {
@@ -113,10 +113,10 @@ class ButtonGrid {
             this.pageNumber = parseInt((productList.length-1)/numberOfButtons);
         }
         this.generateButtonGrid();
-        updatePageNumber();
+        this.updatePageNumber();
     }
 
-    function updatePageNumber() {
+    updatePageNumber() {
         document.getElementById("pageNumber").innerHTML = (this.pageNumber + 1);
     }
 
@@ -134,7 +134,7 @@ class ButtonGrid {
         for (let i = (this.pageNumber*numberOfButtons); i < maximumIndex; i++) {
             createButton(productList[i], buttonGrid, this.buttonFunction);
         }
-        updatePageNumber();
+        this.updatePageNumber();
     }
 }
 
