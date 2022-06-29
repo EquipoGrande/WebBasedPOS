@@ -2,7 +2,7 @@ var g_sizeToggle = false;
 
 function toggleFontSize() {
     let fontSize = g_sizeToggle ? '200%' : '100%';
-    document.getElementById('content').style.fontSize = fontSize;
+    document.body.style.fontSize = fontSize;
 }
 
 function toggleButtonSize() {
