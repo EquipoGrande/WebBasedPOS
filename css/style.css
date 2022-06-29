@@ -107,3 +107,11 @@ body {
 #endDate {
     margin-bottom: 20%;
 }
+
+.pageButton {
+    text-align: center;
+}
+
+.pageNumber {
+    display: inline-block;
+}

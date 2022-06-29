@@ -6,6 +6,7 @@ var now = new Date().getTime();
 
 async function onloadInitialize(functionName) {
     pageNumber = 0; 
+    updatePageNumber();
     await generateInventory().then(function(value) {
         productList = value;
     });
@@ -14,6 +15,11 @@ async function onloadInitialize(functionName) {
         g_sizeToggle = true;
         correctSizes();
     }
+}
+
+async function updatePageNumber() {
+    if(pageNumber != null)
+        document.getElementById("pageNumber").innerHTML = (pageNumber+1);
 }
 
 
@@ -84,6 +90,7 @@ function decrementPage() {
     if (pageNumber < 0) {
         pageNumber = 0;
     }
+    updatePageNumber();
 }
 
 function incrementPage() {
@@ -91,6 +98,7 @@ function incrementPage() {
     if (pageNumber > parseInt((productList.length-1)/numberOfButtons)) {
         pageNumber = parseInt((productList.length-1)/numberOfButtons);
     }
+    updatePageNumber();
 }
 
 function toggleSizeAndGenerateButtonGrid(){
@@ -106,6 +114,7 @@ function toggleSizeAndGenerateButtonGrid(){
 function correctSizes(){
     toggleButtonSize();
     pageNumber = 0;
+    updatePageNumber();
     generateButtonGrid();
     toggleFontSize();
 }

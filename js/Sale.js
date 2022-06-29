@@ -169,12 +169,12 @@ class Sale {
         }
     }
 
-    updateItemName() {
+    async updateItemName() {
         let productID = document.getElementById("idText").value;
         for (var i = 0; i < this.productList.length; i++) {
             if (this.productList[i]["productid"] == productID) {
                 document.getElementById("productName").value = this.productList[i].productname;
-                //document.getElementById("productAmount").value = this.productList[i].quantity + " " + this.productList[i].units;
+                document.getElementById("productAmount").value = await getInventoryOf(productID).then() + " kg left";
                 break;
             }
         }
