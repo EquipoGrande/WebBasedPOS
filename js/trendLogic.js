@@ -26,7 +26,7 @@ async function generateRestockReport() {
 }
 
 async function generateExcessReport() {
-    excessReport = await fetchReport('http://localhost/api/trends/excessReport').then(response => response.json());
+    excessReport = await fetchReport('http://localhost:3000/api/trends/excessInventoryReport').then(response => response.json());
 
     if (excessReport.length == 0) {
         showAlert('alert-danger', 'Error: No Results in Excess Report');
@@ -44,7 +44,13 @@ async function fetchReport(urlQuery) {
         return
     }
 
-    return fetch(urlQuery + "?start=" + startDate + "&end=" + endDate, {method: 'GET'});
+    return fetch(urlQuery + "?start=" + startDate + "&end=" + endDate, {
+        method: 'GET',
+        headers:  {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    });
 }
 
 function generateTotal(report, propertyName) {
