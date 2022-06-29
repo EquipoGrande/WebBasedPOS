@@ -136,7 +136,7 @@ class Sale {
 
     // Completes the sale and updates other systems as if the customer just paid for the goods
     async finishSale() {
-        const response = await fetch('http://localhost:3000/api/sales/makesale', {
+        fetch('http://localhost:3000/api/sales/makesale', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -146,6 +146,7 @@ class Sale {
         });
 
         document.getElementById("saleTable").innerHTML = "";
+        document.getElementById("totalPrice").value = "";
         resetForm();
         this.saleList = [];
     }
@@ -179,11 +180,6 @@ class Sale {
                 break;
             }
         }
-    }
-
-    // Updates other systems after a sale
-    updateOtherSystems(soldItem) { // ************* Needs to connect to other systems ****************
-        // soldItem is a saleItem object
     }
 
     addItemButton() {
