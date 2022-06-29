@@ -69,7 +69,10 @@ module.exports = function (express) {
         console.log(params);
         db.query(query_insertproduct, params).then(queryResult => {
             res.status(201);
-            res.send(req.body.productname + ' added successfully!');
+            res.send({
+                productid: nextID,
+                productname: req.productname
+            });
         })
         .catch(err => {
             res.status(500);

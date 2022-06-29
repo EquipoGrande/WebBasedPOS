@@ -84,10 +84,14 @@ class ProductInfo {
             body: JSON.stringify(product)
         });
 
-        console.log(response.status);
+        // console.log(response.status);
+        var responseBody = await response.json();
+
+        console.log(responseBody);
 
         if(response.status == 201) {
             showAlert('alert-success', 'Successfully Added Product');
+            document.getElementById('productIDInput').value = responseBody.productid;
         } else {
             showAlert('alert-danger', 'Error Adding Product');
         }
