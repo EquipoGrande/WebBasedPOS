@@ -15,7 +15,10 @@ async function generateSalesReport() {
 }
 
 async function generateRestockReport() {
-    restockReport = await fetchReport('http://localhost:3000/api/trends/restockReport').then(response => response.json());
+    restockReport = await fetchReport('http://localhost:3000/api/trends/restockReport').then(response => response.json())
+    .catch(error => {
+        console.error('Error:', error);
+      });
 
     if (restockReport.length == 0) {
         showAlert("alert-danger", "Error: No data for requested period");
@@ -31,9 +34,9 @@ async function fetchReport(urlQuery) {
 
     if (startDate == "" || endDate == "") {
         showAlert("alert-danger", "Error: Please insert a valid date in each entry!");
+    } else {
+        return fetch(urlQuery + "?start=" + startDate + "&end=" + endDate, {method: 'GET'});
     }
-
-    return fetch(urlQuery + "?start=" + startDate + "&end=" + endDate, {method: 'GET'});
 }
 
 function generateTotal(report, propertyName) {
