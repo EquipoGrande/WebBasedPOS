@@ -6,7 +6,7 @@ async function generateSalesReport() {
     salesReport = await fetchReport('http://localhost:3000/api/trends/salesReport').then(response => response.json());
 
     if (salesReport.length == 0) {
-        // implement error here
+        showAlert("alert-danger", "Error: No data for requested period");
     }
 
     generateTable(salesReport, ["Product","Quantity Sold","Revenue", "Cost", "Profit"]);
