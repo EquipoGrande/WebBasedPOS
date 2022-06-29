@@ -15,6 +15,7 @@
 	<script src="js/CurrentInventoryList.js"></script>
 	<script src="js/ButtonGrid.js"></script>
 	<title>Vendor History</title>
+	<link rel="icon" type="image/x-icon" href="/assets/EquipoGrandeLogo.png">
 </head>
 
 <body>
@@ -29,18 +30,27 @@
 					<div class="col-sm-12 col-padding d-flex flex-column">
 						<form class="p-3">
 							<div class="row form-group">
-								<label class="col-7 col-sm-5 col-md-2 col-lg-2" for="productIDInput">Search Transaction
-									ID:</label>
+								<label class="col-7 col-sm-5 col-md-2 col-lg-2" for="productIDInput">
+									Search Transaction ID:</label>
 								<input class="col-5 col-sm-6 col-md-2 col-lg-2 input-margin" type="text"
 									id="productIDInput">
 								<label class="col-7 col-sm-5 col-md-2 col-lg-2" for="productName">Search Date:</label>
 								<input class="col-5 col-sm-6 col-md-2 col-lg-2 input-margin" type="text"
 									id="productName">
-								<label class="col-7 col-sm-5 col-md-2 col-lg-2" for="currentInventory">Search Product
-									ID:</label>
+								<label class="col-7 col-sm-5 col-md-2 col-lg-2" for="currentInventory">
+									Search Product ID:</label>
 								<input class="col-5 col-sm-6 col-md-2 col-lg-2 input-margin" type="text"
 									id="currentInventory">
 							</div>
+							
+							<div class="row form-group justify-content-center">
+                        <label for="vendorStartDate" class="col-3 col-sm-2 col-md-2 col-lg-1 vendor-date 
+								d-flex justify-content-end align-items-end">Start:</label>
+                        <input id="vendorStartDate" class="col-7 col-sm-3 col-md-3 col-lg-2 vendor-date" type="date"/>
+                        <label for="vendorEndDate" class="col-3 col-sm-2 col-md-2 col-lg-1 vendor-date text-right
+								d-flex justify-content-end align-items-end pe-3">End:</label>
+                        <input id="vendorEndDate" class="col-7 col-sm-3 col-md-3 col-lg-2 vendor-date" type="date"/>
+                    </div>
 						</form>
 					</div>
 				</div>
@@ -56,7 +66,7 @@
 								<th scope="col">Total</th>
 							</tr>
 						</thead>
-						<tbody id="saleTable"></tbody>
+						<tbody id="vendorTable"></tbody>
 					</table>
 				</div>
 

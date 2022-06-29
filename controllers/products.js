@@ -36,16 +36,6 @@ module.exports = function (express) {
         })
     });
 
-    router.get('/sellline', (req, res) => {
-        db.query('SELECT * FROM product',(err, queryResult)=>{
-            if (!err) {
-            res.send(queryResult.rows)
-            req.para
-            } else {
-            console.log(err.message);
-            }
-        });
-    });
     /**
      * Returns the product specified by the product id in JSON format
      */
@@ -69,6 +59,13 @@ module.exports = function (express) {
     router.post('/addproduct', async (req, res) => {
         var nextID = await getNextProductID(db);
         var params = [nextID, req.body.productname, req.body.sellprice, req.body.sellunit, req.body.purchaseprice, req.body.purchaseunit];
+        for(const item of params) {
+            if(typeof item === 'undefined') {
+                res.status(400);
+                res.send('Invalid input');
+                return;
+            }
+        }
         console.log(params);
         db.query(query_insertproduct, params).then(queryResult => {
             res.status(201);

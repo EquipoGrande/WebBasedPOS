@@ -19,6 +19,8 @@ function clearInputError(inputElement) {
 function checkUserLogin() {
     var cashierUser = document.getElementById('username').value;
     var cashierPassword = document.getElementById('password').value;
+    const isCashier = false;
+    const loginWorked = false;
 
     //Set the user and pass as this for now, we can change for authentication later
     if (cashierUser == "josi" && cashierPassword == "ego") {

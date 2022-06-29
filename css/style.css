@@ -115,3 +115,7 @@ body {
 .pageNumber {
     display: inline-block;
 }
+
+.vendor-date {
+    margin-bottom:2%;
+}

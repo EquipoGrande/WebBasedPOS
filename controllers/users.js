@@ -1,4 +1,5 @@
 const query_getUserInfo = `SELECT * FROM userinformation;`;
+
 module.exports = function (express) {
     var router = express.Router();
 
