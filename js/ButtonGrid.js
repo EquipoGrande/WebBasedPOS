@@ -58,6 +58,7 @@ async function modifyInventoryFunction(currentProduct) {
 }
 
 async function saleButtonFunction(currentProduct) {
+    console.log("Sale function");
     document.getElementById("idText").value = currentProduct["productid"];
     document.getElementById("quantityInput").focus();
     document.getElementById("productName").value = currentProduct["productname"];
