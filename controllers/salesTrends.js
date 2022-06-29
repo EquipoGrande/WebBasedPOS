@@ -31,8 +31,7 @@ module.exports = function (express) {
     var db = require('../Database');
 
     router.get('/salesReport', async (req, res) => {
-        let dateRange = req.body;
-        await getIDs(dateRange[0], dateRange[1], db).then();
+        await getIDs(req.query.start, req.query.end, db).then();
 
         db.query(salesReportQuery, [idRange.min, idRange.max])
         .then(queryResult => {
@@ -48,8 +47,7 @@ module.exports = function (express) {
     })
 
     router.get('/restockReport', async (req, res) => {
-        let dateRange = req.body;
-        await getIDs(dateRange[0], dateRange[1], db).then();
+        await getIDs(req.query.start, req.query.end, db).then();
 
         db.query(restockReportQuery, [idRange.min, idRange.max])
         .then(queryResult => {
