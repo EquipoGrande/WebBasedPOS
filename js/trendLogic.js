@@ -28,6 +28,20 @@ async function generateRestockReport() {
     generateTable(restockReport, ["Product", "Quantity in Stock", "Quantity Sold", "Revenue"]);
 }
 
+async function generateProductPairReport() {
+    pairsReport = await fetchReport('http://localhost:3000/api/trends/productPairs').then(response => response.json())
+    .catch(error => {
+        console.error('Error:', error);
+      });
+
+    if (pairsReport.length == 0) {
+        showAlert("alert-danger", "Error: No data for requested period");
+        return;
+    }
+
+    generateTable(pairsReport, ["Product", "Paired Product", "Times Matched"]);
+}
+
 async function generateExcessReport() {
     excessReport = await fetchReport('http://localhost:3000/api/trends/excessInventoryReport').then(response => response.json());
     if (excessReport.length == 0) {
