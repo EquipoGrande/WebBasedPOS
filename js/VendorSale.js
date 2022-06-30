@@ -39,8 +39,7 @@ class Sale {
 
     // Adds a new item to the sale
     addItem(product) {
-        if ((document.getElementById("quantityInput").value <= 0) || 
-        (document.getElementById("quantityInput").value > document.getElementById("productAmount").value)) {
+        if ((document.getElementById("quantityInput").value <= 0)) {
             showAlert('alert-danger',"Error: Invalid quantity");
             return;
         }

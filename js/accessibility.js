@@ -1,5 +1,12 @@
 var g_sizeToggle = false;
 
+async function onloadInitialize(functionName) {
+    if(window.name == "Accessibility Mode"){
+        g_sizeToggle = true;
+        updateWebpage();
+    }
+}
+
 function toggleFontSize() {
     let fontSize = g_sizeToggle ? '200%' : '100%';
     document.body.style.fontSize = fontSize;
@@ -45,3 +52,5 @@ function logoutButton() {
     window.open("Login.html");
     close();
 }
+
+window.addEventListener('load', onloadInitialize);

@@ -134,6 +134,19 @@ function generateTable(report, columnNames) {
 
         trendsTable.append(currentRow)
     }
+<<<<<<< HEAD
+=======
+}
+
+function isFloat(value) {
+    if (typeof value === 'number' &&
+        !Number.isNaN(value) &&
+        !Number.isInteger(value)
+    ) {
+        return true;
+    }
+    return false;
+>>>>>>> c83e102104deef5fa63e2b8dfa92376faee14105
 }
 
 function getTopReport(report, sortname) {
