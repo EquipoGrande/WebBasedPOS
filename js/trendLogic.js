@@ -12,6 +12,7 @@ async function generateSalesReport() {
 
     generateTable(salesReport, ["Product","Quantity Sold","Revenue", "Cost", "Profit"]);
     console.log(generateTotal(salesReport, "profit"));
+    changeTableCaption('Sales Report');
 }
 
 async function generateRestockReport() {
@@ -26,6 +27,7 @@ async function generateRestockReport() {
     }
 
     generateTable(restockReport, ["Product", "Quantity in Stock", "Quantity Sold", "Revenue"]);
+    changeTableCaption('Restock Report');
 }
 
 async function generateProductPairReport() {
@@ -40,6 +42,7 @@ async function generateProductPairReport() {
     }
 
     generateTable(pairsReport, ["Product", "Paired Product", "Times Matched"]);
+    changeTableCaption('Product Pairs Report');
 }
 
 async function generateExcessReport() {
@@ -50,6 +53,7 @@ async function generateExcessReport() {
     }
 
     generateTable(excessReport, ["Product ID", "Name", "Starting Stock", "Quantity Sold", "Percent Sold"]);
+    changeTableCaption('Excess Report')
 }
 
 async function fetchReport(urlQuery) {
@@ -67,6 +71,10 @@ async function fetchReport(urlQuery) {
         }
         return response;
     }
+}
+
+function changeTableCaption(text) {
+    document.getElementById('tableCaption').innerHTML = text;
 }
 
 function generateTotal(report, propertyName) {
