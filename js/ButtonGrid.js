@@ -10,8 +10,12 @@ async function onloadInitialize(functionName) {
     buttonGridObject = new ButtonGrid(function(currentProduct) {functionName(currentProduct)});
     if(window.name == "Accessibility Mode"){
         g_sizeToggle = true;
-        correctSizes();
+        updateWebpage();
     }
+}
+
+function correctSizes() {
+
 }
 
 function createButton(product, buttonGrid, inputFunction) {
