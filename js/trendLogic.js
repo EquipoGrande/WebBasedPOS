@@ -1,5 +1,4 @@
 function onloadTrends() {
-    
 }
 
 async function generateSalesReport() {
@@ -40,6 +39,7 @@ async function generateProductPairReport() {
     }
 
     generateTable(pairsReport, ["Product", "Paired Product", "Times Matched"]);
+    makeGraph(pairsReport, ["Matched"]);
 }
 
 async function generateExcessReport() {
@@ -50,6 +50,7 @@ async function generateExcessReport() {
     }
 
     generateTable(excessReport, ["Product ID", "Name", "Starting Stock", "Quantity Sold", "Percent Sold"]);
+    makeGraph(getTopReport(excessReport, ["percentsold"]));
 }
 
 async function fetchReport(urlQuery) {
@@ -107,8 +108,65 @@ function generateTable(report, columnNames) {
 
         trendsTable.append(currentRow)
     }
-    
-    let current
+}
+
+function getTopReport(report, sortname) {
+    report.sort((a,b) => (b[sortname] > a[sortname]) ? 1 : -1);
+
+    let namelist = new Array();
+    let statlist = new Array();
+
+    for (let i = 0; (i < report.length && i < 10); i++) {
+        namelist.push(report[i].productname);
+        statlist.push(report[i][sortname]);
+    }
+    return {
+        names: namelist,
+        stats: statlist
+    }
+}
+
+function getTopPairs(report) {
+    console.log(report[0]);
+
+    let namelist = new Array();
+    let statlist = new Array();
+
+    for (let i = 0; (i < report.length && i < 10); i++) {
+        namelist.push(report[i].src + " with " + report[i].des);
+        statlist.push(report[i].Matched);
+    }
+    return {
+        names: namelist,
+        stats: statlist
+    }
+}
+
+function makeGraph(reportLists) {
+    var xValues = reportLists.names;
+    var yValues = reportLists.stats;
+    console.log(xValues);
+    console.log(yValues);
+    var barColors = "rgba(82,73,255,1.0)";
+
+    new Chart("myChart", {
+    type: "bar",
+    data: {
+        labels: xValues,
+        datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+        }]
+    },
+    options: {
+        legend: {
+           display: false
+        },
+        tooltips: {
+           enabled: false
+        }
+    }
+    });
 }
 
 window.addEventListener('load', onloadTrends);
