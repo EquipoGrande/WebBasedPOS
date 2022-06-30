@@ -42,14 +42,30 @@ async function generateProductPairReport() {
     generateTable(pairsReport, ["Product", "Paired Product", "Times Matched"]);
 }
 
+async function generateExcessReport() {
+    excessReport = await fetchReport('http://localhost:3000/api/trends/excessInventoryReport').then(response => response.json());
+    if (excessReport.length == 0) {
+        showAlert('alert-danger', 'Error: No Results in Excess Report');
+        return;
+    }
+
+    generateTable(excessReport, ["Product ID", "Name", "Starting Stock", "Quantity Sold", "Percent Sold"]);
+}
+
 async function fetchReport(urlQuery) {
     startDate = document.getElementById("startDate").value;
     endDate = document.getElementById("endDate").value;
 
     if (startDate == "" || endDate == "") {
         showAlert("alert-danger", "Error: Please insert a valid date in each entry!");
+        return {};
     } else {
-        return fetch(urlQuery + "?start=" + startDate + "&end=" + endDate, {method: 'GET'});
+        let response = await fetch(urlQuery + "?start=" + startDate + "&end=" + endDate, {method: 'GET'});
+        if(response.status != 200) {
+            showAlert('alert-danger', 'Error fetching request');
+            return {};
+        }
+        return response;
     }
 }
 

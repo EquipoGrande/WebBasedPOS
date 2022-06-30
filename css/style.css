@@ -48,16 +48,17 @@ body {
 
 .table-header {
     background-color: black;
-    color: white;
+    color: #f8f9fa;
     padding: 3%;
 }
 
 .table-footer {
-    border-width: 2px !important;
-    background-color: white;
+    border-width: 1px 3px 3px 3px !important;
+    background-color: #f8f9fa;
     color: black;
     margin-bottom: 5%;
     padding: 3%;
+    border-color: #6c757d !important;
 
 }
 
@@ -70,7 +71,7 @@ body {
 }
 
 .sidebar {
-    background: white;
+    background: #f8f9fa;
     padding-top: 2%;
     /* hard coded for now, need to play around with the height */
     height: 70vh;
@@ -118,4 +119,11 @@ body {
 
 .vendor-date {
     margin-bottom:2%;
+}
+
+.sticky-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
 }
