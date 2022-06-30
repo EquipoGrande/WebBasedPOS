@@ -1,5 +1,6 @@
+var trendChart;
+
 function onloadTrends() {
-    
 }
 
 async function generateSalesReport() {
@@ -11,7 +12,7 @@ async function generateSalesReport() {
     }
 
     generateTable(salesReport, ["Product","Quantity Sold","Revenue", "Cost", "Profit"]);
-    console.log(generateTotal(salesReport, "profit"));
+    makeGraph(getTopReport(salesReport, ["profit"]));
 }
 
 async function generateRestockReport() {
@@ -26,6 +27,7 @@ async function generateRestockReport() {
     }
 
     generateTable(restockReport, ["Product", "Quantity in Stock", "Quantity Sold", "Revenue"]);
+    makeGraph(getTopRestock(restockReport));
 }
 
 async function generateProductPairReport() {
@@ -40,6 +42,7 @@ async function generateProductPairReport() {
     }
 
     generateTable(pairsReport, ["Product", "Paired Product", "Times Matched"]);
+    makeGraph(getTopPairs(pairsReport));
 }
 
 async function generateExcessReport() {
@@ -50,6 +53,7 @@ async function generateExcessReport() {
     }
 
     generateTable(excessReport, ["Product ID", "Name", "Starting Stock", "Quantity Sold", "Percent Sold"]);
+    makeGraph(getTopReport(excessReport, ["percentsold"]));
 }
 
 async function fetchReport(urlQuery) {
@@ -132,14 +136,106 @@ function generateTable(report, columnNames) {
     }
 }
 
+function getTopReport(report, sortname) {
+    report.sort((a,b) => (b[sortname] > a[sortname]) ? 1 : -1);
+
+    let namelist = new Array();
+    let statlist = new Array();
+
+    for (let i = 0; (i < report.length && i < 10); i++) {
+        namelist.push(report[i].productname);
+        statlist.push(report[i][sortname]);
+    }
+    return {
+        names: namelist,
+        stats: statlist
+    }
+}
+
+function getTopRestock(report) {
+    let ratioList = new Array();
+
+    for (let i = 0; (i < report.length && i < 10); i++) {
+        let currentRatio = (report[i].stockquantity / report[i].amountsold);
+        ratioList.push({
+            name: report[i].productname,
+            stat: currentRatio
+        });
+    }
+
+    ratioList.sort((a,b) => (b.stat > a.stat) ? -1 : 1);
+
+    let namelist = new Array();
+    let statlist = new Array();
+
+    for (let i = 0; (i < ratioList.length && i < 10); i++) {
+        console.log(ratioList[i]);
+        namelist.push(ratioList[i].name);
+        statlist.push(ratioList[i].stat);
+    }
+    return {
+        names: namelist,
+        stats: statlist
+    }
+}
+
+function getTopPairs(report) {
+    let namelist = new Array();
+    let statlist = new Array();
+
+    for (let i = 0; (i < report.length && i < 10); i++) {
+        namelist.push(report[i].Product + " with " + report[i].PairedProduct);
+        statlist.push(report[i].Matched);
+    }
+    return {
+        names: namelist,
+        stats: statlist
+    }
+}
+
+function makeGraph(reportLists) {
+    if (trendChart != null) {
+        trendChart.destroy();
+    }
+
+    var xValues = reportLists.names;
+    var yValues = reportLists.stats;
+    console.log(xValues);
+    console.log(yValues);
+    var barColors = "rgba(82,73,255,1.0)";
+
+    trendChart = new Chart("myChart", {
+    type: "bar",
+    data: {
+        labels: xValues,
+        datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+        }]
+    },
+    options: {
+        legend: {
+           display: false
+        },
+        tooltips: {
+           enabled: false
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+    });
+}
+
 function isFloat(value) {
-    if (typeof value === 'number' &&
-        !Number.isNaN(value) &&
-        !Number.isInteger(value)
-    ) {
+    if(typeof value == 'number' && !Number.isNaN(value) && !Number.isInteger(value)) {
         return true;
     }
     return false;
 }
 
-window.addEventListener('load', onloadTrends);
+
