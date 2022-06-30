@@ -14,9 +14,7 @@
     <script src="js/common.js"></script>
     <script src="js/accessibility.js"></script>
     <script src="js/CurrentInventoryList.js"></script>
-    <script src="js/Trends.js"></script>
     <script src="js/trendLogic.js"></script>
-    <script src="js/ButtonGrid.js"></script>
 
     <title>Trends</title>
     <link rel="icon" type="image/x-icon" href="/assets/EquipoGrandeLogo.png">
@@ -28,7 +26,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2 col-sm-4 col-xs-4 sidebar">
+            <div class="col-md-2 col-sm-4 col-xs-4 sidebar" style="padding-bottom: 5%">
                 <div class="left-navigation">
                     <h5 class="sidebarTitle"><strong>Menu</strong></h5>
 
@@ -52,11 +50,16 @@
             <div class="col-md-10 col-sm-8 main-content" style="margin-bottom: 10%">
                 <h1>Trends & Analytics</h1>
                 
-                <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+                <div class="border border-3 border-secondary bg-light transaction-box
+                d-flex justify-content-center align-items-middle" style="padding: 2%; margin-bottom:2%">
+                    <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+               
+                </div>
 
                 <div class="border border-3 border-secondary bg-light transaction-box"
                     style="overflow:auto; max-height:500px;">
-					<table class="table table-hover table-padding">
+					<table class="table table-hover table-padding caption-top">
+                        <caption id="tableCaption" class="bg-dark">Click a Report Button to Show Reports</caption>
 						<thead class="table-dark sticky-top" id="tableHeader">
 						</thead>
 						<tbody id="trendTable"></tbody>

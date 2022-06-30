@@ -1,21 +1,30 @@
 /**
  * Fetch the Navbar and insert it into the page
  */
-function loadNavbar() {
-    fetch('/Navbar.html').then( response => response.text()).then( function (html) {
+async function loadNavbar() {
+    let checkManager = localStorage.getItem('isManager');
+    fetch('/Navbar.html').then(response => response.text()).then(function (html) {
         var parser = new DOMParser();
         var navbar = parser.parseFromString(html, "text/html");
-        var div = navbar.getElementById('headerDiv');   
-        document.getElementById('header').appendChild(div);
+        var manDiv = navbar.getElementById('manHeaderDiv');
+        var cashDiv = navbar.getElementById('cashHeaderDiv');
+
+
+        if (checkManager == 'yes') {
+            document.getElementById('header').appendChild(manDiv);
+        }
+        else if (checkManager == 'no') {
+            document.getElementById('header').appendChild(cashDiv);
+        }
     });
 }
 
 /**
- * Init the google translate element. This function should not be called directly
+ * Init the google translate element.his function should not be called directly
  * as it is the callback method for the google translate api
  */
 function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
 }
 
 /**
@@ -36,6 +45,7 @@ function loadGoogleTranslate() {
 function showAlert(alertType, text) {
     let alertDiv = document.createElement('div');
     alertDiv.classList.add('alert', alertType, 'd-flex', 'justify-content-center');
+    alertDiv.setAttribute('role', 'alert');
 
     innerElement = document.createElement('p');
     innerElement.innerHTML = text;

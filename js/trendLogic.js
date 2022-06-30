@@ -13,6 +13,7 @@ async function generateSalesReport() {
 
     generateTable(salesReport, ["Product","Quantity Sold","Revenue", "Cost", "Profit"]);
     makeGraph(getTopReport(salesReport, ["profit"]), "Sales Report", "Product", "Profit");
+    changeTableCaption('Sales Report');
 }
 
 async function generateRestockReport() {
@@ -28,6 +29,7 @@ async function generateRestockReport() {
 
     generateTable(restockReport, ["Product", "Quantity in Stock", "Quantity Sold", "Revenue"]);
     makeGraph(getTopRestock(restockReport), "Restock Report", "Product", "(Current Stock / Amount Sold)");
+    changeTableCaption('Restock Report');
 }
 
 async function generateProductPairReport() {
@@ -43,6 +45,7 @@ async function generateProductPairReport() {
 
     generateTable(pairsReport, ["Product", "Paired Product", "Times Matched"]);
     makeGraph(getTopPairs(pairsReport), "Product Pairs", "Pairs", "Times Sold Together");
+    changeTableCaption('Product Pairs Report');
 }
 
 async function generateExcessReport() {
@@ -54,6 +57,7 @@ async function generateExcessReport() {
 
     generateTable(excessReport, ["Product ID", "Name", "Starting Stock", "Quantity Sold", "Percent Sold"]);
     makeGraph(getTopReport(excessReport, ["percentsold"]), "Excess Report", "Product", "Percent Sold");
+    changeTableCaption('Excess Report');
 }
 
 async function fetchReport(urlQuery) {
@@ -71,6 +75,10 @@ async function fetchReport(urlQuery) {
         }
         return response;
     }
+}
+
+function changeTableCaption(text) {
+    document.getElementById('tableCaption').innerHTML = text;
 }
 
 function generateTotal(report, propertyName) {
@@ -193,7 +201,7 @@ function getTopPairs(report) {
     }
 }
 
-function makeGraph(reportLists, chartTitle, xTitle, yTitle) {
+function makeGraph(reportLists) {
     if (trendChart != null) {
         trendChart.destroy();
     }
@@ -214,10 +222,6 @@ function makeGraph(reportLists, chartTitle, xTitle, yTitle) {
         }]
     },
     options: {
-        title: {
-            display: true,
-            text: chartTitle
-        },
         legend: {
            display: false
         },
@@ -228,17 +232,7 @@ function makeGraph(reportLists, chartTitle, xTitle, yTitle) {
             yAxes: [{
                 ticks: {
                     beginAtZero: true
-                },
-                scaleLabel: {
-                    display: true,
-                    labelString: yTitle
                 }
-            }],
-            xAxes: [{
-                scaleLabel: {
-                    display: true,
-                    labelString: xTitle
-                    }
             }]
         }
     }
