@@ -201,7 +201,7 @@ function getTopPairs(report) {
     }
 }
 
-function makeGraph(reportLists) {
+function makeGraph(reportLists, chartTitle, xTitle, yTitle) {
     if (trendChart != null) {
         trendChart.destroy();
     }
@@ -222,6 +222,10 @@ function makeGraph(reportLists) {
         }]
     },
     options: {
+        title: {
+            display: true,
+            text: chartTitle
+        },
         legend: {
            display: false
         },
@@ -232,7 +236,17 @@ function makeGraph(reportLists) {
             yAxes: [{
                 ticks: {
                     beginAtZero: true
+                },
+                scaleLabel: {
+                    display: true,
+                    labelString: yTitle
                 }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: xTitle
+                    }
             }]
         }
     }
