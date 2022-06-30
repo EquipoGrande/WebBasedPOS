@@ -28,6 +28,20 @@ async function generateRestockReport() {
     generateTable(restockReport, ["Product", "Quantity in Stock", "Quantity Sold", "Revenue"]);
 }
 
+async function generateProductPairReport() {
+    pairsReport = await fetchReport('http://localhost:3000/api/trends/productPairs').then(response => response.json())
+    .catch(error => {
+        console.error('Error:', error);
+      });
+
+    if (pairsReport.length == 0) {
+        showAlert("alert-danger", "Error: No data for requested period");
+        return;
+    }
+
+    generateTable(pairsReport, ["Product", "Paired Product", "Times Matched"]);
+}
+
 async function generateExcessReport() {
     excessReport = await fetchReport('http://localhost:3000/api/trends/excessInventoryReport').then(response => response.json());
     if (excessReport.length == 0) {
@@ -68,6 +82,8 @@ function generateTotal(report, propertyName) {
 function generateTable(report, columnNames) {
     trendsTable = document.getElementById("trendTable");
     header = document.getElementById("tableHeader");
+    var euroColumns = new Array();
+    var percentColumns = new Array();
     
     trendsTable.innerHTML = "";
     header.innerHTML = "";
@@ -78,6 +94,13 @@ function generateTable(report, columnNames) {
         let currentCol = document.createElement("td");
         currentCol.innerHTML = columnNames[i];
         headerRow.append(currentCol);
+
+        if(columnNames[i] == "Revenue" || columnNames[i] == "Cost" || columnNames[i] == "Profit") {
+            euroColumns.push(i);
+        }
+        if(columnNames[i] == "Percent Sold") {
+            percentColumns.push(i);
+        }
     }
 
     header.append(headerRow);
@@ -85,16 +108,38 @@ function generateTable(report, columnNames) {
     for (let i = 0; i < report.length; i++) {
         let currentRow = document.createElement("tr");
 
+        var j = 0;
         for (var dataName in report[i]) {
             let currentCol = document.createElement("td");
-            currentCol.innerHTML = report[i][dataName];
+            
+            if(isFloat(report[i][dataName])) {
+                currentCol.innerHTML = report[i][dataName].toFixed(2);
+            } else {
+                currentCol.innerHTML = report[i][dataName];
+            }
+            if(euroColumns.indexOf(j) != -1) {
+                currentCol.innerHTML = "€ " + currentCol.innerHTML;
+            }
+            if(percentColumns.indexOf(j) != -1) {
+                currentCol.innerHTML = currentCol.innerHTML + "%";
+            }
+
             currentRow.append(currentCol);
+            j++;
         }
 
         trendsTable.append(currentRow)
     }
-    
-    let current
+}
+
+function isFloat(value) {
+    if (typeof value === 'number' &&
+        !Number.isNaN(value) &&
+        !Number.isInteger(value)
+    ) {
+        return true;
+    }
+    return false;
 }
 
 window.addEventListener('load', onloadTrends);

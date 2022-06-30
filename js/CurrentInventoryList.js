@@ -7,13 +7,13 @@ async function generateInventory() {
             if (getRequest.status == 200) {
                 resolve(getRequest.response);
             } else {
-                showAlert("alert-sucess", "Cannot find JSON data");
+                showAlert("alert-danger", "Cannot find JSON data");
                 reject(Error(getRequest.statusText));
             };
-            getRequest.onerror = function() {
-                showAlert("alert-sucess", "Cannot find JSON data");
-                reject(Error('Cannot find JSON data'));
-            }
+        }
+        getRequest.onerror = function() {
+            showAlert("alert-danger", "Cannot find JSON data");
+            reject(Error('Cannot find JSON data'));
         }
         getRequest.send();
     });

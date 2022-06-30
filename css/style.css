@@ -121,6 +121,10 @@ body {
     margin-bottom:2%;
 }
 
+.alertRow {
+    pointer-events: none;
+}
+
 .sticky-top {
     position: -webkit-sticky;
     position: sticky;
