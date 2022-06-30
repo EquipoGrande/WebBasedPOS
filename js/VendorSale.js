@@ -4,7 +4,6 @@ async function transactionOnload() {
         }).then();
     newSale = new Sale(productList);
     document.getElementById("sellLine").onclick = function () { newSale.addItemButton() };
-    document.getElementById("removeLine").onclick = function () { newSale.removeItem() };
     document.getElementById("quantityInput").onchange = function () { newSale.updatePrice() };
     document.getElementById("idText").onchange = function () { newSale.updateItemName() };
     resetForm();
