@@ -36,6 +36,7 @@ function loadGoogleTranslate() {
 function showAlert(alertType, text) {
     let alertDiv = document.createElement('div');
     alertDiv.classList.add('alert', alertType, 'd-flex', 'justify-content-center');
+    alertDiv.setAttribute('role', 'alert');
 
     innerElement = document.createElement('p');
     innerElement.innerHTML = text;

@@ -14,9 +14,7 @@
     <script src="js/common.js"></script>
     <script src="js/accessibility.js"></script>
     <script src="js/CurrentInventoryList.js"></script>
-    <script src="js/Trends.js"></script>
     <script src="js/trendLogic.js"></script>
-    <script src="js/ButtonGrid.js"></script>
 
     <title>Trends</title>
     <link rel="icon" type="image/x-icon" href="/assets/EquipoGrandeLogo.png">
@@ -56,7 +54,8 @@
 
                 <div class="border border-3 border-secondary bg-light transaction-box"
                     style="overflow:auto; max-height:500px;">
-					<table class="table table-hover table-padding">
+					<table class="table table-hover table-padding caption-top">
+                        <caption id="tableCaption" class="bg-dark">Click a Report Button to Show Reports</caption>
 						<thead class="table-dark sticky-top" id="tableHeader">
 						</thead>
 						<tbody id="trendTable"></tbody>

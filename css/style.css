@@ -81,6 +81,12 @@ body {
 
 }
 
+caption {
+    background-color: black;
+    color: white;
+    padding: 3px;
+}
+
 .bottom-margin {
     margin-bottom: 4%;
 }
