@@ -3,7 +3,6 @@
  */
 async function loadNavbar() {
     let checkManager = localStorage.getItem('isManager');
-    // let checkCashier = localStorage.getItem('isCashier');
 
     console.log(checkManager);
     fetch('/Navbar.html').then(response => response.text()).then(function (html) {
@@ -12,12 +11,12 @@ async function loadNavbar() {
         var div = navbar.getElementById('headerDiv');
         document.getElementById('header').appendChild(div);
 
-        // if (checkManager == 'manager') {
-        //     console.log("Manager")
-        // }
-        // else if (checkCashier == 'cashier') {
-        //     console.log("Cashier")
-        // }
+        if (checkManager == 'yes') {
+            console.log("Manager")
+        }
+        else if (checkManager == 'no') {
+            console.log("Cashier")
+        }
     });
 }
 
