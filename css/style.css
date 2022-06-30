@@ -27,6 +27,25 @@ body {
     border: #CBE0CE solid 3px;
 }
 
+.btn-colorAdd {
+    background-color: #004aad;
+    color: white;
+    border: #f8f9fa solid 3px;
+}
+
+.btn-colorCheckout {
+    background-color: #004aad;
+    color: white;
+    border: #f8f9fa solid 3px;
+}
+
+.btn-color3 {
+    background-color: #5D8563;
+    color: white;
+    border: #f8f9fa solid 3px;
+}
+
+
 .col-padding {
     padding-left: 4%;
     padding-right: 5%;
