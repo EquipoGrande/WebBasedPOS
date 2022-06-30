@@ -17,13 +17,16 @@ function toggleButtonSize() {
     }
 }
 
-function toggleSize() {
+function updateVariables() {
     g_sizeToggle = !g_sizeToggle;
     if(g_sizeToggle){
         window.name = "Accessibility Mode";
     }else{
         window.name = "Standard Mode";
     }
+}
+
+function updateWebpage() {
     toggleButtonSize();
     toggleFontSize();
 
@@ -31,6 +34,11 @@ function toggleSize() {
         buttonGridObject.pageNumber = 0;
         buttonGridObject.generateButtonGrid();
     }
+}
+
+function toggleSize() {
+    updateVariables();
+    updateWebpage();
 }
 
 function logoutButton() {
