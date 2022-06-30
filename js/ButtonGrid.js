@@ -8,10 +8,6 @@ async function onloadInitialize(functionName) {
         productList = value;
     });
     buttonGridObject = new ButtonGrid(function(currentProduct) {functionName(currentProduct)});
-    if(window.name == "Accessibility Mode"){
-        g_sizeToggle = true;
-        updateWebpage();
-    }
 }
 
 function correctSizes() {
