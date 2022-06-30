@@ -1,3 +1,5 @@
+var trendChart;
+
 function onloadTrends() {
     
 }
