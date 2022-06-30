@@ -119,3 +119,7 @@ body {
 .vendor-date {
     margin-bottom:2%;
 }
+
+.alertRow {
+    pointer-events: none;
+}
