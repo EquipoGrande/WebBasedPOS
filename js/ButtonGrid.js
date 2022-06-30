@@ -77,23 +77,6 @@ async function editInventoryFunction(currentProduct) {
     }
 }
 
-function toggleSizeAndGenerateButtonGrid(){
-    g_sizeToggle = !g_sizeToggle;
-    if(g_sizeToggle){
-        window.name = "Accessibility Mode";
-    }else{
-        window.name = "Standard Mode";
-    }
-    correctSizes();
-}
-
-function correctSizes(){
-    buttonGridObject.pageNumber = 0;
-    toggleButtonSize();
-    buttonGridObject.generateButtonGrid();
-    toggleFontSize();
-}
-
 async function updateButtonGrid() {
     await generateInventory().then(function(value) {
         productList = value;

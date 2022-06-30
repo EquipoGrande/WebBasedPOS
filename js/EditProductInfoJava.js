@@ -51,10 +51,10 @@ class ProductInfo {
         });
 
         if(response.status == 200) {
-            showAlert('alert-success', 'Successfully Added Product');
+            showAlert('alert-success', 'Successfully Edited Product');
             updateButtonGrid();
         } else {
-            showAlert('alert-danger', 'Error Adding Product');
+            showAlert('alert-danger', 'Error Edited Product');
         }
     }
 
