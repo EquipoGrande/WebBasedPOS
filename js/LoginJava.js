@@ -52,7 +52,7 @@ async function checkUserLogin() {
 
     // Set the user and pass as this for now, we can change for authentication later
     if (accessGranted == true) {
-        window.open("transactionsPage.html", "_self");
+        window.open("transactionsPage.html");
         close();
     } else {
         setFormMessage(document, "error", "Invalid username / password combination");
