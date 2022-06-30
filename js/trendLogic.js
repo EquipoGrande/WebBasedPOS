@@ -1,3 +1,5 @@
+var trendChart;
+
 function onloadTrends() {
 }
 
@@ -10,7 +12,7 @@ async function generateSalesReport() {
     }
 
     generateTable(salesReport, ["Product","Quantity Sold","Revenue", "Cost", "Profit"]);
-    console.log(generateTotal(salesReport, "profit"));
+    makeGraph(getTopReport(salesReport, ["profit"]));
 }
 
 async function generateRestockReport() {
@@ -25,6 +27,7 @@ async function generateRestockReport() {
     }
 
     generateTable(restockReport, ["Product", "Quantity in Stock", "Quantity Sold", "Revenue"]);
+    makeGraph(getTopRestock(restockReport));
 }
 
 async function generateProductPairReport() {
@@ -39,7 +42,7 @@ async function generateProductPairReport() {
     }
 
     generateTable(pairsReport, ["Product", "Paired Product", "Times Matched"]);
-    makeGraph(pairsReport, ["Matched"]);
+    makeGraph(getTopPairs(pairsReport));
 }
 
 async function generateExcessReport() {
@@ -83,6 +86,8 @@ function generateTotal(report, propertyName) {
 function generateTable(report, columnNames) {
     trendsTable = document.getElementById("trendTable");
     header = document.getElementById("tableHeader");
+    var euroColumns = new Array();
+    var percentColumns = new Array();
     
     trendsTable.innerHTML = "";
     header.innerHTML = "";
@@ -93,6 +98,13 @@ function generateTable(report, columnNames) {
         let currentCol = document.createElement("td");
         currentCol.innerHTML = columnNames[i];
         headerRow.append(currentCol);
+
+        if(columnNames[i] == "Revenue" || columnNames[i] == "Cost" || columnNames[i] == "Profit") {
+            euroColumns.push(i);
+        }
+        if(columnNames[i] == "Percent Sold") {
+            percentColumns.push(i);
+        }
     }
 
     header.append(headerRow);
@@ -100,10 +112,24 @@ function generateTable(report, columnNames) {
     for (let i = 0; i < report.length; i++) {
         let currentRow = document.createElement("tr");
 
+        var j = 0;
         for (var dataName in report[i]) {
             let currentCol = document.createElement("td");
-            currentCol.innerHTML = report[i][dataName];
+            
+            if(isFloat(report[i][dataName])) {
+                currentCol.innerHTML = report[i][dataName].toFixed(2);
+            } else {
+                currentCol.innerHTML = report[i][dataName];
+            }
+            if(euroColumns.indexOf(j) != -1) {
+                currentCol.innerHTML = "€ " + currentCol.innerHTML;
+            }
+            if(percentColumns.indexOf(j) != -1) {
+                currentCol.innerHTML = currentCol.innerHTML + "%";
+            }
+
             currentRow.append(currentCol);
+            j++;
         }
 
         trendsTable.append(currentRow)
@@ -126,14 +152,39 @@ function getTopReport(report, sortname) {
     }
 }
 
-function getTopPairs(report) {
-    console.log(report[0]);
+function getTopRestock(report) {
+    let ratioList = new Array();
+
+    for (let i = 0; (i < report.length && i < 10); i++) {
+        let currentRatio = (report[i].stockquantity / report[i].amountsold);
+        ratioList.push({
+            name: report[i].productname,
+            stat: currentRatio
+        });
+    }
+
+    ratioList.sort((a,b) => (b.stat > a.stat) ? -1 : 1);
 
     let namelist = new Array();
     let statlist = new Array();
 
+    for (let i = 0; (i < ratioList.length && i < 10); i++) {
+        console.log(ratioList[i]);
+        namelist.push(ratioList[i].name);
+        statlist.push(ratioList[i].stat);
+    }
+    return {
+        names: namelist,
+        stats: statlist
+    }
+}
+
+function getTopPairs(report) {
+    let namelist = new Array();
+    let statlist = new Array();
+
     for (let i = 0; (i < report.length && i < 10); i++) {
-        namelist.push(report[i].src + " with " + report[i].des);
+        namelist.push(report[i].Product + " with " + report[i].PairedProduct);
         statlist.push(report[i].Matched);
     }
     return {
@@ -143,13 +194,18 @@ function getTopPairs(report) {
 }
 
 function makeGraph(reportLists) {
+
+    if (trendChart != null) {
+        trendChart.destroy();
+    }
+
     var xValues = reportLists.names;
     var yValues = reportLists.stats;
     console.log(xValues);
     console.log(yValues);
     var barColors = "rgba(82,73,255,1.0)";
 
-    new Chart("myChart", {
+    trendChart = new Chart("myChart", {
     type: "bar",
     data: {
         labels: xValues,
@@ -164,9 +220,23 @@ function makeGraph(reportLists) {
         },
         tooltips: {
            enabled: false
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
         }
     }
     });
 }
 
-window.addEventListener('load', onloadTrends);
+function isFloat(value) {
+    if(typeof value == 'number' && !Number.isNaN(value) && !Number.isInteger(value)) {
+        return true;
+    }
+    return false;
+}
+
+
