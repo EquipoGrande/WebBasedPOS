@@ -38,7 +38,7 @@
                               <th width="8%" scope="col">PID</th>
                               <th width="26%" scope="col">Product</th>
                               <th width="14%" scope="col">Amount</th>
-                              <th width="10%" scope="col">Price</th>
+                              <th width="15%" scope="col">Price</th>
                               <th width="10%" scope="col"></th>
                            </tr>
                         </thead>
@@ -61,22 +61,20 @@
                </table>
             </div>
 
-            <!-- ------------------------------------------------------- -->
-
-
             <div class="border border-3 border-secondary bg-light">
 
                <form class="p-3 border border-3 bg-light">
                   <div class="row form-group row-margin">
-                     <div class="col-5"> <input type="number" class="form-control" placeholder="ID" id="idText"> </div>
+                     <div class="col-5"> <input type="number" class="form-control" placeholder="ID" id="idText" min="0"> </div>
                      <div class="col-6"> <input type="text" readonly class="form-control-plaintext" id="productName"
-                           value="Product Name"> </div>
+                           value="Product Name"> 
+                     </div>
                   </div>
 
                   
                   <div class="row form-group row-margin">
                      <div class="col-6"> <input type="number" class="form-control" placeholder="Quantity"
-                        id="quantityInput"> </div>
+                        id="quantityInput" min="0"> </div>
                         <div class="col-4"> <input type="text" readonly class="form-control-plaintext" id="productTotal"
                            value="€ 0.00"> </div>
                         </div>
