@@ -10,19 +10,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/NavbarStyle.css">
-
     <script src="js/accessibility.js"></script>
 
 </head>
 
 <body>
-    <div class="row" id="headerDiv">
-       <div class="col-2">
-           <img id="logo" class="img-fluid col-2 align-middle col-2" src="assets/AssumptaITomasLogoGreenV2.png">
-       </div> 
-        
-        <div class="col-9">
-            <h1 class="notranslate">Assumpta i Tomas </h1>
+    <!-- Manager Navbar -->
+    <div class="row" id="manHeaderDiv">
+        <img id="logo" class="img-fluid col-2 align-middle col-2" src="assets/AssumptaITomasLogoGreenV2.png">
+        <div class="col">
+            <h1 class="">Assumpta i Tomas</h1>
             <nav class="navbar navbar-expand-lg navbar-light">
                 <ul>
                     <li class="col mx-2"><a href="transactionsPage.html">Transactions</a></li>
@@ -33,21 +30,44 @@
                     <li class="col mx-2"><a href="vendorTransactions.html">Vendor Transactions</a></li>
                 </ul>
                 <ul>
-                    <button id="toggleSizeButton" class="col mx-2 btn btn-light"
-                    onclick="toggleSize();" style="margin-top:5%; margin-bottom:5%">Toggle Size</button>
+                    <button id="toggleSizeButton" class="col mx-2 btn btn-light" onclick="toggleSize();"
+                        style="margin-top:5%; margin-bottom:5%">Toggle Size</button>
                     <button class="col mx-2 btn btn-dark" onclick="logoutButton();">Log Out</button>
                 </ul>
             </nav>
             <div id="google_translate_element"></div>
         </div>
-        
+
         <div class="col-1">
             <div class="row d-flex justify-content-end">
-                <img id="logo" class="opacity-50" style="width: 100%; height: 100%;" src="assets/EquipoGrandeLogo.png">
+                <img id="logo" class="opacity-50" style="width: 100%; height: 100%;" src="assets/EquipoGrandeLogo.png"
+                    alt="Equipo Grande Logo">
             </div>
 
         </div>
     </div>
+
+    <!-- Cashier Navbar -->
+    <div class="row" id="cashHeaderDiv">
+        <img id="logo" class="img-fluid col-2 align-middle col-2" src="assets/AssumptaITomasLogoGreenV2.png">
+        <div class="col">
+            <h1 class="">Assumpta i Tomas</h1>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <ul>
+                    <li class="col mx-2"><a href="transactionsPage.html">Transactions</a></li>
+                </ul>
+                <ul>
+                    <button id="toggleSizeButton" class="col mx-2 btn btn-light"
+                        onclick="toggleSizeAndGenerateButtonGrid();">Toggle Size</button>
+                    <button class="col mx-2 btn btn-dark" onclick="logoutButton();">Log Out</button>
+                </ul>
+            </nav>
+            <div id="google_translate_element"></div>
+
+        </div>
+    </div>
+
+
 </body>
 
 </html>

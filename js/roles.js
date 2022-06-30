@@ -5,7 +5,6 @@ async function findUsers() {
         getRequest.open('GET', 'http://localhost:3000/api/users/getUsers');
         getRequest.onload = function () {
             if (getRequest.status == 200) {
-                console.log("wtf");
                 resolve(getRequest.response);
             } else {
                 reject(Error(getRequest.statusText));
