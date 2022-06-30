@@ -1,13 +1,23 @@
-
 /**
  * Fetch the Navbar and insert it into the page
  */
-function loadNavbar() {
-    fetch('/Navbar.html').then( response => response.text()).then( function (html) {
+async function loadNavbar() {
+    let checkManager = localStorage.getItem('isManager');
+    // let checkCashier = localStorage.getItem('isCashier');
+
+    console.log(checkManager);
+    fetch('/Navbar.html').then(response => response.text()).then(function (html) {
         var parser = new DOMParser();
         var navbar = parser.parseFromString(html, "text/html");
         var div = navbar.getElementById('headerDiv');
         document.getElementById('header').appendChild(div);
+
+        // if (checkManager == 'manager') {
+        //     console.log("Manager")
+        // }
+        // else if (checkCashier == 'cashier') {
+        //     console.log("Cashier")
+        // }
     });
 }
 
@@ -16,7 +26,7 @@ function loadNavbar() {
  * as it is the callback method for the google translate api
  */
 function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
 }
 
 /**
