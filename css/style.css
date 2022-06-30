@@ -101,6 +101,10 @@ body {
     margin-bottom: 20%;
 }
 
+#buttonGrid {
+    word-wrap: break-word;
+}
+
 #startDate {
     margin-bottom: 15%;
 }
