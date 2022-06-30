@@ -1,5 +1,3 @@
-var trendChart;
-
 function onloadTrends() {
 }
 
@@ -12,7 +10,7 @@ async function generateSalesReport() {
     }
 
     generateTable(salesReport, ["Product","Quantity Sold","Revenue", "Cost", "Profit"]);
-    makeGraph(getTopReport(salesReport, ["profit"]));
+    console.log(generateTotal(salesReport, "profit"));
 }
 
 async function generateRestockReport() {
@@ -27,7 +25,6 @@ async function generateRestockReport() {
     }
 
     generateTable(restockReport, ["Product", "Quantity in Stock", "Quantity Sold", "Revenue"]);
-    makeGraph(getTopRestock(restockReport));
 }
 
 async function generateProductPairReport() {
@@ -42,7 +39,7 @@ async function generateProductPairReport() {
     }
 
     generateTable(pairsReport, ["Product", "Paired Product", "Times Matched"]);
-    makeGraph(getTopPairs(pairsReport));
+    makeGraph(pairsReport, ["Matched"]);
 }
 
 async function generateExcessReport() {
@@ -129,40 +126,14 @@ function getTopReport(report, sortname) {
     }
 }
 
-function getTopRestock(report) {
-    let ratioList = new Array();
-
-    for (let i = 0; (i < report.length && i < 10); i++) {
-        let currentRatio = (report[i].stockquantity / report[i].amountsold);
-        ratioList.push({
-            name: report[i].productname,
-            stat: currentRatio
-        });
-    }
-
-    ratioList.sort((a,b) => (b.stat > a.stat) ? -1 : 1);
-
-    let namelist = new Array();
-    let statlist = new Array();
-
-    for (let i = 0; (i < ratioList.length && i < 10); i++) {
-        console.log(ratioList[i]);
-        namelist.push(ratioList[i].name);
-        statlist.push(ratioList[i].stat);
-    }
-    return {
-        names: namelist,
-        stats: statlist
-    }
-}
-
 function getTopPairs(report) {
+    console.log(report[0]);
 
     let namelist = new Array();
     let statlist = new Array();
 
     for (let i = 0; (i < report.length && i < 10); i++) {
-        namelist.push(report[i].Product + " with " + report[i].PairedProduct);
+        namelist.push(report[i].src + " with " + report[i].des);
         statlist.push(report[i].Matched);
     }
     return {
@@ -172,18 +143,13 @@ function getTopPairs(report) {
 }
 
 function makeGraph(reportLists) {
-
-    if (trendChart != null) {
-        trendChart.destroy();
-    }
-
     var xValues = reportLists.names;
     var yValues = reportLists.stats;
     console.log(xValues);
     console.log(yValues);
     var barColors = "rgba(82,73,255,1.0)";
 
-    trendChart = new Chart("myChart", {
+    new Chart("myChart", {
     type: "bar",
     data: {
         labels: xValues,
@@ -198,13 +164,6 @@ function makeGraph(reportLists) {
         },
         tooltips: {
            enabled: false
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
         }
     }
     });
