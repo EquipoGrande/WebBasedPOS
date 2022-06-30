@@ -92,8 +92,7 @@ body {
 .sidebar {
     background: #f8f9fa;
     padding-top: 2%;
-    /* hard coded for now, need to play around with the height */
-    height: 70vh;
+    height: 110vh;
 }
 
 .list {
