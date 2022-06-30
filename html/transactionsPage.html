@@ -16,7 +16,7 @@
    <script src="js/ButtonGrid.js"></script>
    <script src="js/Sale.js"></script>
 
-   <title>Customer Transactions</title>
+   <title>Transactions</title>
    <link rel="icon" type="image/x-icon" href="/assets/EquipoGrandeLogo.png">
 </head>
 
@@ -31,14 +31,14 @@
 
             
             <div class="border border-3 border-secondary bg-light transaction-box"
-               style="overflow:auto; max-height:100px;">
+               style="overflow:auto; min-height:300px; max-height:300px;">
                <table class="table table-hover" style="border-color: #f8f9fa">
                         <thead class="table-header sticky-top">
                            <tr>
                               <th width="8%" scope="col">PID</th>
                               <th width="26%" scope="col">Product</th>
                               <th width="14%" scope="col">Amount</th>
-                              <th width="15%" scope="col">Price</th>
+                              <th width="20%" scope="col">Price</th>
                               <th width="10%" scope="col"></th>
                            </tr>
                         </thead>
@@ -66,21 +66,21 @@
                <form class="p-3 border border-3 bg-light">
                   <div class="row form-group row-margin">
                      <div class="col-5"> <input type="number" class="form-control" placeholder="ID" id="idText" min="0"> </div>
-                     <div class="col-6"> <input type="text" readonly class="form-control-plaintext" id="productName"
+                     <div class="col-7"> <input type="text" readonly class="form-control-plaintext" id="productName"
                            value="Product Name"> 
                      </div>
                   </div>
 
                   
                   <div class="row form-group row-margin">
-                     <div class="col-6"> <input type="number" class="form-control" placeholder="Quantity"
+                     <div class="col-5"> <input type="number" class="form-control" placeholder="Quantity"
                         id="quantityInput" min="0"> </div>
-                        <div class="col-4"> <input type="text" readonly class="form-control-plaintext" id="productTotal"
+                        <div class="col-7"> <input type="text" readonly class="form-control-plaintext" id="productTotal"
                            value="€ 0.00"> </div>
                         </div>
                         
                   <div class="row form-group row-margin">
-                     <div class="col-6"> <input type="text" readonly class="form-control-plaintext" id="productAmount"
+                     <div class="col-12"> <input type="text" readonly class="form-control-plaintext" id="productAmount"
                            value="Amount Left in Stock"> </div>
                   </div>
 
