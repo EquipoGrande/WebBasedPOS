@@ -26,6 +26,11 @@ function toggleSize() {
     }
     toggleButtonSize();
     toggleFontSize();
+
+    if(typeof buttonGridObject !== 'undefined') {
+        buttonGridObject.pageNumber = 0;
+        buttonGridObject.generateButtonGrid();
+    }
 }
 
 function logoutButton() {
