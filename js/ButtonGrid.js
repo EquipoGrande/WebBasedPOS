@@ -40,9 +40,9 @@ async function getInventoryOf(currentId){
             } else {
                 reject(Error(getRequest.statusText));
             };
-            getRequest.onerror = function() {
-                reject(Error('Cannot find JSON data'));
-            }
+        }
+        getRequest.onerror = function() {
+            reject(Error('Cannot find JSON data'));
         }
         getRequest.send();
     });
