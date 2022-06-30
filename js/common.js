@@ -3,25 +3,24 @@
  */
 async function loadNavbar() {
     let checkManager = localStorage.getItem('isManager');
-
-    console.log(checkManager);
     fetch('/Navbar.html').then(response => response.text()).then(function (html) {
         var parser = new DOMParser();
         var navbar = parser.parseFromString(html, "text/html");
-        var div = navbar.getElementById('headerDiv');
-        document.getElementById('header').appendChild(div);
+        var manDiv = navbar.getElementById('manHeaderDiv');
+        var cashDiv = navbar.getElementById('cashHeaderDiv');
+
 
         if (checkManager == 'yes') {
-            console.log("Manager")
+            document.getElementById('header').appendChild(manDiv);
         }
         else if (checkManager == 'no') {
-            console.log("Cashier")
+            document.getElementById('header').appendChild(cashDiv);
         }
     });
 }
 
 /**
- * Init the google translate element. This function should not be called directly
+ * Init the google translate element.his function should not be called directly
  * as it is the callback method for the google translate api
  */
 function googleTranslateElementInit() {

@@ -29,6 +29,7 @@ async function checkUserLogin() {
     var accessGranted = false;
     var isManager = false;
 
+    // Checking to see if the user and password combos are correct
     let i = 0;
     for (; i < userList.length; i++) {
         if ((user == userList[i]["username"]) && (pass == userList[i]["password"])) {
@@ -37,6 +38,7 @@ async function checkUserLogin() {
         }
     }
 
+    // Checking to see if the user is a manager
     if ((accessGranted == true) && (userList[i]["role"] == 'Manager')) {
         isManager = true;
     }
@@ -50,7 +52,7 @@ async function checkUserLogin() {
 
     // Set the user and pass as this for now, we can change for authentication later
     if (accessGranted == true) {
-        window.open("transactionsPage.html", '_self');
+        window.open("transactionsPage.html");
         close();
     } else {
         setFormMessage(document, "error", "Invalid username / password combination");

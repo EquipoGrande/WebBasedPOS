@@ -19,9 +19,9 @@ function toggleButtonSize() {
 
 function toggleSize() {
     g_sizeToggle = !g_sizeToggle;
-    if(g_sizeToggle){
+    if (g_sizeToggle) {
         window.name = "Accessibility Mode";
-    }else{
+    } else {
         window.name = "Standard Mode";
     }
     toggleButtonSize();
