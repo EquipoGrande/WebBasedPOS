@@ -16,7 +16,7 @@
    <script src="js/ButtonGrid.js"></script>
    <script src="js/Sale.js"></script>
 
-   <title>Customer Transactions</title>
+   <title>Transactions</title>
    <link rel="icon" type="image/x-icon" href="/assets/EquipoGrandeLogo.png">
 </head>
 
@@ -26,25 +26,23 @@
       </header>
 
       <div class="row flex-grow-1 main-content">
-         <div class="col-sm-6 col-padding">
+         <div class="col-sm-6 col-padding" style="margin-bottom: 10%;">
             <h1>Transactions</h1>
 
-            <div class="table-header">
-               <table style="width: 100%;">
-                  <thead>
+            
+            <div class="border border-3 border-secondary bg-light transaction-box"
+               style="overflow:auto; min-height:300px; max-height:300px;">
+               <table class="table table-hover caption-top" style="border-color: #f8f9fa">
+                  <caption>Items in sale</caption>
+                  <thead class="table-header sticky-top">
                      <tr>
-                        <th scope="col">PID</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Price</th>
+                        <th width="8%" scope="col">PID</th>
+                        <th width="26%" scope="col">Product</th>
+                        <th width="14%" scope="col">Amount</th>
+                        <th width="20%" scope="col">Price</th>
+                        <th width="10%" scope="col"></th>
                      </tr>
                   </thead>
-               </table>
-            </div>
-
-            <div class="border border-3 border-secondary bg-light transaction-box"
-               style="overflow:auto; max-height:100px;">
-               <table class="table table-hover">
 
                   <tbody id="saleTable"></tbody>
 
@@ -55,8 +53,8 @@
                <table style="width: 100%;">
                   <tfoot id="table-footer">
                      <tr>
-                        <th width="70%">Total :</th>
-                        <td><input type="text" readonly class="form-control-plaintext" id="totalPrice" value="€ 0.00"
+                        <th width="45%" style="text-align: right;">Total : &nbsp;</th>
+                        <td><input type="text" tabIndex="-1" readonly class="form-control-plaintext" id="totalPrice" value="€ 0.00"
                               placeholder="€ 0.00">
                         </td>
                      </tr>
@@ -68,35 +66,35 @@
 
                <form class="p-3 border border-3 bg-light">
                   <div class="row form-group row-margin">
-                     <div class="col-5"> <input type="number" class="form-control" placeholder="ID" id="idText"> </div>
-                     <div class="col-6"> <input type="text" readonly class="form-control-plaintext" id="productName"
-                           value="Product Name"> </div>
-                  </div>
-                  <div class="row form-group row-margin">
-                     <div class="col-5"> <input type="number" readonly class="form-control" placeholder="Amount"
-                           id="idText">
+                     <div class="col-5"> <input type="number" class="form-control" placeholder="ID" id="idText" min="0"> </div>
+                     <div class="col-7"> <input type="text" tabIndex="-1" readonly class="form-control-plaintext" id="productName"
+                           value="Product Name"> 
                      </div>
-                     <div class="col-6"> <input type="text" readonly class="form-control-plaintext" id="productAmount"
-                           value="Amount Left in Stock"> </div>
                   </div>
+
+                  
                   <div class="row form-group row-margin">
-                     <div class="col-6"> <input type="number" class="form-control" placeholder="Quantity"
-                           id="quantityInput"> </div>
-                     <div class="col-4"> <input type="text" readonly class="form-control-plaintext" id="productTotal"
+                     <div class="col-5"> <input type="number" class="form-control" placeholder="Quantity"
+                        id="quantityInput" min="0"> </div>
+                        <div class="col-7"> <input type="text" tabIndex="-1" readonly class="form-control-plaintext" id="productTotal"
                            value="€ 0.00"> </div>
+                        </div>
+                        
+                  <div class="row form-group row-margin">
+                     <div class="col-12"> <input type="text" tabIndex="-1" readonly class="form-control-plaintext" id="productAmount"
+                           value="Amount Left in Stock"> </div>
                   </div>
 
                   <div class="row form-group">
-                     <button type="button" class="col-md my-1 btn btn-color1" id="sellLine">Add/Edit</button>
-                     <button type="button" class="col-md my-1 btn btn-color1" id="removeLine">Remove</button>
-                     <button type="button" class="col-md my-1 btn btn-color1" onclick="newSale.finishSale();">Make
-                        Sale</button>
+                     <button type="button" class="col-md my-1 btn btn-colorAdd" id="sellLine">Add/Edit</button>
+                     <button type="button" class="col-md my-1 btn btn-colorCheckout" onclick="newSale.finishSale();">
+                        Checkout</button>
                   </div>
                </form>
             </div>
          </div>
 
-         <div class="col-sm-6 d-flex flex-column col-padding">
+         <div class="col-sm-6 d-flex flex-column col-padding" style="margin-bottom:10%;">
             <h1>Select Product:</h1>
             <div class="flex-grow-1 productPanel">
                <div class="container h-100">
@@ -109,10 +107,14 @@
                <button class="btn btn-color1" type="button" onclick="buttonGridObject.incrementPage();">Next Page
                   &gt;&gt;</button>
             </div>
-            <div class="pageButton">
+            <div class="pageButton ">
                Page <span id="pageNumber"></span>
             </div>
          </div>
+      </div>
+   </div>
+   <div class="alertRow row position-fixed w-100 top-0 start-0 d-flex justify-content-center">
+      <div id="alertContainer" class="col col-md-3 d-flex flex-column justify-content-center">
       </div>
    </div>
 </body>

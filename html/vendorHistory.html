@@ -56,8 +56,9 @@
 				</div>
 
 				<div class="border border-3 border-secondary bg-light transaction-box">
-					<table class="table table-hover table-padding">
-						<thead class="table-dark">
+					<table class="table table-hover table-padding caption-top">
+						<caption class="bg-dark">Vendor Order History</caption>
+						<thead class="table-dark sticky-top">
 							<tr>
 								<th scope="col">Date</th>
 								<th scope="col">Transaction ID</th>
@@ -74,4 +75,8 @@
 
 		</div>
 	</div>
+	<div class="alertRow row position-fixed w-100 top-0 start-0 d-flex justify-content-center">
+        <div id="alertContainer" class="col col-md-3 d-flex flex-column justify-content-center">
+        </div>
+    </div>
 </body>

@@ -10,10 +10,10 @@
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/NavbarStyle.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="js/common.js"></script>
     <script src="js/accessibility.js"></script>
     <script src="js/CurrentInventoryList.js"></script>
-    <script src="js/Trends.js"></script>
     <script src="js/trendLogic.js"></script>
 
     <title>Trends</title>
@@ -37,31 +37,35 @@
                         <input id="endDate" class="form-control" type="date"/>
                     </div>
 
-                    <div class="btn-group-vertical">
-                        <button class="btn-light button">End-of-Day Report</button>
-                        <button class="btn-light button">Excess Report</button>
-                        <button class="btn-light button" onclick="generateRestockReport()">Restock Report</button>
-                        <button class="btn-light button" onclick="generateSalesReport()">Sales Report</button>
+                    <div class="btn-group-vertical d-flex justify-content-center">
+                        <button class="btn-group my-1 btn btn-dark button" onclick=generateProductPairReport()>Product Pairings</button>
+                        <button class="btn-group my-1 btn btn-dark button" onclick="generateExcessReport()">Excess Report</button>
+                        <button class="btn-group my-1 btn btn-dark button" onclick="generateRestockReport()">Restock Report</button>
+                        <button class="btn-group my-1 btn btn-dark button" onclick="generateSalesReport()">Sales Report</button>
                     </div>
 
                 </div>
             </div>
 
-            <div class="col-md-10 col-sm-8 main-content">
+            <div class="col-md-10 col-sm-8 main-content" style="margin-bottom: 10%">
                 <h1>Trends & Analytics</h1>
+                
+                <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
 
-                <div class="border border-3 border-secondary bg-light transaction-box">
-					<table class="table table-hover table-padding">
-						<thead class="table-dark" id="tableHeader">
+                <div class="border border-3 border-secondary bg-light transaction-box"
+                    style="overflow:auto; max-height:500px;">
+					<table class="table table-hover table-padding caption-top">
+                        <caption id="tableCaption" class="bg-dark">Click a Report Button to Show Reports</caption>
+						<thead class="table-dark sticky-top" id="tableHeader">
 						</thead>
 						<tbody id="trendTable"></tbody>
 					</table>
 				</div>
-                
-                <!-- <div style="width:75%;">
-                    <canvas id="barChart" width="1" height="1"></canvas>
-                </div> -->
             </div>
+        </div>
+    </div>
+    <div class="alertRow row position-fixed w-100 top-0 start-0 d-flex justify-content-center">
+        <div id="alertContainer" class="col col-md-3 d-flex flex-column justify-content-center">
         </div>
     </div>
 </body>

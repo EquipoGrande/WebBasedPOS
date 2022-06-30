@@ -15,7 +15,7 @@
     <script src="js/CurrentInventoryList.js"></script>
     <script src="js/ButtonGrid.js"></script>
     <script src="js/ModifyInventory.js"></script>
-    <title>Customer Transactions</title>
+    <title>Update Inventory</title>
     <link rel="icon" type="image/x-icon" href="/assets/EquipoGrandeLogo.png">
 </head>
 
@@ -24,23 +24,23 @@
         <header class="row" id="header">
         </header>
         <div class="row flex-grow-1 main-content">
-            <div class="col-sm-6 col-padding d-flex flex-column h-100">
+            <div class="col-sm-6 col-padding d-flex flex-column" style="margin-bottom: 10%">
                 <h1>Update Inventory</h1>
                 <form class="p-3 border border-3 border-secondary bg-light">
                     <div class="row form-group row-margin">
                         <label class="col-6" for="idtext">Product ID:</label>
-                        <input class="col-6" type="number" id="idtext" readonly>
+                        <input class="col-6" type="number" tabIndex="-1" id="idtext" readonly>
                     </div>
                     <div class="row form-group row-margin">
                         <label class="col-6" for="productName">Product Name:</label>
-                        <input class="col-6" type="text" id="productName" readonly>
+                        <input class="col-6" type="text" tabIndex="-1" id="productName" readonly>
                     </div>
                     <div class="row form-group row-margin">
                         <label class="col-6" for="currentInventory">Current Inventory:</label>
                         <input class="col-6" type="text" id="currentInventory">
                     </div>
                     <div class="row form-group">
-                        <button type="button" class="col-md my-1 btn btn-color1" id="updateInventory">Update Inventory</button>
+                        <button type="button" class="col-md my-1 btn btn-color3" id="updateInventory">Update Inventory</button>
                     </div>
                 </form>
             </div>
@@ -66,7 +66,9 @@
         </div>
     </div>
     
-    <div id="alertContainer" class="position-fixed top-0 start-50">
+    <div class="alertRow row position-fixed w-100 top-0 start-0 d-flex justify-content-center">
+        <div id="alertContainer" class="col col-md-3 d-flex flex-column justify-content-center">
+        </div>
     </div>
 </body>
 

@@ -4,7 +4,6 @@ async function transactionOnload() {
         }).then();
     newSale = new Sale(productList);
     document.getElementById("sellLine").onclick = function () { newSale.addItemButton() };
-    document.getElementById("removeLine").onclick = function () { newSale.removeItem() };
     document.getElementById("quantityInput").onchange = function () { newSale.updatePrice() };
     document.getElementById("idText").onchange = function () { newSale.updateItemName() };
     resetForm();
@@ -40,7 +39,8 @@ class Sale {
 
     // Adds a new item to the sale
     addItem(product) {
-        if (document.getElementById("quantityInput").value <= 0) {
+        if ((document.getElementById("quantityInput").value <= 0)) {
+            showAlert('alert-danger',"Error: Invalid quantity");
             return;
         }
 
@@ -74,7 +74,13 @@ class Sale {
 
         let removeElement = document.createElement("td");
         let removeButton = document.createElement("button");
-        removeButton.innerHTML = "Remove";
+        
+        removeButton.innerHTML = "X";
+        removeButton.style.backgroundColor = '#8F423D'; 
+        removeButton.style.color='white'
+        removeButton.style.width='35px'
+        removeButton.style.border='#8F423D';
+        
         removeButton.onclick = function() {
             newSale.removeItemByID(product["productid"]);
         }
@@ -114,7 +120,7 @@ class Sale {
         let productID = document.getElementById("idText").value;
         this.removeItemByID(productID);	
     }	
-    
+
     removeItemByID(productID) {
         for (var i = 0; i < this.saleList.length; i++) {
             if (this.saleList[i]["productID"] == productID) {
@@ -174,7 +180,11 @@ class Sale {
         for (var i = 0; i < this.productList.length; i++) {
             if (this.productList[i]["productid"] == productID) {
                 var round = Math.round(100 * this.productList[i].purchaseprice * document.getElementById("quantityInput").value);
-                document.getElementById("productTotal").value = "€ " + round / 100;
+                if(round > 0) {
+                    document.getElementById("productTotal").value = "€ " + round / 100;
+                } else {
+                    document.getElementById("productTotal").value = "€ " + 0;
+                }
                 break;
             }
         }
@@ -185,7 +195,7 @@ class Sale {
         for (var i = 0; i < this.productList.length; i++) {
             if (this.productList[i]["productid"] == productID) {
                 document.getElementById("productName").value = this.productList[i].productname;
-                document.getElementById("productAmount").value = await getInventoryOf(productID).then() + " kg left";
+                document.getElementById("productAmount").value = (round(100*(await getInventoryOf(productID).then()))/100) + " kg left";
                 break;
             }
         }

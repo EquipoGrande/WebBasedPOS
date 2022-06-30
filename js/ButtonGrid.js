@@ -2,16 +2,17 @@ var productList = new Array;
 var testSale;
 var numberOfButtons = 15;
 var buttonGridObject;
+var chosenButtonText;
 
 async function onloadInitialize(functionName) {
     await generateInventory().then(function(value) {
         productList = value;
     });
     buttonGridObject = new ButtonGrid(function(currentProduct) {functionName(currentProduct)});
-    if(window.name == "Accessibility Mode"){
-        g_sizeToggle = true;
-        correctSizes();
-    }
+}
+
+function correctSizes() {
+
 }
 
 function createButton(product, buttonGrid, inputFunction) {
@@ -23,6 +24,7 @@ function createButton(product, buttonGrid, inputFunction) {
     button.innerHTML = product["productname"];
 
     button.onclick = function() {
+        chosenButtonText = button.innerHTML.substring(78,button.innerHTML.length-14);
         inputFunction(product);
     }
 
@@ -38,11 +40,13 @@ async function getInventoryOf(currentId){
             if (getRequest.status == 200) {
                 resolve(getRequest.response);
             } else {
+                showAlert('alert-danger', 'Error getting inventory ' + getRequest.statusText);
                 reject(Error(getRequest.statusText));
             };
-            getRequest.onerror = function() {
-                reject(Error('Cannot find JSON data'));
-            }
+        }
+        getRequest.onerror = function() {
+            showAlert('alert-danger', 'Error getting inventory ' + getRequest.statusText);
+            reject(Error('Cannot find JSON data'));
         }
         getRequest.send();
     });
@@ -53,7 +57,7 @@ async function getInventoryOf(currentId){
 
 async function modifyInventoryFunction(currentProduct) {
     document.getElementById("idtext").value = currentProduct["productid"];
-    document.getElementById("productName").value = currentProduct["productname"];
+    document.getElementById("productName").value = chosenButtonText;
     document.getElementById("currentInventory").value = await getInventoryOf(currentProduct["productid"]).then();
 }
 
@@ -61,13 +65,13 @@ async function saleButtonFunction(currentProduct) {
     console.log("Sale function");
     document.getElementById("idText").value = currentProduct["productid"];
     document.getElementById("quantityInput").focus();
-    document.getElementById("productName").value = currentProduct["productname"];
+    document.getElementById("productName").value = chosenButtonText;
     document.getElementById("productAmount").value = await getInventoryOf(currentProduct["productid"]).then() + " kg left";
 }
 
 async function editInventoryFunction(currentProduct) {
     document.getElementById("productIDInput").value = currentProduct["productid"];
-    document.getElementById("productName").value = currentProduct["productname"];
+    document.getElementById("productName").value = chosenButtonText;
     document.getElementById("sellPrice").value = currentProduct["sellprice"];
     document.getElementById("purchasePrice").value = currentProduct["purchaseprice"];
     if(currentProduct["sellunit"] == 1) {
@@ -75,23 +79,6 @@ async function editInventoryFunction(currentProduct) {
     } else {
         document.getElementById("radioIndividual").checked = true;
     }
-}
-
-function toggleSizeAndGenerateButtonGrid(){
-    g_sizeToggle = !g_sizeToggle;
-    if(g_sizeToggle){
-        window.name = "Accessibility Mode";
-    }else{
-        window.name = "Standard Mode";
-    }
-    correctSizes();
-}
-
-function correctSizes(){
-    buttonGridObject.pageNumber = 0;
-    toggleButtonSize();
-    buttonGridObject.generateButtonGrid();
-    toggleFontSize();
 }
 
 async function updateButtonGrid() {

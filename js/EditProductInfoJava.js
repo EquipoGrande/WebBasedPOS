@@ -35,10 +35,7 @@ class ProductInfo {
         product["purchaseprice"] = purchasePrice;
         product["purchaseunit"] = unit;
 
-        // var putRequest = new XMLHttpRequest();
-        // putRequest.responseType = "json";
-        // putRequest.open("PUT", "http://localhost:3000/api/products/editproduct");
-        // putRequest.send(JSON.stringify(product));
+        console.log('test');
         
         const response = await fetch('http://localhost:3000/api/products/editproduct', 
         {
@@ -48,13 +45,20 @@ class ProductInfo {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(product)
+        })
+        .catch(err => {
+            showAlert('alert-danger', err);
         });
 
+        if(typeof response == 'undefined') {
+            return;
+        }
+
         if(response.status == 200) {
-            showAlert('alert-success', 'Successfully Added Product');
+            showAlert('alert-success', 'Successfully Edited Product');
             updateButtonGrid();
         } else {
-            showAlert('alert-danger', 'Error Adding Product');
+            showAlert('alert-danger', 'Error Edited Product');
         }
     }
 
@@ -82,7 +86,14 @@ class ProductInfo {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(product)
+        })
+        .catch(err => {
+            showAlert('alert-danger', err);
         });
+
+        if(typeof response == 'undefined') {
+            return;
+        }
 
         var responseBody = await response.json();
 
@@ -115,7 +126,14 @@ class ProductInfo {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
+        })
+        .catch(err => {
+            showAlert('alert-danger', err);
         });
+
+        if(typeof response == 'undefined') {
+            return;
+        }
 
         if(response.status == 200) {
             showAlert('alert-success', 'Successfully Removed Product');

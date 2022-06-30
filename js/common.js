@@ -44,13 +44,14 @@ function loadGoogleTranslate() {
  */
 function showAlert(alertType, text) {
     let alertDiv = document.createElement('div');
-    alertDiv.classList.add('alert', alertType);
+    alertDiv.classList.add('alert', alertType, 'd-flex', 'justify-content-center');
+    alertDiv.setAttribute('role', 'alert');
 
     innerElement = document.createElement('p');
     innerElement.innerHTML = text;
     alertDiv.appendChild(innerElement);
 
-    document.getElementById("alertContainer").appendChild(alertDiv);
+    document.getElementById("alertContainer").prepend(alertDiv);
 
     window.setTimeout(() => alertDiv.remove(), 5000);
 }
