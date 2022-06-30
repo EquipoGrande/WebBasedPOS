@@ -33,10 +33,11 @@
                <table style="width: 100%;">
                   <thead>
                      <tr>
-                        <th scope="col">PID</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Price</th>
+                        <!-- style="width: 100%;" -->
+                        <th width="8%" scope="col">PID</th>
+                        <th width="26%" scope="col">Product</th>
+                        <th width="14%" scope="col">Amount</th>
+                        <th width="25%" scope="col">Price</th>
                      </tr>
                   </thead>
                </table>
@@ -44,7 +45,16 @@
 
             <div class="border border-3 border-secondary bg-light transaction-box"
                style="overflow:auto; max-height:100px;">
-               <table class="table table-hover">
+               <table class="table table-hover" style="border-color: white">
+                  <!-- FIXME, border shows up, should line up tho -->
+                  <!-- <thead>
+                     <tr>
+                        <th width="10%" scope="col"></th>
+                        <th width="36%" scope="col"></th>
+                        <th width="18%" scope="col"></th>
+                        <th width="16%" scope="col"></th>
+                     </tr>
+                  </thead> -->
 
                   <tbody id="saleTable"></tbody>
 
@@ -72,22 +82,24 @@
                      <div class="col-6"> <input type="text" readonly class="form-control-plaintext" id="productName"
                            value="Product Name"> </div>
                   </div>
+
+                  
+                  <div class="row form-group row-margin">
+                     <div class="col-6"> <input type="number" class="form-control" placeholder="Quantity"
+                        id="quantityInput"> </div>
+                        <div class="col-4"> <input type="text" readonly class="form-control-plaintext" id="productTotal"
+                           value="€ 0.00"> </div>
+                        </div>
+                        
                   <div class="row form-group row-margin">
                      <div class="col-6"> <input type="text" readonly class="form-control-plaintext" id="productAmount"
                            value="Amount Left in Stock"> </div>
                   </div>
-                  <div class="row form-group row-margin">
-                     <div class="col-6"> <input type="number" class="form-control" placeholder="Quantity"
-                           id="quantityInput"> </div>
-                     <div class="col-4"> <input type="text" readonly class="form-control-plaintext" id="productTotal"
-                           value="€ 0.00"> </div>
-                  </div>
 
                   <div class="row form-group">
                      <button type="button" class="col-md my-1 btn btn-color1" id="sellLine">Add/Edit</button>
-                     <button type="button" class="col-md my-1 btn btn-color1" id="removeLine">Remove</button>
-                     <button type="button" class="col-md my-1 btn btn-color1" onclick="newSale.finishSale();">Make
-                        Sale</button>
+                     <button type="button" class="col-md my-1 btn btn-color1" onclick="newSale.finishSale();">
+                        Checkout</button>
                   </div>
                </form>
             </div>
@@ -106,7 +118,7 @@
                <button class="btn btn-color1" type="button" onclick="buttonGridObject.incrementPage();">Next Page
                   &gt;&gt;</button>
             </div>
-            <div class="pageButton">
+            <div class="pageButton ">
                Page <span id="pageNumber"></span>
             </div>
          </div>
