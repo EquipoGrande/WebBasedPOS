@@ -171,7 +171,7 @@ class Sale {
         for (var i = 0; i < this.saleList.length; i++) {
             this.total += (Math.round(100 * this.saleList[i]["purchaseprice"]) / 100);
         }
-        document.getElementById("totalPrice").value = "Total: €" + this.total;
+        document.getElementById("totalPrice").value = "Total: €" + this.total.toFixed(2);
     }
 
     updatePrice() {

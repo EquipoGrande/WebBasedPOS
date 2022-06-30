@@ -97,8 +97,8 @@ class Sale {
 
         quantityElement.innerHTML = document.getElementById("quantityInput").value + " " + unitType;
 
-        var round = Math.round((100 * product["sellprice"] * document.getElementById("quantityInput").value));
-        priceElement.innerHTML = "€ " + round / 100;
+        var round = product["sellprice"] * document.getElementById("quantityInput").value;
+        priceElement.innerHTML = "€ " + round.toFixed(2);
 
         saleRow.append(idElement);
         saleRow.append(nameElement);
@@ -172,7 +172,7 @@ class Sale {
         for (var i = 0; i < this.saleList.length; i++) {
             this.total += (Math.round(100 * this.saleList[i]["sellprice"]) / 100);
         }
-        document.getElementById("totalPrice").value = " € " + this.total;
+        document.getElementById("totalPrice").value = " € " + this.total.toFixed(2);
     }
 
     updatePrice() {
