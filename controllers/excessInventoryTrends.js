@@ -26,6 +26,8 @@ module.exports = function (express) {
      */
     router.get('/excessInventoryReport', async (req, res) => {
 
+        let success = true;
+
         // Get the sale and vendor id ranges
         let custSaleIDRange = {}, vendSaleIDRange = {};
 
@@ -38,7 +40,10 @@ module.exports = function (express) {
             console.log(err.message);
             res.status = 500;
             res.send(err.message);
+            success = false;
         });
+
+        if(!success) return;
 
         vendSaleIDRange = await db.query(query_VendorIDRange, [startDate, endDate])
         .then(result => result.rows[0])
@@ -46,7 +51,10 @@ module.exports = function (express) {
             console.log(err.message);
             res.status = 500;
             res.send(err.message);
+            success = false;
         });
+
+        if(!success) return;
 
         // Execute mega query
         queryResult = await db.query(query_megaQuery, [custSaleIDRange.minsaleid, custSaleIDRange.maxsaleid, vendSaleIDRange.minsaleid])
@@ -55,8 +63,11 @@ module.exports = function (express) {
             console.log(err.message);
             res.status = 500;
             res.send(err.message);
+            success = false;
         });
         
+        if(!success) return;
+
         res.status(200);
         res.send(queryResult);
     });

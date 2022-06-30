@@ -31,11 +31,17 @@ module.exports = function (express) {
     var db = require('../Database');
 
     router.get('/salesReport', async (req, res) => {
+
+        let success = true;
+
         await getIDs(req.query.start, req.query.end, db).then().catch(err => {
             res.status(500);
             console.log(err.message);
             res.send(err.message);
+            success = false;
         });
+
+        if(!success) return;
 
         db.query(salesReportQuery, [idRange.min, idRange.max])
         .then(queryResult => {
@@ -51,7 +57,17 @@ module.exports = function (express) {
     })
 
     router.get('/restockReport', async (req, res) => {
-        await getIDs(req.query.start, req.query.end, db).then();
+        
+        let success = true;
+        
+        await getIDs(req.query.start, req.query.end, db).then().catch(err => {
+            res.status(500);
+            console.log(err.message);
+            res.send(err.message);
+            success = false;
+        });
+
+        if(!success) return;
 
         db.query(restockReportQuery, [idRange.min, idRange.max])
         .then(queryResult => {
