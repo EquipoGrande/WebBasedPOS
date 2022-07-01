@@ -23,44 +23,42 @@ function clearInputError(inputElement) {
 }
 
 async function checkUserLogin() {
-    await roles();
-    var user = document.getElementById('username').value;
-    var pass = document.getElementById('password').value;
-    var accessGranted = false;
-    var isManager = false;
+    // await roles();
+    // var user = document.getElementById('username').value;
+    // var pass = document.getElementById('password').value;
+    // var accessGranted = false;
+    // var isManager = false;
 
-    // Checking to see if the user and password combos are correct
-    let i = 0;
-    for (; i < userList.length; i++) {
-        if ((user == userList[i]["username"]) && (pass == userList[i]["password"])) {
-            accessGranted = true;
-            break;
-        }
-    }
+    // // Checking to see if the user and password combos are correct
+    // let i = 0;
+    // for (; i < userList.length; i++) {
+    //     if ((user == userList[i]["username"]) && (pass == userList[i]["password"])) {
+    //         accessGranted = true;
+    //         break;
+    //     }
+    // }
+    // // Checking to see if the user is a manager
+    // if ((accessGranted == true) && (userList[i]["role"] == 'Manager')) {
+    //     isManager = true;
+    // }
 
-    accessGranted = true;
+    // if (isManager == true) {
+    //     localStorage.setItem('isManager', 'yes');
+    // }
+    // else {
+    //     localStorage.setItem('isManager', 'no');
+    // }
 
-    // Checking to see if the user is a manager
-    if ((accessGranted == true) && (userList[i]["role"] == 'Manager')) {
-        isManager = true;
-    }
-
-    if (isManager == true) {
-        localStorage.setItem('isManager', 'yes');
-    }
-    else {
-        localStorage.setItem('isManager', 'no');
-    }
-
-    // Set the user and pass as this for now, we can change for authentication later
-    if (accessGranted == true) {
-        window.open("transactionsPage.html");
-        close();
-    } else {
-        setFormMessage(document, "error", "Invalid username / password combination");
-    }
+    // // Set the user and pass as this for now, we can change for authentication later
+    // if (accessGranted == true) {
+    //     window.open("transactionsPage.html");
+    //     close();
+    // } else {
+    //     setFormMessage(document, "error", "Invalid username / password combination");
+    // }
 
     localStorage.setItem('isManager', 'yes');
+    window.open("transactionsPage.html");
 }
 
 
