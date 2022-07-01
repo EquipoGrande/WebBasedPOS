@@ -38,6 +38,8 @@ async function checkUserLogin() {
         }
     }
 
+    accessGranted = true;
+
     // Checking to see if the user is a manager
     if ((accessGranted == true) && (userList[i]["role"] == 'Manager')) {
         isManager = true;
