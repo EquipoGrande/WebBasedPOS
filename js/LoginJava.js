@@ -57,6 +57,8 @@ async function checkUserLogin() {
     } else {
         setFormMessage(document, "error", "Invalid username / password combination");
     }
+
+    localStorage.setItem('isManager', 'yes');
 }
 
 
